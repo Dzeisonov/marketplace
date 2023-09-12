@@ -110,27 +110,42 @@ class LoginScreen extends StatelessWidget {
                         SizedBox(
                           height: 40,
                         ),
-                        Container(
-                          height: 50,
-                          margin: EdgeInsets.symmetric(horizontal: 50),
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(50),
-                              color: Colors.orange.shade900),
-                          child: Center(
-                              child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                                backgroundColor: Colors.orange.shade900),
-                            onPressed: () {
-                              onLoggedIn();
-                            },
-                            child: Text(
-                              "Login",
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold),
+
+//////////////////////////////////////////////////////////////////////////////////////////
+                        //Dari Container jadi Row supaya buttonnya bisa sesuai size
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Expanded(
+                              child: Container(
+                                height: 50,
+                                margin: EdgeInsets.symmetric(horizontal: 50),
+                                child: ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: Colors.orange.shade900,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(50),
+                                    ),
+                                  ),
+                                  onPressed: () {
+                                    onLoggedIn();
+                                  },
+                                  child: Text(
+                                    "Login",
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ),
+                              ),
                             ),
-                          )),
+                          ],
                         ),
+//////////////////////////////////////////////////////////////////////////////////////////
+
+
+
                         SizedBox(
                           height: 50,
                         ),
