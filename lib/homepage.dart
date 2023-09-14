@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'category1_page.dart';
 import 'category2_page.dart';
 import 'category3_page.dart';
@@ -14,17 +15,29 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.orange.shade200,
-      body: Container(
-        child: Column(
+        backgroundColor: Colors.orange.shade200,
+        body: Container(
+            child: Column(
           children: [
-            SizedBox(height: 20),
+            SizedBox(height: 10),
             _buildSearchBar(),
-            _buildIconList(),
+            _buildHomePageUI(),
           ],
-        ),
-      ),
-    );
+        )));
+  }
+
+  Widget _buildHomePageUI() {
+    return Expanded(
+        child: SingleChildScrollView(
+      scrollDirection: Axis.vertical,
+      child: Column(children: [
+        _buildIconList(),
+        SizedBox(height: 10),
+        _buildCarouselSlide(),
+        SizedBox(height: 10),
+        _buildItemContainer(),
+      ]),
+    ));
   }
 
   Widget _buildSearchBar() {
@@ -63,14 +76,7 @@ class _HomePageState extends State<HomePage> {
       "Category 3",
       "Category 4",
       "Category 5",
-      "Category 6",
-      "Category 7",
-      "Category 8",
-      "Category 9",
-      "Category 10",
     ];
-    
-    bool isScrolling = false;
 
     return Container(
       height: 150,
@@ -87,24 +93,18 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
           ),
-
           SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             child: Row(
               children: List.generate(
-                10,
+                categories.length,
                 (index) {
                   List<String> descriptions = [
                     "List all",
-                    "cat",
-                    "pig",
-                    "horse",
-                    "bull",
-                    "dog",
-                    "7",
-                    "8",
-                    "9",
-                    "10",
+                    "Clothes",
+                    "Shoes",
+                    "Hat",
+                    "Accessories",
                   ];
 
                   bool isFirstShape = index == 0;
@@ -113,36 +113,31 @@ class _HomePageState extends State<HomePage> {
                     //NgeFix jika pas hover+scrolling di button langsung ke page lain
                     //Mungkin berguna? mungkin enggak
                     onVerticalDragDown: (_) {
-                      setState(() {
-                        isScrolling = true;
-                      });
+                      setState(() {});
                     },
                     onVerticalDragEnd: (_) {
-                      setState(() {
-                        isScrolling = false;
-                      });
+                      setState(() {});
                     },
                     onTap: () {
                       Navigator.of(context).push(
                         MaterialPageRoute(
                           builder: (context) {
-                          // Use the category name to select the right page
-                          switch (categories[index]) {
-                            case "Category 1":
-                              return Category1Page();
-                            case "Category 2":
-                              return Category2Page();
-                            case "Category 3":
-                              return Category3Page();
-                            // Add more cases for other categories
-                            default:
-                              return Category1Page(); // Default to Category 1 for now
-                          }
+                            // Use the category name to select the right page
+                            switch (categories[index]) {
+                              case "Category 1":
+                                return Category1Page();
+                              case "Category 2":
+                                return Category2Page();
+                              case "Category 3":
+                                return Category3Page();
+                              // Add more cases for other categories
+                              default:
+                                return Category1Page(); // Default to Category 1 for now
+                            }
                           },
                         ),
                       );
                     },
-
 
                     child: Padding(
                       padding: EdgeInsets.only(left: 15.0, top: 10.0),
@@ -152,17 +147,21 @@ class _HomePageState extends State<HomePage> {
                             width: 80,
                             height: 80,
                             decoration: BoxDecoration(
-                              shape: isFirstShape ? BoxShape.circle : BoxShape.rectangle,
-                              borderRadius: isFirstShape ? null : BorderRadius.circular(12.0),
+                              shape: isFirstShape
+                                  ? BoxShape.circle
+                                  : BoxShape.rectangle,
+                              borderRadius: isFirstShape
+                                  ? null
+                                  : BorderRadius.circular(12.0),
                               color: Colors.orange,
                             ),
                             child: Center(
                               child: Icon(
-                                  Icons.rectangle,
-                                  color: Colors.white,
-                                ),
+                                Icons.rectangle,
+                                color: Colors.white,
                               ),
                             ),
+                          ),
                           SizedBox(height: 5),
                           Text(
                             descriptions[index],
@@ -180,6 +179,138 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
-///////////////////////////////////////////////////////////////
-}
 
+///////////////////////////////////////////////////////////////
+  Widget _buildCarouselSlide() {
+    final imageAssets = [
+      "https://img.freepik.com/premium-vector/special-offer-sale-discount-banner_180786-46.jpg?w=2000",
+      "https://img.freepik.com/premium-vector/special-offer-final-sale-banner-red-background-illustration_275806-121.jpg?w=2000",
+      "https://img.freepik.com/free-vector/mega-sale-offers-banner-template_1017-31299.jpg?size=626&ext=jpg&ga=GA1.1.1154823071.1694689597&semt=ais"
+    ];
+
+    return Container(
+        margin: EdgeInsets.symmetric(horizontal: 20),
+        width: 400,
+        height: 150,
+        child: CarouselSlider.builder(
+          itemCount: imageAssets.length,
+          options: CarouselOptions(
+            aspectRatio: 16 / 9,
+            autoPlay: true,
+            viewportFraction: 1.0,
+          ),
+          itemBuilder: (context, index, realIndex) {
+            final imageAsset = imageAssets[index];
+
+            return _buildImage(imageAsset, index);
+          },
+        ));
+  }
+
+  Widget _buildImage(String imagesArr, int index) => Container(
+          child: Image.network(
+        imagesArr,
+        fit: BoxFit.fill,
+        height: 150,
+        width: 400,
+      ));
+
+  Widget _buildItemContainer() {
+    return Container(
+      alignment: Alignment.center,
+      child: SingleChildScrollView(
+        scrollDirection: Axis.vertical,
+        child: Column(
+          children: [
+            Row(
+              children: [
+                _buildShopItem("lib/images/tshirt.jpg", "T-Shirt1",
+                    "This is a nice looking brown T-Shirt", 9.5, 3.99),
+                _buildShopItem("lib/images/tshirt.jpg", "T-Shirt2",
+                    "This is a nice looking brown T-Shirt", 9.5, 3.99)
+              ],
+            ),
+            Row(
+              children: [
+                _buildShopItem("lib/images/tshirt.jpg", "T-Shirt1",
+                    "This is a nice looking brown T-Shirt", 9.5, 3.99),
+                _buildShopItem("lib/images/tshirt.jpg", "T-Shirt2",
+                    "This is a nice looking brown T-Shirt", 9.5, 3.99)
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildShopItem(String image, String name, String description,
+      double rating, double price) {
+    return Container(
+      margin: EdgeInsets.symmetric(
+        horizontal: 10,
+        vertical: 15,
+      ),
+      height: 250,
+      width: 170,
+      decoration: BoxDecoration(
+        color: Colors.white, // Set the background color
+        borderRadius: BorderRadius.circular(10), // Set the border-radius value
+      ),
+      child: Column(children: [
+        Container(
+          margin: EdgeInsets.all(10),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(10),
+            child: Image(
+              image: AssetImage(image),
+              width: 160,
+              height: 160,
+              fit: BoxFit.fill,
+              alignment: Alignment.topCenter,
+            ),
+          ),
+        ),
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Icon(
+              Icons.star,
+              color: Colors.yellow,
+            ),
+            Text(
+              rating.toString(),
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+            )
+          ],
+        ),
+        Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
+          Text(
+            name,
+            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+          ),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              Text(
+                "\$" + rating.toString(),
+                style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+              )
+            ],
+          ),
+        ]),
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              description,
+              style: TextStyle(fontSize: 8),
+              overflow: TextOverflow.ellipsis,
+              maxLines: 2,
+            )
+          ],
+        ),
+      ]),
+    );
+  }
+}

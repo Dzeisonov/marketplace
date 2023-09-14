@@ -1,8 +1,10 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:marketplace/cart.dart';
+import 'package:marketplace/category_page.dart';
 import 'package:marketplace/homepage.dart';
 import 'package:marketplace/profile.dart';
+import 'package:marketplace/catalog.dart';
 
 class NavBar extends StatefulWidget {
   const NavBar({Key? key}) : super(key: key);
@@ -12,10 +14,11 @@ class NavBar extends StatefulWidget {
 }
 
 class _NavBarState extends State<NavBar> {
-  int _index = 1;
+  int _index = 0;
   final screens = [
-    CartPage(),
     HomePage(),
+    CatalogPage(),
+    CartPage(),
     ProfilePage(),
   ];
 
@@ -35,8 +38,9 @@ class _NavBarState extends State<NavBar> {
         color: Colors.orange,
         animationDuration: Duration(milliseconds: 200),
         items: [
-          Icon(Icons.shopping_cart, color: Colors.white),
           Icon(Icons.home, color: Colors.white),
+          Icon(Icons.shopping_bag, color: Colors.white),
+          Icon(Icons.shopping_cart, color: Colors.white),
           Icon(Icons.person, color: Colors.white),
         ],
       ),
