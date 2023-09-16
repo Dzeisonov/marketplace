@@ -189,9 +189,9 @@ class _HomePageState extends State<HomePage> {
 ///////////////////////////////////////////////////////////////
   Widget _buildCarouselSlide() {
     final imageAssets = [
-      "https://img.freepik.com/premium-vector/special-offer-sale-discount-banner_180786-46.jpg?w=2000",
-      "https://img.freepik.com/premium-vector/special-offer-final-sale-banner-red-background-illustration_275806-121.jpg?w=2000",
-      "https://img.freepik.com/free-vector/mega-sale-offers-banner-template_1017-31299.jpg?size=626&ext=jpg&ga=GA1.1.1154823071.1694689597&semt=ais"
+      "lib/images/offer2.jpg",
+      "lib/images/offer2.jpg",
+      "lib/images/offer2.jpg",
     ];
 
     return Container(
@@ -208,7 +208,7 @@ class _HomePageState extends State<HomePage> {
           itemBuilder: (context, index, realIndex) {
             final imageAsset = imageAssets[index];
 
-            return _buildImage(imageAsset, index);
+            return Image.asset(imageAsset);
           },
         ));
   }
@@ -286,7 +286,7 @@ class _HomePageState extends State<HomePage> {
         horizontal: 10,
         vertical: 15,
       ),
-      height: 250,
+      height: 295,
       width: 170,
       decoration: BoxDecoration(
         color: Colors.white, // Set the background color
@@ -306,39 +306,61 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
         ),
+
         Container(
           padding: EdgeInsets.only(left: 10, right: 10),
           child: Column(children: [
             Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Icon(
                   Icons.star,
                   color: Colors.yellow,
                 ),
+                SizedBox(width: 2),
                 Text(
                   rating.toString(),
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 )
               ],
             ),
+            
+        SizedBox(height: 5,),
+
             Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
               Text(
                 name,
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
             ]),
+
+            SizedBox(height: 10),
+
             Container(
-              alignment: Alignment.centerLeft,
               child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
                     "\$" + rating.toString(),
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                   ),
                   Spacer(),
-                  Icon(Icons.shopping_cart),
+                  GestureDetector(
+                    onTap: (){
+
+                    },
+                    child: Container(
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Colors.black,
+                    ),
+                    padding: 
+                      EdgeInsets.all(10),
+                    child: Icon(
+                      Icons.shopping_cart,
+                      color: Colors.white,
+                    ),
+                  ),
+                  ),
                 ],
               ),
             )
