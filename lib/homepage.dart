@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:marketplace/catalog.dart';
+import 'package:marketplace/navbar.dart';
+import 'package:marketplace/navcatalog.dart';
 import 'category1_page.dart';
 import 'category2_page.dart';
 import 'category3_page.dart';
@@ -35,6 +38,9 @@ class _HomePageState extends State<HomePage> {
         SizedBox(height: 10),
         _buildCarouselSlide(),
         SizedBox(height: 10),
+        _buildItemCategory(),
+        _buildItemContainer(),
+        _buildItemCategory(),
         _buildItemContainer(),
       ]),
     ));
@@ -215,27 +221,56 @@ class _HomePageState extends State<HomePage> {
         width: 400,
       ));
 
+  Widget _buildItemCategory() {
+    return Container(
+      margin: EdgeInsets.symmetric(horizontal: 15),
+      alignment: Alignment.center,
+      child: Column(children: [
+        Row(
+          children: [
+            Align(
+              alignment: Alignment.topLeft,
+              child: Text(
+                "Trending",
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              ),
+            ),
+            Spacer(),
+            Align(
+              alignment: Alignment.topRight,
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return NavCat();
+                      },
+                    ),
+                  );
+                },
+                child: Text("See more",
+                    style: TextStyle(fontSize: 16, color: Colors.black)),
+              ),
+            ),
+          ],
+        ),
+      ]),
+    );
+  }
+
   Widget _buildItemContainer() {
     return Container(
-      alignment: Alignment.center,
+      // alignment: Alignment.center,
       child: SingleChildScrollView(
-        scrollDirection: Axis.vertical,
+        scrollDirection: Axis.horizontal,
         child: Column(
           children: [
             Row(
               children: [
-                _buildShopItem("lib/images/tshirt.jpg", "T-Shirt1",
-                    "This is a nice looking brown T-Shirt", 9.5, 3.99),
-                _buildShopItem("lib/images/tshirt.jpg", "T-Shirt2",
-                    "This is a nice looking brown T-Shirt", 9.5, 3.99)
-              ],
-            ),
-            Row(
-              children: [
-                _buildShopItem("lib/images/tshirt.jpg", "T-Shirt1",
-                    "This is a nice looking brown T-Shirt", 9.5, 3.99),
-                _buildShopItem("lib/images/tshirt.jpg", "T-Shirt2",
-                    "This is a nice looking brown T-Shirt", 9.5, 3.99)
+                _buildShopItem("lib/images/tshirt.jpg", "T-Shirt1", 9.5, 3.99),
+                _buildShopItem("lib/images/tshirt.jpg", "T-Shirt2", 9.5, 3.99),
+                _buildShopItem("lib/images/tshirt.jpg", "T-Shirt1", 9.5, 3.99),
+                _buildShopItem("lib/images/tshirt.jpg", "T-Shirt2", 9.5, 3.99)
               ],
             ),
           ],
@@ -244,8 +279,8 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Widget _buildShopItem(String image, String name, String description,
-      double rating, double price) {
+  Widget _buildShopItem(
+      String image, String name, double rating, double price) {
     return Container(
       margin: EdgeInsets.symmetric(
         horizontal: 10,
@@ -271,44 +306,43 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
         ),
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Icon(
-              Icons.star,
-              color: Colors.yellow,
+        Container(
+          padding: EdgeInsets.only(left: 10, right: 10),
+          child: Column(children: [
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Icon(
+                  Icons.star,
+                  color: Colors.yellow,
+                ),
+                Text(
+                  rating.toString(),
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                )
+              ],
             ),
-            Text(
-              rating.toString(),
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-            )
-          ],
-        ),
-        Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          Text(
-            name,
-            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-          ),
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
+            Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
               Text(
-                "\$" + rating.toString(),
-                style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
-              )
-            ],
-          ),
-        ]),
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              description,
-              style: TextStyle(fontSize: 8),
-              overflow: TextOverflow.ellipsis,
-              maxLines: 2,
+                name,
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              ),
+            ]),
+            Container(
+              alignment: Alignment.centerLeft,
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "\$" + rating.toString(),
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                  ),
+                  Spacer(),
+                  Icon(Icons.shopping_cart),
+                ],
+              ),
             )
-          ],
+          ]),
         ),
       ]),
     );
