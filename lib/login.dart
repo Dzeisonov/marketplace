@@ -13,16 +13,13 @@ class LoginScreen extends StatelessWidget {
       body: Container(
         width: double.infinity,
         decoration: BoxDecoration(
-            gradient: LinearGradient(begin: Alignment.topCenter, colors: [
-          Colors.orange.shade900,
-          Colors.orange.shade800,
-          Colors.orange.shade400,
-        ])),
+            color: Colors.black,
+            ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             SizedBox(
-              height: 80,
+              height: 175,
             ),
             Padding(
               padding: EdgeInsets.all(20),
@@ -62,12 +59,13 @@ class LoginScreen extends StatelessWidget {
                         Container(
                           decoration: BoxDecoration(
                               color: Colors.white,
-                              borderRadius: BorderRadius.circular(10),
+                              border: Border.all(color: Colors.black26),
+                              borderRadius: BorderRadius.circular(15),
                               boxShadow: [
                                 BoxShadow(
-                                    color: Color.fromRGBO(225, 95, 27, .3),
-                                    blurRadius: 20,
-                                    offset: Offset(0, 10))
+                                    color: Colors.grey,
+                                    blurRadius: 10,
+                                    offset: Offset(0, 4))
                               ]),
                           child: Column(
                             children: <Widget>[
@@ -86,10 +84,6 @@ class LoginScreen extends StatelessWidget {
                               ),
                               Container(
                                 padding: EdgeInsets.all(10),
-                                decoration: BoxDecoration(
-                                    border: Border(
-                                        bottom: BorderSide(
-                                            color: Colors.grey.shade200))),
                                 child: TextField(
                                   decoration: InputDecoration(
                                       hintText: "Password",
@@ -105,7 +99,7 @@ class LoginScreen extends StatelessWidget {
                         ),
                         Text(
                           "Forgot Password?",
-                          style: TextStyle(color: Colors.grey),
+                          style: TextStyle(color: Colors.black54),
                         ),
                         SizedBox(
                           height: 40,
@@ -122,7 +116,7 @@ class LoginScreen extends StatelessWidget {
                                 margin: EdgeInsets.symmetric(horizontal: 50),
                                 child: ElevatedButton(
                                   style: ElevatedButton.styleFrom(
-                                    backgroundColor: Colors.orange.shade900,
+                                    backgroundColor: Colors.black,
                                     shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(50),
                                     ),
@@ -151,7 +145,7 @@ class LoginScreen extends StatelessWidget {
                         ),
                         Text(
                           "Continue with social media",
-                          style: TextStyle(color: Colors.grey),
+                          style: TextStyle(color: Colors.black54),
                         ),
                         SizedBox(
                           height: 30,

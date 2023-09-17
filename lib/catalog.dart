@@ -32,7 +32,7 @@ class TabBarExample extends StatelessWidget {
         body: CustomScrollView(
           slivers: [
             SliverAppBar(
-              backgroundColor: Colors.orange,
+              backgroundColor: Colors.white,
               expandedHeight: 100, // Adjust the expanded height as needed
               floating: false,
               pinned: false,
@@ -44,40 +44,82 @@ class TabBarExample extends StatelessWidget {
                     height: 10,
                   ),
                   TabBar(
-                    indicatorColor: Colors.deepOrange,
+                    indicatorColor: Colors.black,
                     indicatorWeight: 6,
                     tabs: <Widget>[
                       Tab(
                         child: Container(
                           padding: EdgeInsets.symmetric(
-                              horizontal: 15, vertical: 10),
+                              horizontal: 19, vertical: 10),
                           decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            color: Colors.orange.shade400,
+                            borderRadius: BorderRadius.circular(20),
+                            color: Colors.white,
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey.withOpacity(0.7),
+                                spreadRadius: 1.5,
+                                blurRadius: 2,
+                                offset: Offset(0, 2),
+                              ),
+                            ],
+                            border: Border.all(
+                              color: Colors.black,
+                              width: 1,
+                              )
                           ),
-                          child: Text("Trending1"),
+                          child: Text("Trending1",
+                            style: TextStyle(color: Colors.black),
+                              ),
                         ),
                       ),
                       Tab(
                         child: Container(
                           padding: EdgeInsets.symmetric(
-                              horizontal: 15, vertical: 10),
+                              horizontal: 19, vertical: 10),
                           decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            color: Colors.orange.shade400,
+                            borderRadius: BorderRadius.circular(20),
+                            color: Colors.white,
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey.withOpacity(0.7),
+                                spreadRadius: 1.5,
+                                blurRadius: 2,
+                                offset: Offset(0, 2),
+                              ),
+                            ],
+                            border: Border.all(
+                              color: Colors.black,
+                              width: 1,
+                              )
                           ),
-                          child: Text("Trending2"),
+                          child: Text("Trending2",
+                            style: TextStyle(color: Colors.black),
+                              ),
                         ),
                       ),
                       Tab(
                         child: Container(
                           padding: EdgeInsets.symmetric(
-                              horizontal: 15, vertical: 10),
+                              horizontal: 19, vertical: 10),
                           decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            color: Colors.orange.shade400,
+                            borderRadius: BorderRadius.circular(20),
+                            color: Colors.white,
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey.withOpacity(0.7),
+                                spreadRadius: 1.5,
+                                blurRadius: 2,
+                                offset: Offset(0, 2),
+                              ),
+                            ],
+                            border: Border.all(
+                              color: Colors.black,
+                              width: 1,
+                              )
                           ),
-                          child: Text("Trending3"),
+                          child: Text("Trending3",
+                            style: TextStyle(color: Colors.black),
+                              ),
                         ),
                       ),
                     ],
@@ -107,27 +149,39 @@ class TabBarExample extends StatelessWidget {
   }
 
   Widget _buildSearchBar() {
-    OutlineInputBorder outlineInputBorder = OutlineInputBorder(
-      borderRadius: BorderRadius.circular(20.0),
-      borderSide: BorderSide(color: Colors.orange),
-    );
+      OutlineInputBorder outlineInputBorder = OutlineInputBorder(
+        borderRadius: BorderRadius.circular(20.0),
+        borderSide: BorderSide(color: Colors.black),
+      );
 
-    return Container(
-      margin: EdgeInsets.only(
-          left: 15, right: 15, top: 10), // Adjust the top margin as needed
-      alignment: Alignment.topCenter,
-      child: Column(
-        children: [
-          TextField(
-            decoration: InputDecoration(
-              fillColor: Colors.white,
-              filled: true,
-              contentPadding:
-                  const EdgeInsets.symmetric(vertical: 10.0, horizontal: 15),
-              hintText: "Search",
-              suffixIcon: const Icon(Icons.search),
-              enabledBorder: outlineInputBorder,
-              focusedBorder: outlineInputBorder,
+      return Container(
+        margin: EdgeInsets.only(left: 15, right: 15, top: 25),
+        alignment: Alignment.topCenter,
+        child: Column(
+          children: [
+            Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20.0),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.8),
+                    offset: Offset(0, 3),
+                    blurRadius: 4,
+                    spreadRadius: -1,
+                  )
+                ]
+            ),
+            child: TextField(
+              decoration: InputDecoration(
+                fillColor: Colors.white,
+                filled: true,
+                contentPadding:
+                    const EdgeInsets.symmetric(vertical: 10.0, horizontal: 15),
+                hintText: "Search",
+                suffixIcon: const Icon(Icons.search),
+                enabledBorder: outlineInputBorder,
+                focusedBorder: outlineInputBorder,
+              ),
             ),
           ),
         ],

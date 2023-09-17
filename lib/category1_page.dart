@@ -5,6 +5,7 @@ class Category1Page extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.black,
         title: Text('Category 1'),
       ),
       body: Center(

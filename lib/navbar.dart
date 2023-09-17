@@ -26,22 +26,38 @@ class _NavBarState extends State<NavBar> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: screens[_index],
-      backgroundColor: Colors.orange.shade200,
-      bottomNavigationBar: CurvedNavigationBar(
-        index: _index,
+      backgroundColor: Colors.black,
+      bottomNavigationBar: BottomNavigationBar(
         onTap: (index) {
           setState(() {
             _index = index;
           });
         },
-        backgroundColor: Colors.orange.shade200,
-        color: Colors.orange,
-        animationDuration: Duration(milliseconds: 200),
+        backgroundColor: Colors.black,
+          // color: Colors.black,
+          // animationDuration: Duration(milliseconds: 200),
+        unselectedItemColor: Colors.white70,  
+        selectedItemColor: Colors.white,
+        currentIndex: _index,
+        type: BottomNavigationBarType.fixed,
+
         items: [
-          Icon(Icons.home, color: Colors.white),
-          Icon(Icons.shopping_bag, color: Colors.white),
-          Icon(Icons.shopping_cart, color: Colors.white),
-          Icon(Icons.person, color: Colors.white),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.shopping_bag),
+            label: 'Shop',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.shopping_cart),
+            label: 'Cart',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person),
+            label: 'Profile',
+          ),
         ],
       ),
     );

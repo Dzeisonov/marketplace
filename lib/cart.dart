@@ -16,7 +16,7 @@ class _CartPageState extends State<CartPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.orange.shade200,
+      backgroundColor: Colors.white,
       body: Padding(
         padding: const EdgeInsets.only(top: 20, bottom: 25),
         child: Align(
@@ -48,20 +48,30 @@ class _CartPageState extends State<CartPage> {
           cartItems.remove(item);
         });
       },
-      background: Container(
-        color: Colors.red,
-        child: Icon(Icons.delete, color: Colors.white),
-        alignment: Alignment.centerRight,
-        padding: EdgeInsets.only(right: 20),
-      ),
+      // background: Container(
+      //   color: Colors.red,
+      //   child: Icon(Icons.delete, color: Colors.white),
+      //   alignment: Alignment.centerRight,
+      //   padding: EdgeInsets.only(right: 20),
+      // ),
+
+      
       child: Container(
         margin: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
-          color: Colors.white,
-        ),
+        color: Colors.white, // Set the background color
+        borderRadius: BorderRadius.circular(10), 
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.7),
+            spreadRadius: 2,
+            blurRadius: 5,
+            offset: Offset(0, 3),
+          )],// Set the border-radius value
+      ),
         height: 110,
         width: 400,
+        
         child: Stack(
           children: [
             Row(
@@ -84,25 +94,33 @@ class _CartPageState extends State<CartPage> {
                   margin: EdgeInsets.only(top: 10),
                   child: Column(
                     children: [
-                      Text(
-                        item.name,
-                        style: TextStyle(
-                            fontSize: 16, fontWeight: FontWeight.bold),
-                      ),
                       Container(
                         child: Row(
                           children: [
-                            Icon(
-                              Icons.star,
-                              color: Colors.yellow,
-                            ),
                             Text(
-                              item.rating.toString(),
+                              item.name,
                               style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            )
+                                  fontSize: 16, fontWeight: FontWeight.bold),
+                            ),
+                            Container(
+                              child: Row(
+                                children: [
+                                  Align(
+                                    alignment: Alignment.topRight,
+                                    child: Icon(
+                                    Icons.star,
+                                    color: Colors.yellow,
+                                  ),
+                                ),
+                                Text(
+                                  item.rating.toString(),
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                )
+                              ]),
+                            ),
                           ],
                         ),
                       ),

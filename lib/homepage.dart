@@ -18,7 +18,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.orange.shade200,
+        backgroundColor: Colors.white,
         body: Container(
             child: Column(
           children: [
@@ -49,7 +49,7 @@ class _HomePageState extends State<HomePage> {
   Widget _buildSearchBar() {
     OutlineInputBorder outlineInputBorder = OutlineInputBorder(
       borderRadius: BorderRadius.circular(20.0),
-      borderSide: BorderSide(color: Colors.orange),
+      borderSide: BorderSide(color: Colors.black),
     );
 
     return Container(
@@ -57,7 +57,19 @@ class _HomePageState extends State<HomePage> {
       alignment: Alignment.topCenter,
       child: Column(
         children: [
-          TextField(
+          Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(20.0),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.8),
+                  offset: Offset(0, 3),
+                  blurRadius: 4,
+                  spreadRadius: -1,
+                )
+              ]
+          ),
+          child: TextField(
             decoration: InputDecoration(
               fillColor: Colors.white,
               filled: true,
@@ -69,10 +81,11 @@ class _HomePageState extends State<HomePage> {
               focusedBorder: outlineInputBorder,
             ),
           ),
-        ],
-      ),
-    );
-  }
+        ),
+      ],
+    ),
+  );
+}
 
 ////////////////////////////////////////////////////////////
   Widget _buildIconList() {
@@ -84,8 +97,6 @@ class _HomePageState extends State<HomePage> {
       "Category 5",
     ];
 
-<<<<<<< HEAD
-=======
     List<String> categoryImages = [
       "lib/images/all.png",
       "lib/images/dress.png",
@@ -94,7 +105,6 @@ class _HomePageState extends State<HomePage> {
       "lib/images/necklace.png", 
     ];
 
->>>>>>> 6c00b90 (Menambahkan icon category 1-5 pada homepage)
     return Container(
       height: 150,
       child: Column(
@@ -161,7 +171,7 @@ class _HomePageState extends State<HomePage> {
                       child: Column(
                         children: [
                           Container(
-                            width: 80,
+                            width: 77,
                             height: 80,
                             decoration: BoxDecoration(
                               shape: isFirstShape
@@ -170,23 +180,17 @@ class _HomePageState extends State<HomePage> {
                               borderRadius: isFirstShape
                                   ? null
                                   : BorderRadius.circular(12.0),
-                              color: Colors.orange,
+                              color: Colors.white,
                             ),
                             child: Center(
-<<<<<<< HEAD
-                              child: Icon(
-                                Icons.rectangle,
-                                color: Colors.white,
-=======
-                              child: Image.network(
+                              child: Image.asset(
                                 categoryImages[index],
-                                width: 40,
-                                height: 40,
->>>>>>> 6c00b90 (Menambahkan icon category 1-5 pada homepage)
+                                width: 80,
+                                height: 80,
                               ),
                             ),
                           ),
-                          SizedBox(height: 5),
+                          SizedBox(height: 1),
                           Text(
                             descriptions[index],
                             style: TextStyle(fontSize: 12),
@@ -207,26 +211,37 @@ class _HomePageState extends State<HomePage> {
 ///////////////////////////////////////////////////////////////
   Widget _buildCarouselSlide() {
     final imageAssets = [
-      "lib/images/offer2.jpg",
-      "lib/images/offer2.jpg",
-      "lib/images/offer2.jpg",
+      "lib/images/adds/offer1.jpg",
+      "lib/images/adds/offer2.jpg",
+      "lib/images/adds/offer3.jpg",
     ];
 
+    double screenWidth = MediaQuery.of(context).size.width;
+    double widths = screenWidth - 30;
+    double heights = screenWidth * 8 / 18;
+    
     return Container(
-        margin: EdgeInsets.symmetric(horizontal: 20),
-        width: 400,
-        height: 150,
+
+        margin: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+        width: widths,
+        height: heights,
         child: CarouselSlider.builder(
           itemCount: imageAssets.length,
           options: CarouselOptions(
-            aspectRatio: 16 / 9,
             autoPlay: true,
             viewportFraction: 1.0,
           ),
           itemBuilder: (context, index, realIndex) {
             final imageAsset = imageAssets[index];
-
-            return Image.asset(imageAsset);
+            
+            return Container(
+              width: widths,
+              height: heights,
+              child: Image.asset(
+                imageAsset,
+                fit: BoxFit.cover,
+              )
+            );
           },
         ));
   }
@@ -266,8 +281,17 @@ class _HomePageState extends State<HomePage> {
                     ),
                   );
                 },
-                child: Text("See more",
-                    style: TextStyle(fontSize: 16, color: Colors.black)),
+                child: Row(
+                  children: [
+                    Text("See more",
+                      style: TextStyle(fontSize: 16, color: Colors.black)
+                      ),
+                    SizedBox(width: 5,),
+                    Text(">",
+                      style: TextStyle(fontSize: 18, color: Colors.black, fontWeight: FontWeight.bold)
+                      )
+                  ],
+                ),
               ),
             ),
           ],
@@ -308,7 +332,14 @@ class _HomePageState extends State<HomePage> {
       width: 170,
       decoration: BoxDecoration(
         color: Colors.white, // Set the background color
-        borderRadius: BorderRadius.circular(10), // Set the border-radius value
+        borderRadius: BorderRadius.circular(10), 
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.7),
+            spreadRadius: 2,
+            blurRadius: 5,
+            offset: Offset(0, 3),
+          )],// Set the border-radius value
       ),
       child: Column(children: [
         Container(

@@ -11,7 +11,7 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.orange.shade200,
+        backgroundColor: Colors.white,
         body: Container(
             alignment: Alignment.centerLeft,
             child: Column(
@@ -20,21 +20,21 @@ class _ProfilePageState extends State<ProfilePage> {
                 SizedBox(height: 15),
                 _buildProfileIcon("lib/images/profile.png"),
                 SizedBox(height: 20),
-                _buildMenuItem("Edit Profile", Colors.orange.shade200, 20, () {
+                _buildMenuItem("Edit Profile", 20, () {
                   // Customize this part to navigate to your ProfileScreen.
                   Navigator.push(context, MaterialPageRoute(builder: (_) {
                     return ProfileScreen(); // Replace with your ProfileScreen widget.
                   }));
                 }),
                 _buildDivider(10, 10),
-                _buildMenuItem("Payments", Colors.orange.shade200, 20, () {
+                _buildMenuItem("Payments", 20, () {
                   // Customize this part to navigate to your ProfileScreen.
                   Navigator.push(context, MaterialPageRoute(builder: (_) {
                     return PaymentsScreen(); // Replace with your ProfileScreen widget.
                   }));
                 }),
                 _buildDivider(10, 10),
-                _buildMenuItem("Settings", Colors.orange.shade200, 20, () {
+                _buildMenuItem("Settings", 20, () {
                   // Customize this part to navigate to your ProfileScreen.
                   Navigator.push(context, MaterialPageRoute(builder: (_) {
                     return SettingsScreen(); // Replace with your ProfileScreen widget.
@@ -55,17 +55,17 @@ class _ProfilePageState extends State<ProfilePage> {
   }
 
   Widget _buildMenuItem(
-      String text, Color backgroundColor, double fontSize, VoidCallback onTap) {
+      String text,  double fontSize, VoidCallback onTap) {
     return GestureDetector(
       onTap: onTap, // Specify the callback to be called when tapped.
       child: Container(
-        color: backgroundColor, // Background color
+        color: Colors.white, // Background color
         padding: EdgeInsets.all(8.0), // Adjust padding as needed
         child: Text(
           text,
           style: TextStyle(
             fontSize: fontSize, // Text size
-            color: Colors.white, // Text color
+            color: Colors.black, // Text color
           ),
         ),
       ),
@@ -76,7 +76,7 @@ class _ProfilePageState extends State<ProfilePage> {
     return Divider(
       height: 1,
       thickness: 2,
-      color: Colors.orange.shade400,
+      color: Colors.black,
       indent: indent, // Customize the space before the divider
       endIndent: endIndent, // Customize the space after the divider
     );
@@ -94,7 +94,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.orange,
+        backgroundColor: Colors.white,
         body: Padding(
             padding: const EdgeInsets.only(bottom: 25),
             child: Align(
@@ -115,7 +115,7 @@ class _PaymentsScreenState extends State<PaymentsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.orange,
+        backgroundColor: Colors.white,
         body: Padding(
             padding: const EdgeInsets.only(bottom: 25),
             child: Align(
@@ -136,7 +136,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.orange,
+        backgroundColor: Colors.white,
         body: Padding(
             padding: const EdgeInsets.only(bottom: 25),
             child: Align(

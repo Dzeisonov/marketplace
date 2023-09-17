@@ -11,7 +11,7 @@ class _TrendScreenState extends State<TrendScreen> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.orange.shade200,
+      color: Colors.white,
       child: ListView(
         scrollDirection: Axis.vertical,
         children: [
@@ -74,9 +74,17 @@ class _TrendScreenState extends State<TrendScreen> {
       ),
       height: 295,
       width: 170,
+
       decoration: BoxDecoration(
         color: Colors.white, // Set the background color
-        borderRadius: BorderRadius.circular(10), // Set the border-radius value
+        borderRadius: BorderRadius.circular(10), 
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.7),
+            spreadRadius: 2,
+            blurRadius: 5,
+            offset: Offset(0, 3),
+          )],// Set the border-radius value
       ),
       child: Column(children: [
         Container(
