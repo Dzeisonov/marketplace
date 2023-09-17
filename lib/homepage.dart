@@ -84,6 +84,17 @@ class _HomePageState extends State<HomePage> {
       "Category 5",
     ];
 
+<<<<<<< HEAD
+=======
+    List<String> categoryImages = [
+      "lib/images/all.png",
+      "lib/images/dress.png",
+      "lib/images/shoe.png",
+      "lib/images/cap.png",
+      "lib/images/necklace.png", 
+    ];
+
+>>>>>>> 6c00b90 (Menambahkan icon category 1-5 pada homepage)
     return Container(
       height: 150,
       child: Column(
@@ -162,9 +173,16 @@ class _HomePageState extends State<HomePage> {
                               color: Colors.orange,
                             ),
                             child: Center(
+<<<<<<< HEAD
                               child: Icon(
                                 Icons.rectangle,
                                 color: Colors.white,
+=======
+                              child: Image.network(
+                                categoryImages[index],
+                                width: 40,
+                                height: 40,
+>>>>>>> 6c00b90 (Menambahkan icon category 1-5 pada homepage)
                               ),
                             ),
                           ),
