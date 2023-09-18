@@ -3,6 +3,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:marketplace/catalog.dart';
 import 'package:marketplace/navbar.dart';
 import 'package:marketplace/navcatalog.dart';
+import 'package:marketplace/trendpage.dart';
 import 'category1_page.dart';
 import 'category2_page.dart';
 import 'category3_page.dart';
@@ -59,33 +60,32 @@ class _HomePageState extends State<HomePage> {
         children: [
           Container(
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20.0),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withOpacity(0.8),
-                  offset: Offset(0, 3),
-                  blurRadius: 4,
-                  spreadRadius: -1,
-                )
-              ]
-          ),
-          child: TextField(
-            decoration: InputDecoration(
-              fillColor: Colors.white,
-              filled: true,
-              contentPadding:
-                  const EdgeInsets.symmetric(vertical: 10.0, horizontal: 15),
-              hintText: "Search",
-              suffixIcon: const Icon(Icons.search),
-              enabledBorder: outlineInputBorder,
-              focusedBorder: outlineInputBorder,
+                borderRadius: BorderRadius.circular(20.0),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.8),
+                    offset: Offset(0, 3),
+                    blurRadius: 4,
+                    spreadRadius: -1,
+                  )
+                ]),
+            child: TextField(
+              decoration: InputDecoration(
+                fillColor: Colors.white,
+                filled: true,
+                contentPadding:
+                    const EdgeInsets.symmetric(vertical: 10.0, horizontal: 15),
+                hintText: "Search",
+                suffixIcon: const Icon(Icons.search),
+                enabledBorder: outlineInputBorder,
+                focusedBorder: outlineInputBorder,
+              ),
             ),
           ),
-        ),
-      ],
-    ),
-  );
-}
+        ],
+      ),
+    );
+  }
 
 ////////////////////////////////////////////////////////////
   Widget _buildIconList() {
@@ -102,7 +102,7 @@ class _HomePageState extends State<HomePage> {
       "lib/images/dress.png",
       "lib/images/shoe.png",
       "lib/images/cap.png",
-      "lib/images/necklace.png", 
+      "lib/images/necklace.png",
     ];
 
     return Container(
@@ -219,9 +219,8 @@ class _HomePageState extends State<HomePage> {
     double screenWidth = MediaQuery.of(context).size.width;
     double widths = screenWidth - 30;
     double heights = screenWidth * 8 / 18;
-    
-    return Container(
 
+    return Container(
         margin: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
         width: widths,
         height: heights,
@@ -233,15 +232,14 @@ class _HomePageState extends State<HomePage> {
           ),
           itemBuilder: (context, index, realIndex) {
             final imageAsset = imageAssets[index];
-            
+
             return Container(
-              width: widths,
-              height: heights,
-              child: Image.asset(
-                imageAsset,
-                fit: BoxFit.cover,
-              )
-            );
+                width: widths,
+                height: heights,
+                child: Image.asset(
+                  imageAsset,
+                  fit: BoxFit.cover,
+                ));
           },
         ));
   }
@@ -276,7 +274,7 @@ class _HomePageState extends State<HomePage> {
                   Navigator.of(context).push(
                     MaterialPageRoute(
                       builder: (context) {
-                        return NavCat();
+                        return TrendPage();
                       },
                     ),
                   );
@@ -284,12 +282,15 @@ class _HomePageState extends State<HomePage> {
                 child: Row(
                   children: [
                     Text("See more",
-                      style: TextStyle(fontSize: 16, color: Colors.black)
-                      ),
-                    SizedBox(width: 5,),
+                        style: TextStyle(fontSize: 16, color: Colors.black)),
+                    SizedBox(
+                      width: 5,
+                    ),
                     Text(">",
-                      style: TextStyle(fontSize: 18, color: Colors.black, fontWeight: FontWeight.bold)
-                      )
+                        style: TextStyle(
+                            fontSize: 18,
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold))
                   ],
                 ),
               ),
@@ -332,14 +333,15 @@ class _HomePageState extends State<HomePage> {
       width: 170,
       decoration: BoxDecoration(
         color: Colors.white, // Set the background color
-        borderRadius: BorderRadius.circular(10), 
+        borderRadius: BorderRadius.circular(10),
         boxShadow: [
           BoxShadow(
             color: Colors.grey.withOpacity(0.7),
             spreadRadius: 2,
             blurRadius: 5,
             offset: Offset(0, 3),
-          )],// Set the border-radius value
+          )
+        ], // Set the border-radius value
       ),
       child: Column(children: [
         Container(
@@ -355,7 +357,6 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
         ),
-
         Container(
           padding: EdgeInsets.only(left: 10, right: 10),
           child: Column(children: [
@@ -372,18 +373,16 @@ class _HomePageState extends State<HomePage> {
                 )
               ],
             ),
-            
-        SizedBox(height: 5,),
-
+            SizedBox(
+              height: 5,
+            ),
             Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
               Text(
                 name,
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
             ]),
-
             SizedBox(height: 10),
-
             Container(
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -393,22 +392,16 @@ class _HomePageState extends State<HomePage> {
                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                   ),
                   Spacer(),
-                  GestureDetector(
-                    onTap: (){
-
-                    },
-                    child: Container(
+                  Container(
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
                       color: Colors.black,
                     ),
-                    padding: 
-                      EdgeInsets.all(10),
+                    padding: EdgeInsets.all(10),
                     child: Icon(
                       Icons.shopping_cart,
                       color: Colors.white,
                     ),
-                  ),
                   ),
                 ],
               ),

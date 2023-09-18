@@ -5,6 +5,7 @@ import 'package:marketplace/homepage.dart';
 import 'package:marketplace/profile.dart';
 import 'package:marketplace/catalog.dart';
 
+////////////////////>>>>>>>>>>> Not Used <<<<<<<<<<<<////////////////////
 class NavCat extends StatefulWidget {
   const NavCat({Key? key}) : super(key: key);
 
@@ -33,9 +34,9 @@ class _NavBarState extends State<NavCat> {
           });
         },
         backgroundColor: Colors.black,
-          // color: Colors.black,
-          // animationDuration: Duration(milliseconds: 200),
-        unselectedItemColor: Colors.white70,  
+        // color: Colors.black,
+        // animationDuration: Duration(milliseconds: 200),
+        unselectedItemColor: Colors.white70,
         selectedItemColor: Colors.white,
         currentIndex: _index,
         type: BottomNavigationBarType.fixed,

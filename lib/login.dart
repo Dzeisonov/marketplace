@@ -13,8 +13,8 @@ class LoginScreen extends StatelessWidget {
       body: Container(
         width: double.infinity,
         decoration: BoxDecoration(
-            color: Colors.black,
-            ),
+          color: Colors.black,
+        ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
@@ -137,8 +137,6 @@ class LoginScreen extends StatelessWidget {
                           ],
                         ),
 //////////////////////////////////////////////////////////////////////////////////////////
-
-
 
                         SizedBox(
                           height: 50,

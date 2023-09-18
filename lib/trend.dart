@@ -22,9 +22,9 @@ class _TrendScreenState extends State<TrendScreen> {
   }
 
   Widget _buildItemContainer() {
-      double screenWidth = MediaQuery.of(context).size.width;
-  // Calculate the width as a fraction of the screen width
-  double containerWidth = screenWidth * 0.036;
+    double screenWidth = MediaQuery.of(context).size.width;
+    // Calculate the width as a fraction of the screen width
+    double containerWidth = screenWidth * 0.016;
     return Container(
       margin: EdgeInsets.symmetric(
         horizontal: containerWidth,
@@ -64,9 +64,8 @@ class _TrendScreenState extends State<TrendScreen> {
     );
   }
 
- Widget _buildShopItem(
+  Widget _buildShopItem(
       String image, String name, double rating, double price) {
-        
     return Container(
       margin: EdgeInsets.symmetric(
         horizontal: 10,
@@ -74,17 +73,17 @@ class _TrendScreenState extends State<TrendScreen> {
       ),
       height: 295,
       width: 170,
-
       decoration: BoxDecoration(
         color: Colors.white, // Set the background color
-        borderRadius: BorderRadius.circular(10), 
+        borderRadius: BorderRadius.circular(10),
         boxShadow: [
           BoxShadow(
             color: Colors.grey.withOpacity(0.7),
             spreadRadius: 2,
             blurRadius: 5,
             offset: Offset(0, 3),
-          )],// Set the border-radius value
+          )
+        ], // Set the border-radius value
       ),
       child: Column(children: [
         Container(
@@ -100,7 +99,6 @@ class _TrendScreenState extends State<TrendScreen> {
             ),
           ),
         ),
-
         Container(
           padding: EdgeInsets.only(left: 10, right: 10),
           child: Column(children: [
@@ -117,18 +115,16 @@ class _TrendScreenState extends State<TrendScreen> {
                 )
               ],
             ),
-            
-        SizedBox(height: 5,),
-
+            SizedBox(
+              height: 5,
+            ),
             Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
               Text(
                 name,
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
             ]),
-
             SizedBox(height: 10),
-
             Container(
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -139,21 +135,18 @@ class _TrendScreenState extends State<TrendScreen> {
                   ),
                   Spacer(),
                   GestureDetector(
-                    onTap: (){
-
-                    },
+                    onTap: () {},
                     child: Container(
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Colors.black,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: Colors.black,
+                      ),
+                      padding: EdgeInsets.all(10),
+                      child: Icon(
+                        Icons.shopping_cart,
+                        color: Colors.white,
+                      ),
                     ),
-                    padding: 
-                      EdgeInsets.all(10),
-                    child: Icon(
-                      Icons.shopping_cart,
-                      color: Colors.white,
-                    ),
-                  ),
                   ),
                 ],
               ),

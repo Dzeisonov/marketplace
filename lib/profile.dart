@@ -54,8 +54,7 @@ class _ProfilePageState extends State<ProfilePage> {
     );
   }
 
-  Widget _buildMenuItem(
-      String text,  double fontSize, VoidCallback onTap) {
+  Widget _buildMenuItem(String text, double fontSize, VoidCallback onTap) {
     return GestureDetector(
       onTap: onTap, // Specify the callback to be called when tapped.
       child: Container(
@@ -94,6 +93,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.black,
+          title: Text("Edit Profile"),
+        ),
         backgroundColor: Colors.white,
         body: Padding(
             padding: const EdgeInsets.only(bottom: 25),
@@ -115,6 +118,10 @@ class _PaymentsScreenState extends State<PaymentsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.black,
+          title: Text("Payments"),
+        ),
         backgroundColor: Colors.white,
         body: Padding(
             padding: const EdgeInsets.only(bottom: 25),
@@ -136,6 +143,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.black,
+          title: Text("Settings"),
+        ),
         backgroundColor: Colors.white,
         body: Padding(
             padding: const EdgeInsets.only(bottom: 25),

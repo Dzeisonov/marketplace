@@ -55,23 +55,22 @@ class _CartPageState extends State<CartPage> {
       //   padding: EdgeInsets.only(right: 20),
       // ),
 
-      
       child: Container(
         margin: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
         decoration: BoxDecoration(
-        color: Colors.white, // Set the background color
-        borderRadius: BorderRadius.circular(10), 
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.7),
-            spreadRadius: 2,
-            blurRadius: 5,
-            offset: Offset(0, 3),
-          )],// Set the border-radius value
-      ),
+          color: Colors.white, // Set the background color
+          borderRadius: BorderRadius.circular(10),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.7),
+              spreadRadius: 2,
+              blurRadius: 5,
+              offset: Offset(0, 3),
+            )
+          ], // Set the border-radius value
+        ),
         height: 110,
         width: 400,
-        
         child: Stack(
           children: [
             Row(
@@ -103,11 +102,10 @@ class _CartPageState extends State<CartPage> {
                                   fontSize: 16, fontWeight: FontWeight.bold),
                             ),
                             Container(
-                              child: Row(
-                                children: [
-                                  Align(
-                                    alignment: Alignment.topRight,
-                                    child: Icon(
+                              child: Row(children: [
+                                Align(
+                                  alignment: Alignment.topRight,
+                                  child: Icon(
                                     Icons.star,
                                     color: Colors.yellow,
                                   ),

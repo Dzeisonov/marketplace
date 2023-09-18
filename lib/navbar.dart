@@ -1,4 +1,3 @@
-import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:marketplace/cart.dart';
 import 'package:marketplace/category_page.dart';
@@ -15,7 +14,8 @@ class NavBar extends StatefulWidget {
 
 class _NavBarState extends State<NavBar> {
   int _index = 0;
-  final screens = [
+  final PageController _pageController = PageController();
+  final List<Widget> screens = [
     HomePage(),
     CatalogPage(),
     CartPage(),
@@ -23,24 +23,43 @@ class _NavBarState extends State<NavBar> {
   ];
 
   @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: screens[_index],
       backgroundColor: Colors.black,
+      body: PageView.builder(
+        controller: _pageController,
+        itemCount: screens.length,
+        onPageChanged: (index) {
+          setState(() {
+            _index = index;
+          });
+        },
+        itemBuilder: (context, index) {
+          return screens[index];
+        },
+      ),
       bottomNavigationBar: BottomNavigationBar(
         onTap: (index) {
           setState(() {
             _index = index;
           });
+          _pageController.animateToPage(
+            index,
+            duration: Duration(milliseconds: 400),
+            curve: Curves.easeInOut,
+          );
         },
         backgroundColor: Colors.black,
-          // color: Colors.black,
-          // animationDuration: Duration(milliseconds: 200),
-        unselectedItemColor: Colors.white70,  
+        unselectedItemColor: Colors.white70,
         selectedItemColor: Colors.white,
         currentIndex: _index,
         type: BottomNavigationBarType.fixed,
-
         items: [
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
