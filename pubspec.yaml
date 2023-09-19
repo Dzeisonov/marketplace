@@ -38,14 +38,11 @@ dependencies:
   simple_animations: ^5.0.2
   carousel_slider: ^4.2.1
   provider: ^6.0.5
-<<<<<<< HEAD
-=======
   flutter_native_splash: ^2.3.2
 
 flutter_native_splash:
   color: "#111111"
   image: lib\images\splash.png
->>>>>>> 197242b (Menambahkan splash screen)
 
 dev_dependencies:
   flutter_test:
