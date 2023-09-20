@@ -130,7 +130,7 @@ class _HomePageState extends State<HomePage> {
                     "List all",
                     "Clothes",
                     "Shoes",
-                    "Hat",
+                    "Hats",
                     "Accessories",
                   ];
 

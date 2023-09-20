@@ -48,17 +48,10 @@ class _CartPageState extends State<CartPage> {
           cartItems.remove(item);
         });
       },
-      // background: Container(
-      //   color: Colors.red,
-      //   child: Icon(Icons.delete, color: Colors.white),
-      //   alignment: Alignment.centerRight,
-      //   padding: EdgeInsets.only(right: 20),
-      // ),
-
       child: Container(
         margin: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
         decoration: BoxDecoration(
-          color: Colors.white, // Set the background color
+          color: Colors.white,
           borderRadius: BorderRadius.circular(10),
           boxShadow: [
             BoxShadow(
@@ -67,7 +60,7 @@ class _CartPageState extends State<CartPage> {
               blurRadius: 5,
               offset: Offset(0, 3),
             )
-          ], // Set the border-radius value
+          ],
         ),
         height: 110,
         width: 400,
@@ -89,44 +82,61 @@ class _CartPageState extends State<CartPage> {
                     ),
                   ),
                 ),
-                Container(
-                  margin: EdgeInsets.only(top: 10),
+                Expanded(
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Container(
+                        margin: EdgeInsets.only(left: 4, top: 9),
                         child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text(
-                              item.name,
-                              style: TextStyle(
-                                  fontSize: 16, fontWeight: FontWeight.bold),
+                            Container(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment
+                                    .start, // Aligns item.name and item.price
+                                children: [
+                                  Text(
+                                    item.name,
+                                    style: TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  Text(
+                                    "\$" + item.price.toString(),
+                                    style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
                             Container(
-                              child: Row(children: [
-                                Align(
-                                  alignment: Alignment.topRight,
-                                  child: Icon(
-                                    Icons.star,
-                                    color: Colors.yellow,
+                              margin: EdgeInsets.only(
+                                right: 15,
+                              ),
+                              child: Row(
+                                children: [
+                                  Align(
+                                    alignment: Alignment.topRight,
+                                    child: Icon(
+                                      Icons.star,
+                                      color: Colors.yellow,
+                                    ),
                                   ),
-                                ),
-                                Text(
-                                  item.rating.toString(),
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.bold,
+                                  Text(
+                                    item.rating.toString(),
+                                    style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold,
+                                    ),
                                   ),
-                                )
-                              ]),
+                                ],
+                              ),
                             ),
                           ],
-                        ),
-                      ),
-                      Text(
-                        "\$" + item.price.toString(),
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
                         ),
                       ),
                     ],

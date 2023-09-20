@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:marketplace/editprofile.dart';
+import 'package:marketplace/payments.dart';
+import 'package:marketplace/settings.dart';
 
 class ProfilePage extends StatefulWidget {
   ProfilePage({Key? key}) : super(key: key);
@@ -20,21 +23,21 @@ class _ProfilePageState extends State<ProfilePage> {
                 SizedBox(height: 15),
                 _buildProfileIcon("lib/images/profile.png"),
                 SizedBox(height: 20),
-                _buildMenuItem("Edit Profile", 20, () {
+                _buildMenuItem("Edit Profile", () {
                   // Customize this part to navigate to your ProfileScreen.
                   Navigator.push(context, MaterialPageRoute(builder: (_) {
                     return ProfileScreen(); // Replace with your ProfileScreen widget.
                   }));
                 }),
                 _buildDivider(10, 10),
-                _buildMenuItem("Payments", 20, () {
+                _buildMenuItem("Payments", () {
                   // Customize this part to navigate to your ProfileScreen.
                   Navigator.push(context, MaterialPageRoute(builder: (_) {
                     return PaymentsScreen(); // Replace with your ProfileScreen widget.
                   }));
                 }),
                 _buildDivider(10, 10),
-                _buildMenuItem("Settings", 20, () {
+                _buildMenuItem("Settings", () {
                   // Customize this part to navigate to your ProfileScreen.
                   Navigator.push(context, MaterialPageRoute(builder: (_) {
                     return SettingsScreen(); // Replace with your ProfileScreen widget.
@@ -54,7 +57,7 @@ class _ProfilePageState extends State<ProfilePage> {
     );
   }
 
-  Widget _buildMenuItem(String text, double fontSize, VoidCallback onTap) {
+  Widget _buildMenuItem(String text, VoidCallback onTap) {
     return GestureDetector(
       onTap: onTap, // Specify the callback to be called when tapped.
       child: Container(
@@ -63,7 +66,7 @@ class _ProfilePageState extends State<ProfilePage> {
         child: Text(
           text,
           style: TextStyle(
-            fontSize: fontSize, // Text size
+            fontSize: 20, // Text size
             color: Colors.black, // Text color
           ),
         ),
@@ -79,80 +82,5 @@ class _ProfilePageState extends State<ProfilePage> {
       indent: indent, // Customize the space before the divider
       endIndent: endIndent, // Customize the space after the divider
     );
-  }
-}
-
-class ProfileScreen extends StatefulWidget {
-  ProfileScreen({Key? key}) : super(key: key);
-
-  @override
-  State<ProfileScreen> createState() => _ProfileScreenState();
-}
-
-class _ProfileScreenState extends State<ProfileScreen> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.black,
-          title: Text("Edit Profile"),
-        ),
-        backgroundColor: Colors.white,
-        body: Padding(
-            padding: const EdgeInsets.only(bottom: 25),
-            child: Align(
-              alignment: Alignment.center,
-              child: Text('Profile Screens'),
-            )));
-  }
-}
-
-class PaymentsScreen extends StatefulWidget {
-  PaymentsScreen({Key? key}) : super(key: key);
-
-  @override
-  State<PaymentsScreen> createState() => _PaymentsScreenState();
-}
-
-class _PaymentsScreenState extends State<PaymentsScreen> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.black,
-          title: Text("Payments"),
-        ),
-        backgroundColor: Colors.white,
-        body: Padding(
-            padding: const EdgeInsets.only(bottom: 25),
-            child: Align(
-              alignment: Alignment.center,
-              child: Text('Payments Screen'),
-            )));
-  }
-}
-
-class SettingsScreen extends StatefulWidget {
-  SettingsScreen({Key? key}) : super(key: key);
-
-  @override
-  State<SettingsScreen> createState() => _SettingsScreenState();
-}
-
-class _SettingsScreenState extends State<SettingsScreen> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.black,
-          title: Text("Settings"),
-        ),
-        backgroundColor: Colors.white,
-        body: Padding(
-            padding: const EdgeInsets.only(bottom: 25),
-            child: Align(
-              alignment: Alignment.center,
-              child: Text('Settings Screen'),
-            )));
   }
 }

@@ -53,104 +53,16 @@ class TabBarExample extends StatelessWidget {
                     labelPadding: EdgeInsets.symmetric(horizontal: 8),
                     tabs: <Widget>[
                       Tab(
-                        child: Container(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 19, vertical: 10),
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(20),
-                              color: Colors.white,
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.grey.withOpacity(0.7),
-                                  spreadRadius: 1.5,
-                                  blurRadius: 2,
-                                  offset: Offset(0, 2),
-                                ),
-                              ],
-                              border: Border.all(
-                                color: Colors.black,
-                                width: 1,
-                              )),
-                          child: Text(
-                            "Trending1",
-                            style: TextStyle(color: Colors.black),
-                          ),
-                        ),
+                        child: _buildTab("Clothes"),
                       ),
                       Tab(
-                        child: Container(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 19, vertical: 10),
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(20),
-                              color: Colors.white,
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.grey.withOpacity(0.7),
-                                  spreadRadius: 1.5,
-                                  blurRadius: 2,
-                                  offset: Offset(0, 2),
-                                ),
-                              ],
-                              border: Border.all(
-                                color: Colors.black,
-                                width: 1,
-                              )),
-                          child: Text(
-                            "Trending2",
-                            style: TextStyle(color: Colors.black),
-                          ),
-                        ),
+                        child: _buildTab("Shoes"),
                       ),
                       Tab(
-                        child: Container(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 19, vertical: 10),
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(20),
-                              color: Colors.white,
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.grey.withOpacity(0.7),
-                                  spreadRadius: 1.5,
-                                  blurRadius: 2,
-                                  offset: Offset(0, 2),
-                                ),
-                              ],
-                              border: Border.all(
-                                color: Colors.black,
-                                width: 1,
-                              )),
-                          child: Text(
-                            "Trending3",
-                            style: TextStyle(color: Colors.black),
-                          ),
-                        ),
+                        child: _buildTab("Hats"),
                       ),
                       Tab(
-                        child: Container(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 19, vertical: 10),
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(20),
-                              color: Colors.white,
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.grey.withOpacity(0.7),
-                                  spreadRadius: 1.5,
-                                  blurRadius: 2,
-                                  offset: Offset(0, 2),
-                                ),
-                              ],
-                              border: Border.all(
-                                color: Colors.black,
-                                width: 1,
-                              )),
-                          child: Text(
-                            "Trending4",
-                            style: TextStyle(color: Colors.black),
-                          ),
-                        ),
+                        child: _buildTab("Accessories"),
                       ),
                     ],
                   ),
@@ -220,6 +132,31 @@ class TabBarExample extends StatelessWidget {
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  Widget _buildTab(String tab) {
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 19, vertical: 10),
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(20),
+          color: Colors.white,
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.7),
+              spreadRadius: 1.5,
+              blurRadius: 2,
+              offset: Offset(0, 2),
+            ),
+          ],
+          border: Border.all(
+            color: Colors.black,
+            width: 1,
+          )),
+      child: Text(
+        tab,
+        style: TextStyle(color: Colors.black),
       ),
     );
   }
