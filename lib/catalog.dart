@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:marketplace/search.dart';
 import 'package:marketplace/trend.dart';
 
 class CatalogPage extends StatefulWidget {
@@ -94,46 +95,56 @@ class TabBarExample extends StatelessWidget {
   }
 
   Widget _buildSearchBar() {
+    // Pass BuildContext as a parameter
     OutlineInputBorder outlineInputBorder = OutlineInputBorder(
       borderRadius: BorderRadius.circular(20.0),
       borderSide: BorderSide(color: Colors.black),
     );
-
-    return Container(
-      margin: EdgeInsets.only(left: 15, right: 15, top: 25),
-      alignment: Alignment.topCenter,
-      child: Column(
-        children: [
-          Flexible(
-            child: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20.0),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withOpacity(0.8),
-                    offset: Offset(0, 3),
-                    blurRadius: 4,
-                    spreadRadius: -1,
-                  )
-                ],
-              ),
-              child: TextField(
-                decoration: InputDecoration(
-                  fillColor: Colors.white,
-                  filled: true,
-                  contentPadding: const EdgeInsets.symmetric(
-                      vertical: 10.0, horizontal: 15),
-                  hintText: "Search",
-                  suffixIcon: const Icon(Icons.search),
-                  enabledBorder: outlineInputBorder,
-                  focusedBorder: outlineInputBorder,
+    return Builder(builder: (BuildContext context) {
+      return Container(
+        margin: EdgeInsets.only(left: 15, right: 15, top: 25),
+        alignment: Alignment.topCenter,
+        child: Column(
+          children: [
+            Flexible(
+              child: GestureDetector(
+                // Wrap the TextField with GestureDetector
+                onTap: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => SearchBarA()),
+                  );
+                },
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20.0),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.8),
+                        offset: Offset(0, 3),
+                        blurRadius: 4,
+                        spreadRadius: -1,
+                      )
+                    ],
+                  ),
+                  child: TextField(
+                    decoration: InputDecoration(
+                      fillColor: Colors.white,
+                      filled: true,
+                      contentPadding: const EdgeInsets.symmetric(
+                          vertical: 10.0, horizontal: 15),
+                      hintText: "Search",
+                      suffixIcon: const Icon(Icons.search),
+                      enabledBorder: outlineInputBorder,
+                      focusedBorder: outlineInputBorder,
+                    ),
+                  ),
                 ),
               ),
             ),
-          ),
-        ],
-      ),
-    );
+          ],
+        ),
+      );
+    });
   }
 
   Widget _buildTab(String tab) {

@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:marketplace/catalog.dart';
-import 'package:marketplace/navbar.dart';
-import 'package:marketplace/navcatalog.dart';
+import 'package:marketplace/search.dart';
 import 'package:marketplace/trendpage.dart';
 import 'category1_page.dart';
 import 'category2_page.dart';
@@ -70,6 +68,10 @@ class _HomePageState extends State<HomePage> {
                   )
                 ]),
             child: TextField(
+              onTap: () {
+                Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => SearchBarA()));
+              },
               decoration: InputDecoration(
                 fillColor: Colors.white,
                 filled: true,
