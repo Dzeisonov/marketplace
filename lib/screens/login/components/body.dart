@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:marketplace/sizeconfig.dart';
 
+import '../../../components/social_card.dart';
 import 'login_form.dart';
 
 class Body extends StatelessWidget {
@@ -39,15 +39,50 @@ class Body extends StatelessWidget {
                 textAlign: TextAlign.center,
               ),
               SizedBox(height: getProportionateScreenHeight(25)),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SocialCard(
+                    icon: "lib/icons/facebook.png",
+                    press: () {},
+                  ),
+                  SocialCard(
+                    icon: "lib/icons/google.png",
+                    press: () {},
+                  ),
+                  SocialCard(
+                    icon: "lib/icons/instagram.png",
+                    press: () {},
+                  ),
+                ],
+              ),
+              SizedBox(height: getProportionateScreenHeight(30)),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    "Don't have an account? ",
+                    style: TextStyle(
+                      fontSize: getProportionateScreenWidth(12),
+                    ),
+                  ),
+                  Text(
+                    "Sign Up",
+                    style: TextStyle(
+                      fontSize: getProportionateScreenWidth(12),
+                      fontWeight: FontWeight.bold,
+                      decoration: TextDecoration.underline,
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(height: getProportionateScreenHeight(38)),
               Container(
-                padding: EdgeInsets.all(getProportionateScreenWidth(12)),
-                height: getProportionateScreenHeight(40),
-                width: getProportionateScreenWidth(40),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  shape: BoxShape.circle,
+                height: getProportionateScreenHeight(40.56),
+                width: getProportionateScreenWidth(49.92),
+                child: Image.asset(
+                  "lib/images/splash.png",
                 ),
-                child: SvgPicture.asset("lib/icons/fb.svg"),
               ),
             ],
           ),
@@ -56,6 +91,8 @@ class Body extends StatelessWidget {
     );
   }
 }
+
+
 
 
 

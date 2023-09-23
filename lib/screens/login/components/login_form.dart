@@ -25,13 +25,23 @@ class _LogInFormState extends State<LogInForm> {
       child: Column(
         children: [
           SizedBox(height: getProportionateScreenHeight(20)),
-          buildEmailFormField(),
+          Padding(
+            padding: EdgeInsets.symmetric(
+              horizontal: getProportionateScreenWidth(18),
+            ),
+            child: buildEmailFormField(),
+          ),
           SizedBox(height: getProportionateScreenHeight(25)),
-          buildPasswordFormField(),
+          Padding(
+            padding: EdgeInsets.symmetric(
+              horizontal: getProportionateScreenWidth(18),
+            ),
+            child: buildPasswordFormField(),
+          ),
           SizedBox(height: getProportionateScreenHeight(20)),
           Padding(
             padding: EdgeInsets.symmetric(
-              horizontal: getProportionateScreenWidth(48),
+              horizontal: getProportionateScreenWidth(62),
             ),
             child: FormError(errors: errors),
           ),
@@ -66,7 +76,7 @@ class _LogInFormState extends State<LogInForm> {
               ),
             ]
           ),
-          SizedBox(height: getProportionateScreenHeight(30)),
+          SizedBox(height: getProportionateScreenHeight(28)),
           DefaultButton(
             text: "Log In",
             press: () {
@@ -90,7 +100,7 @@ class _LogInFormState extends State<LogInForm> {
                 errors.remove(kPassNullError);
               });
             }
-            else if (value.length >= 8 && errors.contains(kShortPassError)) {
+            else if (value.isEmpty || value.length >= 8 && errors.contains(kShortPassError)) {
               setState(() {
                 errors.remove(kShortPassError);
               });
@@ -103,7 +113,7 @@ class _LogInFormState extends State<LogInForm> {
                 errors.add(kPassNullError);
               });
             }
-            else if (value != null && value.length < 8 && !errors.contains(kShortPassError)) {
+            else if ((value != null && !value.isEmpty) && value.length < 8 && !errors.contains(kShortPassError)) {
               setState(() {
                 errors.add(kShortPassError);
               });
@@ -122,6 +132,7 @@ class _LogInFormState extends State<LogInForm> {
             hintStyle: TextStyle(
               color: kTextColor,
               fontWeight: FontWeight.w100,
+              fontSize: 14,
             ),
             floatingLabelBehavior: FloatingLabelBehavior.always,
           )
@@ -138,7 +149,7 @@ class _LogInFormState extends State<LogInForm> {
                 errors.remove(kEmailNullError);
               });
             }
-            else if (emailValidatorRegExp.hasMatch(value) && errors.contains(kInvalidEmailError)) {
+            else if (value.isEmpty || emailValidatorRegExp.hasMatch(value) && errors.contains(kInvalidEmailError)) {
               setState(() {
                 errors.remove(kInvalidEmailError);
               });
@@ -154,7 +165,7 @@ class _LogInFormState extends State<LogInForm> {
                 errors.add(kEmailNullError);
               });
             }
-            else if (value != null && !emailValidatorRegExp.hasMatch(value) && !errors.contains(kInvalidEmailError)) {
+            else if ((value != null && !value.isEmpty) && !emailValidatorRegExp.hasMatch(value) && !errors.contains(kInvalidEmailError)) {
               setState(() {
                 errors.add(kInvalidEmailError);
               });
@@ -170,6 +181,7 @@ class _LogInFormState extends State<LogInForm> {
             hintStyle: TextStyle(
               color: kTextColor,
               fontWeight: FontWeight.w100,
+              fontSize: 14
             ),
             floatingLabelBehavior: FloatingLabelBehavior.always,
           )
