@@ -10,7 +10,7 @@ class CartPage extends StatefulWidget {
 class _CartPageState extends State<CartPage> {
   List<CartItem> cartItems = [
     CartItem("lib/images/tshirt.jpg", "Tshirt", 9.5, 3.99, 1),
-    CartItem("lib/images/tshirt.jpg", "Tshirt1", 9.5, 3.99, 1),
+
   ];
 
   @override

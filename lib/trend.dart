@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class TrendScreen extends StatefulWidget {
-  const TrendScreen({Key? key}) : super(key: key);
+  final String selectedCategory;
+  const TrendScreen({Key? key, required this.selectedCategory}) : super(key: key);
 
   @override
   State<TrendScreen> createState() => _TrendScreenState();
@@ -21,48 +22,138 @@ class _TrendScreenState extends State<TrendScreen> {
     );
   }
 
-  Widget _buildItemContainer() {
-    double screenWidth = MediaQuery.of(context).size.width;
-    // Calculate the width as a fraction of the screen width
-    double containerWidth = screenWidth * 0.016;
-    return Container(
-      margin: EdgeInsets.symmetric(
-        horizontal: containerWidth,
-      ),
-      // alignment: Alignment.center,
-      // child: SingleChildScrollView(
-      // scrollDirection: Axis.vertical,
-      child: Column(
-        children: [
-          Row(
-            children: [
-              _buildShopItem("lib/images/tshirt.jpg", "T-Shirt1", 9.5, 3.99),
-              _buildShopItem("lib/images/tshirt.jpg", "T-Shirt2", 9.5, 3.99),
+Widget _buildItemContainer() {
+  double screenWidth = MediaQuery.of(context).size.width;
+  double containerWidth = screenWidth * 0.016;
+  
+  List<Widget> rows = [];
+  switch (widget.selectedCategory) {
+    case "Clothes":
+      for (int i = 1; i <= 17; i++) {
+        String imagePath1 = "lib/images/CLOTHES/SHIRT/SHIRT$i.jpg";
+        String imagePath2 = "lib/images/CLOTHES/SHIRT/SHIRT${i + 1}.jpg";
+        String itemName1 = "Shirt$i";
+        String itemName2 = "Shirt${i + 1}";
+        double itemPrice = 9.5;
+        double itemDiscount = 3.99;
+
+        Widget row = Row(
+          children: [
+            _buildShopItem(imagePath1, itemName1, itemPrice, itemDiscount),
+            _buildShopItem(imagePath2, itemName2, itemPrice, itemDiscount),
             ],
-          ),
-          Row(
-            children: [
-              _buildShopItem("lib/images/tshirt.jpg", "T-Shirt1", 9.5, 3.99),
-              _buildShopItem("lib/images/tshirt.jpg", "T-Shirt2", 9.5, 3.99),
+          );
+          rows.add(row);
+          i++;
+        }
+      break;
+      
+    case "Shoes":
+      for (int i = 1; i <= 6; i++) {
+        String imagePath1 = "lib/images/CLOTHES/SHOES/SHOES$i.jpg";
+        String imagePath2 = "lib/images/CLOTHES/SHOES/SHOES${i + 1}.jpg";
+        String itemName1 = "Shoes$i";
+        String itemName2 = "Shoes${i + 1}";
+        double itemPrice = 9.5;
+        double itemDiscount = 3.99;
+
+        Widget row = Row(
+          children: [
+            _buildShopItem(imagePath1, itemName1, itemPrice, itemDiscount),
+            _buildShopItem(imagePath2, itemName2, itemPrice, itemDiscount),
             ],
-          ),
-          Row(
-            children: [
-              _buildShopItem("lib/images/tshirt.jpg", "T-Shirt1", 9.5, 3.99),
-              _buildShopItem("lib/images/tshirt.jpg", "T-Shirt2", 9.5, 3.99),
+          );
+          rows.add(row);
+          i++;
+        }
+      break;
+    case "Hats":
+      for (int i = 1; i <= 7; i++) {
+        String imagePath1 = "lib/images/CLOTHES/CAP/CAP$i.jpeg";
+        String imagePath2 = "lib/images/CLOTHES/CAP/CAP${i + 1}.jpeg";
+        String itemName1 = "CAP$i";
+        String itemName2 = "CAP${i + 1}";
+        double itemPrice = 9.5;
+        double itemDiscount = 3.99;
+
+        Widget row = Row(
+          children: [
+            _buildShopItem(imagePath1, itemName1, itemPrice, itemDiscount),
+            _buildShopItem(imagePath2, itemName2, itemPrice, itemDiscount),
             ],
-          ),
-          Row(
-            children: [
-              _buildShopItem("lib/images/tshirt.jpg", "T-Shirt1", 9.5, 3.99),
-              _buildShopItem("lib/images/tshirt.jpg", "T-Shirt2", 9.5, 3.99),
+          );
+          rows.add(row);
+          i++;
+        }
+      break;
+    case "Accessories":
+      for (int i = 1; i <= 8; i++) {
+        String imagePath1 = "lib/images/CLOTHES/ACCESSORIES/ACC$i.jpg";
+        String imagePath2 = "lib/images/CLOTHES/ACCESSORIES/ACC${i + 1}.jpg";
+        String itemName1 = "ACCESSORIES$i";
+        String itemName2 = "ACCESSORIES${i + 1}";
+        double itemPrice = 9.5;
+        double itemDiscount = 3.99;
+
+        Widget row = Row(
+          children: [
+            _buildShopItem(imagePath1, itemName1, itemPrice, itemDiscount),
+            _buildShopItem(imagePath2, itemName2, itemPrice, itemDiscount),
             ],
-          ),
-        ],
-      ),
-      // ),
-    );
+          );
+          rows.add(row);
+          i++;
+        }
+      break;
+    default:
+      for (int i = 1; i <= 17; i++) {
+        String imagePath1 = "lib/images/CLOTHES/SHIRT/SHIRT$i.jpg";
+        String imagePath2 = "lib/images/CLOTHES/SHIRT/SHIRT${i + 1}.jpg";
+        String itemName1 = "Shirt$i";
+        String itemName2 = "Shirt${i + 1}";
+        double itemPrice = 9.5;
+        double itemDiscount = 3.99;
+
+        Widget row = Row(
+          children: [
+            _buildShopItem(imagePath1, itemName1, itemPrice, itemDiscount),
+            _buildShopItem(imagePath2, itemName2, itemPrice, itemDiscount),
+            ],
+          );
+          rows.add(row);
+          i++;
+        }
+      break;
   }
+  // for (int i = 1; i <= 17; i++) {
+    // String imagePath1 = "lib/images/CLOTHES/SHIRT/SHIRT$i.jpg";
+    // String imagePath2 = "lib/images/CLOTHES/SHIRT/SHIRT${i + 1}.jpg";
+    // String itemName1 = "Shirt$i";
+    // String itemName2 = "Shirt${i + 1}";
+    // double itemPrice = 9.5;
+    // double itemDiscount = 3.99;
+
+    // Widget row = Row(
+    //   children: [
+    //     _buildShopItem(imagePath1, itemName1, itemPrice, itemDiscount),
+    //     _buildShopItem(imagePath2, itemName2, itemPrice, itemDiscount),
+    //   ],
+    // );
+
+    // rows.add(row);
+// 
+    // i++;
+  // }
+
+  return Container(
+    margin: EdgeInsets.symmetric(horizontal: containerWidth),
+    child: Column(
+      children: rows,
+    ),
+  );
+}
+
+
 
   Widget _buildShopItem(
       String image, String name, double rating, double price) {

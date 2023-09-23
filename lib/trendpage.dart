@@ -21,7 +21,7 @@ class _TrendPageState extends State<TrendPage> {
             padding: const EdgeInsets.only(bottom: 25),
             child: Align(
               alignment: Alignment.center,
-              child: TrendScreen(),
+              child: TrendScreen(selectedCategory: "Clothes"),
             )));
   }
 }
