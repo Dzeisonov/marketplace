@@ -1,0 +1,178 @@
+import 'package:flutter/material.dart';
+
+import '../../../components/default_button.dart';
+import '../../../components/form_error.dart';
+import '../../../constants.dart';
+import '../../../sizeconfig.dart';
+
+class LogInForm extends StatefulWidget {
+  const LogInForm({super.key});
+
+  @override
+  State<LogInForm> createState() => _LogInFormState();
+}
+
+class _LogInFormState extends State<LogInForm> {
+  final _formKey = GlobalKey<FormState>();
+  late String email;
+  late String password;
+  bool remember = false;
+  final List<String> errors = [];
+  @override
+  Widget build(BuildContext context) {
+    return Form(
+      key: _formKey,
+      child: Column(
+        children: [
+          SizedBox(height: getProportionateScreenHeight(20)),
+          buildEmailFormField(),
+          SizedBox(height: getProportionateScreenHeight(25)),
+          buildPasswordFormField(),
+          SizedBox(height: getProportionateScreenHeight(20)),
+          Padding(
+            padding: EdgeInsets.symmetric(
+              horizontal: getProportionateScreenWidth(48),
+            ),
+            child: FormError(errors: errors),
+          ),
+          SizedBox(height: getProportionateScreenHeight(10)),
+          Row(
+            children: [
+              Padding(
+                padding: EdgeInsets.symmetric(
+                  horizontal: getProportionateScreenWidth(8)
+                ),
+                child: Checkbox(
+                  value: remember,
+                  activeColor: kSecondaryColor,
+                  checkColor: Colors.black,
+                  onChanged: (value) {
+                    setState(() {
+                      remember = value!;
+                    });
+                  },
+                ),
+              ),
+              Text("Remember me"),
+              Spacer(),
+              Padding(
+                padding: EdgeInsets.symmetric(
+                  horizontal: getProportionateScreenWidth(20.5),
+                ),
+                child: Text(
+                  "Forgot Password",
+                  style: TextStyle(decoration: TextDecoration.underline),
+                ),
+              ),
+            ]
+          ),
+          SizedBox(height: getProportionateScreenHeight(30)),
+          DefaultButton(
+            text: "Log In",
+            press: () {
+              if (_formKey.currentState!.validate()) {
+                _formKey.currentState!.save();
+              }
+            },
+          ),
+        ],
+      )
+    );
+  }
+
+  TextFormField buildPasswordFormField() {
+    return TextFormField(
+          obscureText: true,
+          onSaved:(newValue) => password = newValue!,
+          onChanged: (value) {
+            if (value.isNotEmpty && errors.contains(kPassNullError)) {
+              setState(() {
+                errors.remove(kPassNullError);
+              });
+            }
+            else if (value.length >= 8 && errors.contains(kShortPassError)) {
+              setState(() {
+                errors.remove(kShortPassError);
+              });
+            }
+            return null;
+          },
+          validator: (value) {
+            if ((value == null || value.isEmpty) && !errors.contains(kPassNullError)) {
+              setState(() {
+                errors.add(kPassNullError);
+              });
+            }
+            else if (value != null && value.length < 8 && !errors.contains(kShortPassError)) {
+              setState(() {
+                errors.add(kShortPassError);
+              });
+            }
+            return null;
+          },
+          style: TextStyle(
+            color: kTextColor,
+          ),
+          decoration: InputDecoration(
+            labelText: "Password",
+            labelStyle: TextStyle(
+              color: kTextColor,
+            ),
+            hintText: "Enter your password",
+            hintStyle: TextStyle(
+              color: kTextColor,
+              fontWeight: FontWeight.w100,
+            ),
+            floatingLabelBehavior: FloatingLabelBehavior.always,
+          )
+        );
+  }
+
+  TextFormField buildEmailFormField() {
+    return TextFormField(
+          keyboardType: TextInputType.emailAddress,
+          onSaved: (newValue) => email = newValue!,
+          onChanged: (value) {
+            if (value.isNotEmpty && errors.contains(kEmailNullError)) {
+              setState(() {
+                errors.remove(kEmailNullError);
+              });
+            }
+            else if (emailValidatorRegExp.hasMatch(value) && errors.contains(kInvalidEmailError)) {
+              setState(() {
+                errors.remove(kInvalidEmailError);
+              });
+            }
+            return null;
+          },
+          style: TextStyle(
+            color: kTextColor,
+          ),
+          validator: (value) {
+            if ((value == null || value.isEmpty) && !errors.contains(kEmailNullError)) {
+              setState(() {
+                errors.add(kEmailNullError);
+              });
+            }
+            else if (value != null && !emailValidatorRegExp.hasMatch(value) && !errors.contains(kInvalidEmailError)) {
+              setState(() {
+                errors.add(kInvalidEmailError);
+              });
+            }
+            return null;
+          },
+          decoration: InputDecoration(
+            labelText: "Email",
+            labelStyle: TextStyle(
+              color: kTextColor,
+            ),
+            hintText: "Enter your email",
+            hintStyle: TextStyle(
+              color: kTextColor,
+              fontWeight: FontWeight.w100,
+            ),
+            floatingLabelBehavior: FloatingLabelBehavior.always,
+          )
+        );
+  }
+}
