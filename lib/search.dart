@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:marketplace/data.dart';
 
 class SearchBarA extends StatefulWidget {
   const SearchBarA({Key? key}) : super(key: key);
@@ -97,13 +98,4 @@ class _SearchBarAState extends State<SearchBarA> {
       ),
     );
   }
-}
-
-class ShopItem {
-  final String imgPath;
-  final String name;
-  final double rating;
-  final double price;
-
-  ShopItem(this.imgPath, this.name, this.rating, this.price);
 }

@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:marketplace/data.dart';
 
-class TrendScreen extends StatefulWidget {
-  const TrendScreen({Key? key}) : super(key: key);
+class ClothesScreen extends StatefulWidget {
+  const ClothesScreen({Key? key}) : super(key: key);
 
   @override
-  State<TrendScreen> createState() => _TrendScreenState();
+  State<ClothesScreen> createState() => _ClothesScreenState();
 }
 
-class _TrendScreenState extends State<TrendScreen> {
+class _ClothesScreenState extends State<ClothesScreen> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -16,7 +16,7 @@ class _TrendScreenState extends State<TrendScreen> {
       child: ListView(
         scrollDirection: Axis.vertical,
         children: [
-          _buildItemContainer(ShopItem.shopItemsTrend),
+          _buildItemContainer(ShopItem.shopItemsClothes),
         ],
       ),
     );

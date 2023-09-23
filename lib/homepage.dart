@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:marketplace/accspage.dart';
+import 'package:marketplace/allItemsPage.dart';
+import 'package:marketplace/clothesPage.dart';
+import 'package:marketplace/hatspage.dart';
+import 'package:marketplace/data.dart';
 import 'package:marketplace/search.dart';
+import 'package:marketplace/shoesPage.dart';
 import 'package:marketplace/trendpage.dart';
-import 'category1_page.dart';
-import 'category2_page.dart';
-import 'category3_page.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key? key}) : super(key: key);
@@ -37,10 +40,32 @@ class _HomePageState extends State<HomePage> {
         SizedBox(height: 10),
         _buildCarouselSlide(),
         SizedBox(height: 10),
-        _buildItemCategory(),
-        _buildItemContainer(),
-        _buildItemCategory(),
-        _buildItemContainer(),
+        _buildItemCategory(
+          "Trending",
+          () {
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) {
+                  return TrendPage(); // Replace MyPage with the desired class
+                },
+              ),
+            );
+          },
+        ),
+        _buildItemContainer(ShopItem.shopItemsTrend),
+        _buildItemCategory(
+          "Hats",
+          () {
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) {
+                  return HatsPage(); // Replace MyPage with the desired class
+                },
+              ),
+            );
+          },
+        ),
+        _buildItemContainer(ShopItem.shopItemsHats),
       ]),
     ));
   }
@@ -154,14 +179,18 @@ class _HomePageState extends State<HomePage> {
                             // Use the category name to select the right page
                             switch (categories[index]) {
                               case "Category 1":
-                                return Category1Page();
+                                return AllPage();
                               case "Category 2":
-                                return Category2Page();
+                                return ClothesPage();
                               case "Category 3":
-                                return Category3Page();
+                                return ShoesPage();
+                              case "Category 4":
+                                return HatsPage();
+                              case "Category 5":
+                                return AccsPage();
                               // Add more cases for other categories
                               default:
-                                return Category1Page(); // Default to Category 1 for now
+                                return AllPage(); // Default to Category 1 for now
                             }
                           },
                         ),
@@ -254,7 +283,10 @@ class _HomePageState extends State<HomePage> {
         width: 400,
       ));
 
-  Widget _buildItemCategory() {
+  Widget _buildItemCategory(
+    String title,
+    Function() onTapCallback,
+  ) {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 15),
       alignment: Alignment.center,
@@ -264,7 +296,7 @@ class _HomePageState extends State<HomePage> {
             Align(
               alignment: Alignment.topLeft,
               child: Text(
-                "Trending",
+                title,
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
               ),
             ),
@@ -272,15 +304,7 @@ class _HomePageState extends State<HomePage> {
             Align(
               alignment: Alignment.topRight,
               child: GestureDetector(
-                onTap: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) {
-                        return TrendPage();
-                      },
-                    ),
-                  );
-                },
+                onTap: onTapCallback,
                 child: Row(
                   children: [
                     Text("See more",
@@ -303,22 +327,35 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Widget _buildItemContainer() {
+  Widget _buildItemContainer(List<ShopItem> data) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double containerWidth = screenWidth * 0.016;
+
+    List<Widget> rows = [];
+    List<ShopItem> shopItems = List.from(data); // Create a copy
+
+    while (shopItems.isNotEmpty) {
+      List<Widget> rowChildren = [];
+
+      while (shopItems.isNotEmpty) {
+        ShopItem item = shopItems.removeAt(0);
+        rowChildren.add(
+            _buildShopItem(item.imgPath, item.name, item.rating, item.price));
+      }
+
+      rows.add(
+        Row(
+          children: rowChildren,
+        ),
+      );
+    }
+
     return Container(
-      // alignment: Alignment.center,
+      margin: EdgeInsets.symmetric(horizontal: containerWidth),
       child: SingleChildScrollView(
         scrollDirection: Axis.horizontal,
         child: Column(
-          children: [
-            Row(
-              children: [
-                _buildShopItem("lib/images/tshirt.jpg", "T-Shirt1", 9.5, 3.99),
-                _buildShopItem("lib/images/tshirt.jpg", "T-Shirt2", 9.5, 3.99),
-                _buildShopItem("lib/images/tshirt.jpg", "T-Shirt1", 9.5, 3.99),
-                _buildShopItem("lib/images/tshirt.jpg", "T-Shirt2", 9.5, 3.99)
-              ],
-            ),
-          ],
+          children: rows,
         ),
       ),
     );

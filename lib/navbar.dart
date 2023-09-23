@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:marketplace/cart.dart';
-import 'package:marketplace/homepage.dart';
+import 'package:marketplace/homePage.dart';
 import 'package:marketplace/profile.dart';
 import 'package:marketplace/catalog.dart';
-import 'package:marketplace/search.dart';
 
 class NavBar extends StatefulWidget {
   const NavBar({Key? key}) : super(key: key);
@@ -19,7 +18,6 @@ class _NavBarState extends State<NavBar> {
     HomePage(),
     CatalogPage(),
     CartPage(),
-    // SearchBarA(),
     ProfilePage(),
   ];
 
