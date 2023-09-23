@@ -72,7 +72,11 @@ flutter:
   assets:
     - lib/images/
     - lib/images/adds/
-  #   - images/a_dot_ham.jpeg
+    - lib/images/clothes/accs/
+    - lib/images/clothes/clothes/
+    - lib/images/clothes/hats/
+    - lib/images/clothes/pants/
+    - lib/images/clothes/shoes/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

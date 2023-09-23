@@ -9,28 +9,32 @@ class SearchBarA extends StatefulWidget {
 }
 
 class _SearchBarAState extends State<SearchBarA> {
-  List<ShopItem> shopItems = [
-    ShopItem("lib/images/tshirt.jpg", "T-Shirt", 9.5, 3.99),
-    ShopItem("lib/images/tshirt.jpg", "Cap", 9.5, 3.99),
-    ShopItem("lib/images/tshirt.jpg", "Dress", 9.5, 3.99),
-    ShopItem("lib/images/tshirt.jpg", "Shoes", 9.5, 3.99),
-  ];
-
+  List<List<ShopItem>> shopItems = ShopItem.combinedList;
   List<ShopItem> displayList = [];
+  List<ShopItem> originalList = [];
 
   @override
   void initState() {
     super.initState();
-    // Initialize the displayList with all items.
-    displayList.addAll(shopItems);
+    // Flatten the nested shopItems list and initialize the displayList and originalList.
+    displayList.addAll(shopItems.expand((list) => list));
+    originalList.addAll(displayList);
   }
 
   void updateList(String value) {
     setState(() {
-      displayList = shopItems
-          .where(
-              (item) => item.name.toLowerCase().contains(value.toLowerCase()))
-          .toList();
+      if (value.isEmpty) {
+        // If the search query is empty, revert to the original list.
+        displayList.clear();
+        displayList.addAll(originalList);
+      } else {
+        // Filter based on the search query.
+        displayList = originalList
+            .where(
+              (item) => item.name.toLowerCase().contains(value.toLowerCase()),
+            )
+            .toList();
+      }
     });
   }
 
