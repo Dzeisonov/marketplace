@@ -1,7 +1,6 @@
-import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:marketplace/cart.dart';
-import 'package:marketplace/homepage.dart';
+import 'package:marketplace/homePage.dart';
 import 'package:marketplace/profile.dart';
 import 'package:marketplace/catalog.dart';
 

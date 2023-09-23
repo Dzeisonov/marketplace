@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:marketplace/data.dart';
 
-class TrendScreen extends StatefulWidget {
-  const TrendScreen({Key? key}) : super(key: key);
+class AllScreen extends StatefulWidget {
+  const AllScreen({Key? key}) : super(key: key);
 
   @override
-  State<TrendScreen> createState() => _TrendScreenState();
+  State<AllScreen> createState() => _AllScreenState();
 }
 
-class _TrendScreenState extends State<TrendScreen> {
+class _AllScreenState extends State<AllScreen> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -16,33 +16,52 @@ class _TrendScreenState extends State<TrendScreen> {
       child: ListView(
         scrollDirection: Axis.vertical,
         children: [
-          _buildItemContainer(ShopItem.shopItemsTrend),
+          _buildItemContainer(ShopItem.combinedList),
         ],
       ),
     );
   }
 
-  Widget _buildItemContainer(List<ShopItem> data) {
+  Widget _buildItemContainer(List<List<ShopItem>> data) {
     double screenWidth = MediaQuery.of(context).size.width;
     double containerWidth = screenWidth * 0.016;
 
     List<Widget> rows = [];
-    List<ShopItem> shopItems = List.from(data); // Create a copy
 
-    while (shopItems.isNotEmpty) {
+    // Iterate through each category (list) in data
+    for (List<ShopItem> categoryItems in data) {
       List<Widget> rowChildren = [];
+      int itemsInCurrentRow = 0; // Keep track of items in the current row
 
-      for (int i = 0; i < 2 && shopItems.isNotEmpty; i++) {
-        ShopItem item = shopItems.removeAt(0);
+      // Iterate through items in the category
+      for (int i = 0; i < categoryItems.length; i++) {
+        if (itemsInCurrentRow >= 2) {
+          // Start a new row if two items are already in the current row
+          rows.add(
+            Row(
+              children: rowChildren,
+            ),
+          );
+          rowChildren = [];
+          itemsInCurrentRow = 0;
+        }
+
+        ShopItem item = categoryItems[i];
         rowChildren.add(
-            _buildShopItem(item.imgPath, item.name, item.rating, item.price));
+          _buildShopItem(item.imgPath, item.name, item.rating, item.price),
+        );
+
+        itemsInCurrentRow++; // Increment the count of items in the current row
       }
 
-      rows.add(
-        Row(
-          children: rowChildren,
-        ),
-      );
+      // Add the remaining items in the last row, if any
+      if (rowChildren.isNotEmpty) {
+        rows.add(
+          Row(
+            children: rowChildren,
+          ),
+        );
+      }
     }
 
     return Container(
