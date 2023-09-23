@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:marketplace/login.dart';
-import 'package:marketplace/navbar.dart';
+// import 'package:marketplace/login.dart';
+// import 'package:marketplace/navbar.dart';
+// import 'package:marketplace/constants.dart';
+import 'package:marketplace/screens/splash/splash_screen.dart';
+import 'package:marketplace/routs.dart';
+import 'package:marketplace/theme.dart';
 
 void main() {
   runApp(const MyApp());
@@ -14,20 +18,14 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  bool isLoggedIn = false;
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: isLoggedIn
-          ? NavBar()
-          : LoginScreen(onLoggedIn: () {
-              // Callback function to update isLoggedIn state
-              setState(() {
-                isLoggedIn = true;
-              });
-            }),
+      theme: theme(),
+      // home: SplashScreen(),
+      initialRoute: SplashScreen.routeName,
+      routes: routes,
     );
   }
 }
