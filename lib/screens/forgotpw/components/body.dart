@@ -1,0 +1,147 @@
+import 'package:flutter/material.dart';
+import 'package:marketplace/components/form_error.dart';
+import 'package:marketplace/components/no_account.dart';
+import 'package:marketplace/constants.dart';
+import 'package:marketplace/sizeconfig.dart';
+
+import '../../../components/default_button.dart';
+
+class Body extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return SafeArea(
+      child: SizedBox(
+        width: double.infinity,
+        child: Padding(
+          padding: 
+            EdgeInsets.symmetric(
+              horizontal: getProportionateScreenWidth(20)
+          ),
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                SizedBox(height: getProportionateScreenHeight(30)),
+                Container(
+                  height: getProportionateScreenHeight(40.56),
+                  width: getProportionateScreenWidth(49.92),
+                  child: Image.asset(
+                    "lib/images/splash.png",
+                  ),
+                ),
+                SizedBox(height: getProportionateScreenHeight(30)),
+                Text(
+                  "Forgot Password",
+                  style: TextStyle(
+                    fontSize: getProportionateScreenWidth(28),
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                SizedBox(height: getProportionateScreenHeight(10)),
+                Text(
+                  "Please enter your email and we will send \nyou a link to reset your password",
+                  textAlign: TextAlign.center,  
+                ),
+                SizedBox(height: getProportionateScreenHeight(25)),
+                Padding(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: getProportionateScreenWidth(18),
+                  ),
+                  child: ForgotPwForm(),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class ForgotPwForm extends StatefulWidget {
+  @override
+  State<ForgotPwForm> createState() => _ForgotPwFormState();
+}
+
+class _ForgotPwFormState extends State<ForgotPwForm> {
+  final _formKey = GlobalKey<FormState>();
+  List<String> errors = [];
+  late String email;
+
+  @override
+  Widget build(BuildContext context) {
+    return Form(
+      key: _formKey,
+      child: Column(
+        children: [
+          SizedBox(height: getProportionateScreenHeight(20)),
+          TextFormField(
+            keyboardType: TextInputType.emailAddress,
+            onSaved: (newValue) => email = newValue!,
+            onChanged: (value) {
+              if (value.isNotEmpty && errors.contains(kEmailNullError)) {
+                setState(() {
+                  errors.remove(kEmailNullError);
+                });
+              }
+              else if (value.isEmpty || emailValidatorRegExp.hasMatch(value) && errors.contains(kInvalidEmailError)) {
+                setState(() {
+                  errors.remove(kInvalidEmailError);
+                });
+              }
+              return null;
+            },
+            style: TextStyle(
+              color: kTextColor,
+            ),
+            validator: (value) {
+              if ((value == null || value.isEmpty) && !errors.contains(kEmailNullError)) {
+                setState(() {
+                  errors.add(kEmailNullError);
+                });
+              }
+              else if ((value != null && !value.isEmpty) && !emailValidatorRegExp.hasMatch(value) && !errors.contains(kInvalidEmailError)) {
+                setState(() {
+                  errors.add(kInvalidEmailError);
+                });
+              }
+              return null;
+            },
+            decoration: InputDecoration(
+              labelText: "Email",
+              labelStyle: TextStyle(
+                color: kTextColor,
+              ),
+              hintText: "Enter your email",
+              hintStyle: TextStyle(
+                color: kTextColor,
+                fontWeight: FontWeight.w100,
+                fontSize: 14
+              ),
+              floatingLabelBehavior: FloatingLabelBehavior.always,
+            )
+          ),
+          SizedBox(height: getProportionateScreenHeight(20)),
+          Padding(
+            padding: EdgeInsets.symmetric(
+              horizontal: getProportionateScreenWidth(56),
+            ),
+            child: FormError(errors: errors),
+          ),
+          SizedBox(height: getProportionateScreenHeight(20)),
+          DefaultButton(
+            text: "Continue",
+            press: () {
+              if (_formKey.currentState?.validate() ?? false) {
+
+              }
+            },
+          ),
+          SizedBox(height: getProportionateScreenHeight(35)),
+          noAccount(),
+          SizedBox(height: getProportionateScreenHeight(38)),
+        ],
+      ),
+    );
+  }
+}

@@ -75,6 +75,7 @@ class _SearchBarAState extends State<SearchBarA> {
           shadowColor: Colors.black.withOpacity(0.8),
         ),
       ),
+      backgroundColor: Colors.white,
       body: Padding(
         padding: EdgeInsets.all(16),
         child: Column(

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:marketplace/data.dart';
 
+import 'constants.dart';
+
 class ShoesScreen extends StatefulWidget {
   const ShoesScreen({Key? key}) : super(key: key);
 
@@ -100,7 +102,10 @@ class _ShoesScreenState extends State<ShoesScreen> {
                 SizedBox(width: 2),
                 Text(
                   rating.toString(),
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                    fontSize: 20, 
+                    fontWeight: FontWeight.bold,
+                    color: kProductTextColor,),
                 )
               ],
             ),
@@ -110,7 +115,11 @@ class _ShoesScreenState extends State<ShoesScreen> {
             Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
               Text(
                 name,
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                style: TextStyle(
+                  fontSize: 20, 
+                  fontWeight: FontWeight.bold,
+                  color: kProductTextColor,
+                ),
               ),
             ]),
             SizedBox(height: 10),
@@ -120,7 +129,11 @@ class _ShoesScreenState extends State<ShoesScreen> {
                 children: [
                   Text(
                     "\$" + price.toString(),
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    style: TextStyle(
+                      fontSize: 20, 
+                      fontWeight: FontWeight.bold,
+                      color: kProductTextColor,
+                    ),
                   ),
                   Spacer(),
                   GestureDetector(

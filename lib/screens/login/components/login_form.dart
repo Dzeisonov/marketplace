@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:marketplace/screens/forgotpw/forgotpw.dart';
+import 'package:marketplace/screens/loginsuccess/loginscs.dart';
 
 import '../../../components/default_button.dart';
 import '../../../components/form_error.dart';
@@ -14,6 +16,10 @@ class LogInForm extends StatefulWidget {
 
 class _LogInFormState extends State<LogInForm> {
   final _formKey = GlobalKey<FormState>();
+
+  String email_default = "maniere@gmail.com";
+  String pw_default = "maniere88";
+
   late String email;
   late String password;
   bool remember = false;
@@ -65,13 +71,18 @@ class _LogInFormState extends State<LogInForm> {
               ),
               Text("Remember me"),
               Spacer(),
-              Padding(
-                padding: EdgeInsets.symmetric(
-                  horizontal: getProportionateScreenWidth(20.5),
+              GestureDetector(
+                onTap: () => Navigator.pushNamed(
+                  context, ForgotPwScreen.routeName
                 ),
-                child: Text(
-                  "Forgot Password",
-                  style: TextStyle(decoration: TextDecoration.underline),
+                child: Padding(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: getProportionateScreenWidth(20.5),
+                  ),
+                  child: Text(
+                    "Forgot Password",
+                    style: TextStyle(decoration: TextDecoration.underline),
+                  ),
                 ),
               ),
             ]
@@ -82,6 +93,8 @@ class _LogInFormState extends State<LogInForm> {
             press: () {
               if (_formKey.currentState!.validate()) {
                 _formKey.currentState!.save();
+                // Setelah data divalidasi dan valid, akan didirect ke tampilan login success
+                Navigator.pushNamed(context, LogInScsScreen.routeName);
               }
             },
           ),

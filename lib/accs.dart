@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:marketplace/data.dart';
 
+import 'constants.dart';
+
 class AccsScreen extends StatefulWidget {
   const AccsScreen({Key? key}) : super(key: key);
 
@@ -100,7 +102,11 @@ class _AccsScreenState extends State<AccsScreen> {
                 SizedBox(width: 2),
                 Text(
                   rating.toString(),
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                    fontSize: 20, 
+                    fontWeight: FontWeight.bold,
+                    color: kProductTextColor,
+                  ),
                 )
               ],
             ),
@@ -110,7 +116,11 @@ class _AccsScreenState extends State<AccsScreen> {
             Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
               Text(
                 name,
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                style: TextStyle(
+                  fontSize: 20, 
+                  fontWeight: FontWeight.bold,
+                  color: kProductTextColor,
+                ),
               ),
             ]),
             SizedBox(height: 10),
@@ -120,7 +130,10 @@ class _AccsScreenState extends State<AccsScreen> {
                 children: [
                   Text(
                     "\$" + price.toString(),
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    style: TextStyle(
+                      fontSize: 20, 
+                      fontWeight: FontWeight.bold,
+                      color: kProductTextColor,),
                   ),
                   Spacer(),
                   GestureDetector(

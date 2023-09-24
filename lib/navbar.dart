@@ -5,6 +5,8 @@ import 'package:marketplace/profile.dart';
 import 'package:marketplace/catalog.dart';
 
 class NavBar extends StatefulWidget {
+  static String routeName = '/navbar';
+
   const NavBar({Key? key}) : super(key: key);
 
   @override

@@ -3,14 +3,20 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:marketplace/accspage.dart';
 import 'package:marketplace/allItemsPage.dart';
 import 'package:marketplace/clothesPage.dart';
+import 'package:marketplace/constants.dart';
 import 'package:marketplace/hatspage.dart';
 import 'package:marketplace/data.dart';
+import 'package:marketplace/navbar.dart';
 import 'package:marketplace/search.dart';
 import 'package:marketplace/shoesPage.dart';
 import 'package:marketplace/trendpage.dart';
 
 class HomePage extends StatefulWidget {
-  HomePage({Key? key}) : super(key: key);
+  static String routeName = "/homepage";
+
+  HomePage({
+    super.key,
+  });
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -20,15 +26,17 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.white,
-        body: Container(
-            child: Column(
+      backgroundColor: Colors.white,
+      body: Container(
+          child: Column(
           children: [
             SizedBox(height: 10),
             _buildSearchBar(),
             _buildHomePageUI(),
           ],
-        )));
+        )
+      ),
+    );
   }
 
   Widget _buildHomePageUI() {
@@ -143,6 +151,7 @@ class _HomePageState extends State<HomePage> {
               "Categories",
               style: TextStyle(
                 fontSize: 16,
+                color: kProductTextColor,
                 fontWeight: FontWeight.bold,
               ),
             ),
@@ -224,7 +233,10 @@ class _HomePageState extends State<HomePage> {
                           SizedBox(height: 1),
                           Text(
                             descriptions[index],
-                            style: TextStyle(fontSize: 12),
+                            style: TextStyle(
+                              fontSize: 12,
+                              color: kProductTextColor,
+                            ),
                           ),
                         ],
                       ),
@@ -297,7 +309,11 @@ class _HomePageState extends State<HomePage> {
               alignment: Alignment.topLeft,
               child: Text(
                 title,
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                style: TextStyle(
+                  fontSize: 16, 
+                  fontWeight: FontWeight.bold,
+                  color: kProductTextColor,
+                ),
               ),
             ),
             Spacer(),
@@ -307,8 +323,9 @@ class _HomePageState extends State<HomePage> {
                 onTap: onTapCallback,
                 child: Row(
                   children: [
-                    Text("See more",
-                        style: TextStyle(fontSize: 16, color: Colors.black)),
+                    Text(
+                      "See more",
+                      style: TextStyle(fontSize: 16, color: Colors.black)),
                     SizedBox(
                       width: 5,
                     ),
@@ -408,7 +425,11 @@ class _HomePageState extends State<HomePage> {
                 SizedBox(width: 2),
                 Text(
                   rating.toString(),
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                    fontSize: 20, 
+                    fontWeight: FontWeight.bold,
+                    color: kProductTextColor,
+                  ),
                 )
               ],
             ),
@@ -418,7 +439,11 @@ class _HomePageState extends State<HomePage> {
             Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
               Text(
                 name,
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                style: TextStyle(
+                  fontSize: 20, 
+                  fontWeight: FontWeight.bold,
+                  color: kProductTextColor,
+                ),
               ),
             ]),
             SizedBox(height: 10),
@@ -428,7 +453,11 @@ class _HomePageState extends State<HomePage> {
                 children: [
                   Text(
                     "\$" + price.toString(),
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    style: TextStyle(
+                      fontSize: 20, 
+                      fontWeight: FontWeight.bold,
+                      color: kProductTextColor,
+                    ),
                   ),
                   Spacer(),
                   Container(

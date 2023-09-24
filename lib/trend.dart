@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:marketplace/constants.dart';
 import 'package:marketplace/data.dart';
 
 class TrendScreen extends StatefulWidget {
@@ -100,7 +101,11 @@ class _TrendScreenState extends State<TrendScreen> {
                 SizedBox(width: 2),
                 Text(
                   rating.toString(),
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    color: kProductTextColor,
+                  ),
                 )
               ],
             ),
@@ -110,7 +115,11 @@ class _TrendScreenState extends State<TrendScreen> {
             Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
               Text(
                 name,
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                style: TextStyle(
+                  fontSize: 20, 
+                  fontWeight: FontWeight.bold,
+                  color: kProductTextColor,
+                ),
               ),
             ]),
             SizedBox(height: 10),
@@ -120,7 +129,11 @@ class _TrendScreenState extends State<TrendScreen> {
                 children: [
                   Text(
                     "\$" + price.toString(),
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    style: TextStyle(
+                      fontSize: 20, 
+                      fontWeight: FontWeight.bold,
+                      color: kProductTextColor,
+                    ),
                   ),
                   Spacer(),
                   GestureDetector(

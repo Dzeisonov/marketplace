@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:marketplace/data.dart';
 
+import 'constants.dart';
+
 class AllScreen extends StatefulWidget {
   const AllScreen({Key? key}) : super(key: key);
 
@@ -119,7 +121,11 @@ class _AllScreenState extends State<AllScreen> {
                 SizedBox(width: 2),
                 Text(
                   rating.toString(),
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                    fontSize: 20, 
+                    fontWeight: FontWeight.bold,
+                    color: kProductTextColor,
+                  ),
                 )
               ],
             ),
@@ -129,7 +135,11 @@ class _AllScreenState extends State<AllScreen> {
             Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
               Text(
                 name,
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                style: TextStyle(
+                  fontSize: 20, 
+                  fontWeight: FontWeight.bold,
+                  color: kProductTextColor,
+                ),
               ),
             ]),
             SizedBox(height: 10),
@@ -139,7 +149,11 @@ class _AllScreenState extends State<AllScreen> {
                 children: [
                   Text(
                     "\$" + price.toString(),
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    style: TextStyle(
+                      fontSize: 20, 
+                      fontWeight: FontWeight.bold,
+                      color: kProductTextColor,
+                    ),
                   ),
                   Spacer(),
                   GestureDetector(
