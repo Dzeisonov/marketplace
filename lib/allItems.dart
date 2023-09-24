@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:marketplace/cart.dart';
 import 'package:marketplace/data.dart';
-
-import 'constants.dart';
+import 'package:marketplace/provider.dart';
+import 'package:provider/provider.dart';
 
 class AllScreen extends StatefulWidget {
   const AllScreen({Key? key}) : super(key: key);
@@ -154,7 +155,13 @@ class _AllScreenState extends State<AllScreen> {
                   ),
                   Spacer(),
                   GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      CartItem cartItem =
+                          CartItem(image, name, rating, price, 1);
+                      final cartProvider =
+                          Provider.of<CartProvider>(context, listen: false);
+                      cartProvider.addItemToCart(cartItem);
+                    },
                     child: Container(
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,

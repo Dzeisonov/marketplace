@@ -2,14 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:marketplace/accspage.dart';
 import 'package:marketplace/allItemsPage.dart';
+import 'package:marketplace/cart.dart';
 import 'package:marketplace/clothesPage.dart';
-import 'package:marketplace/constants.dart';
 import 'package:marketplace/hatspage.dart';
 import 'package:marketplace/data.dart';
-import 'package:marketplace/navbar.dart';
+import 'package:marketplace/provider.dart';
 import 'package:marketplace/search.dart';
 import 'package:marketplace/shoesPage.dart';
 import 'package:marketplace/trendpage.dart';
+import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
   static String routeName = "/homepage";
@@ -454,15 +455,24 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                   Spacer(),
-                  Container(
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Colors.black,
-                    ),
-                    padding: EdgeInsets.all(10),
-                    child: Icon(
-                      Icons.shopping_cart,
-                      color: Colors.white,
+                  GestureDetector(
+                    onTap: () {
+                      CartItem cartItem =
+                          CartItem(image, name, rating, price, 1);
+                      final cartProvider =
+                          Provider.of<CartProvider>(context, listen: false);
+                      cartProvider.addItemToCart(cartItem);
+                    },
+                    child: Container(
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: Colors.black,
+                      ),
+                      padding: EdgeInsets.all(10),
+                      child: Icon(
+                        Icons.shopping_cart,
+                        color: Colors.white,
+                      ),
                     ),
                   ),
                 ],

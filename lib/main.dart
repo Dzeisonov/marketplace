@@ -5,9 +5,19 @@ import 'package:flutter/material.dart';
 import 'package:marketplace/screens/splash/splash_screen.dart';
 import 'package:marketplace/routs.dart';
 import 'package:marketplace/theme.dart';
+import 'package:marketplace/provider.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+            create: (_) => CartProvider()), // Provide CartProvider
+      ],
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatefulWidget {

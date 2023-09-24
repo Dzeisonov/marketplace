@@ -3,7 +3,21 @@ import 'package:marketplace/cart.dart';
 import 'package:marketplace/homePage.dart';
 import 'package:marketplace/profile.dart';
 import 'package:marketplace/catalog.dart';
+import 'package:marketplace/provider.dart';
+import 'package:provider/provider.dart';
 
+void main() {
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => CartProvider()),
+      ],
+      child: MaterialApp(
+        home: NavBar(),
+      ),
+    ),
+  );
+}
 class NavBar extends StatefulWidget {
   static String routeName = '/navbar';
 

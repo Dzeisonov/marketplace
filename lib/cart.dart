@@ -1,42 +1,46 @@
 import 'package:flutter/material.dart';
-import 'package:marketplace/constants.dart';
+import 'package:marketplace/provider.dart';
+import 'package:provider/provider.dart';
 
 class CartPage extends StatefulWidget {
-  CartPage({Key? key}) : super(key: key);
+  final CartItem? cartItem; // Make cartItem optional by adding '?'
+
+  CartPage({this.cartItem, Key? key}) : super(key: key);
 
   @override
   State<CartPage> createState() => _CartPageState();
 }
 
 class _CartPageState extends State<CartPage> {
-  List<CartItem> cartItems = [
-    CartItem("lib/images/tshirt.jpg", "Tshirt", 9.5, 3.99, 1),
-    CartItem("lib/images/tshirt.jpg", "Tshirt1", 9.5, 3.99, 1),
-  ];
-
+  List<CartItem> cartItems = [];
   @override
   Widget build(BuildContext context) {
+    final cartProvider = Provider.of<CartProvider>(context);
+    final cartItems = cartProvider.cartItems;
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: Padding(
         padding: const EdgeInsets.only(top: 20, bottom: 25),
         child: Align(
-          alignment: Alignment.topCenter,
-          child: cartItems.isEmpty
-              ? Center(
-                  child: Text(
-                    "Your cart is empty",
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
+            alignment: Alignment.topCenter,
+            child: cartItems.isEmpty
+                ? Center(
+                    child: Text(
+                      "Your cart is empty",
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
-                  ),
-                )
-              : Column(
-                  children:
-                      cartItems.map((item) => _buildCartItem(item)).toList(),
-                ),
-        ),
+                  )
+                : ListView.builder(
+                    itemCount: cartItems.length,
+                    itemBuilder: (context, index) {
+                      final cartItem = cartItems[index];
+                      return _buildCartItem(cartItem);
+                    },
+                  )),
       ),
     );
   }
@@ -46,7 +50,14 @@ class _CartPageState extends State<CartPage> {
       key: Key(item.name),
       onDismissed: (direction) {
         setState(() {
-          cartItems.remove(item);
+          if (item.amount > 1) {
+            item.amount--;
+          } else {
+            // If the item amount is 1, remove it from the cartItems list
+            final cartProvider =
+                Provider.of<CartProvider>(context, listen: false);
+            cartProvider.removeItemFromCart(item);
+          }
         });
       },
       child: Container(
@@ -60,7 +71,7 @@ class _CartPageState extends State<CartPage> {
               spreadRadius: 2,
               blurRadius: 5,
               offset: Offset(0, 3),
-            )
+            ),
           ],
         ),
         height: 110,
@@ -102,8 +113,7 @@ class _CartPageState extends State<CartPage> {
                                     item.name,
                                     style: TextStyle(
                                         fontSize: 16,
-                                        fontWeight: FontWeight.bold,
-                                      ),
+                                        fontWeight: FontWeight.bold),
                                   ),
                                   Text(
                                     "\$" + item.price.toString(),
@@ -155,9 +165,12 @@ class _CartPageState extends State<CartPage> {
                     onTap: () {
                       setState(() {
                         if (item.amount > 1) {
-                          item.amount--;
+                          item.amount--; // Decrement item count if > 1
                         } else {
-                          cartItems.remove(item);
+                          // If the item amount is 1, remove it from the cartItems list
+                          final cartProvider =
+                              Provider.of<CartProvider>(context, listen: false);
+                          cartProvider.removeItemFromCart(item);
                         }
                       });
                     },
@@ -166,16 +179,13 @@ class _CartPageState extends State<CartPage> {
                   SizedBox(width: 5),
                   Text(
                     item.amount.toString(),
-                    style: TextStyle(
-                      fontSize: 16, 
-                      fontWeight: FontWeight.bold,
-                    ),
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                   ),
                   SizedBox(width: 5),
                   InkWell(
                     onTap: () {
                       setState(() {
-                        item.amount++;
+                        item.amount++; // Increment item count
                       });
                     },
                     child: Icon(Icons.add),
@@ -198,10 +208,4 @@ class CartItem {
   int amount;
 
   CartItem(this.image, this.name, this.rating, this.price, this.amount);
-}
-
-void main() {
-  runApp(MaterialApp(
-    home: CartPage(),
-  ));
 }

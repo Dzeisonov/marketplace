@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:marketplace/cart.dart';
 import 'package:marketplace/data.dart';
-
-import 'constants.dart';
+import 'package:marketplace/provider.dart';
+import 'package:provider/provider.dart';
 
 class ShoesScreen extends StatefulWidget {
   const ShoesScreen({Key? key}) : super(key: key);
@@ -135,7 +136,13 @@ class _ShoesScreenState extends State<ShoesScreen> {
                   ),
                   Spacer(),
                   GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      CartItem cartItem =
+                          CartItem(image, name, rating, price, 1);
+                      final cartProvider =
+                          Provider.of<CartProvider>(context, listen: false);
+                      cartProvider.addItemToCart(cartItem);
+                    },
                     child: Container(
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,

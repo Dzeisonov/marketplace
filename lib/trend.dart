@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:marketplace/cart.dart';
 import 'package:marketplace/constants.dart';
 import 'package:marketplace/data.dart';
+import 'package:marketplace/provider.dart';
+import 'package:provider/provider.dart';
 
 class TrendScreen extends StatefulWidget {
   const TrendScreen({Key? key}) : super(key: key);
@@ -137,7 +140,13 @@ class _TrendScreenState extends State<TrendScreen> {
                   ),
                   Spacer(),
                   GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      CartItem cartItem =
+                          CartItem(image, name, rating, price, 1);
+                      final cartProvider =
+                          Provider.of<CartProvider>(context, listen: false);
+                      cartProvider.addItemToCart(cartItem);
+                    },
                     child: Container(
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
