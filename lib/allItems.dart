@@ -12,7 +12,20 @@ class AllScreen extends StatefulWidget {
 }
 
 class _AllScreenState extends State<AllScreen> {
-  Color cartCircleColor = Colors.black;
+  List<Color> cartCircleColors = [];
+
+  @override
+  void initState() {
+    super.initState();
+
+    // Initialize the color list with default colors
+    for (int i = 0; i < ShopItem.combinedList.length; i++) {
+      for (int j = 0; j < ShopItem.combinedList[i].length; j++) {
+        cartCircleColors.add(Colors.black);
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -32,13 +45,22 @@ class _AllScreenState extends State<AllScreen> {
 
     List<Widget> rows = [];
 
+    // Initialize itemIndex with 0
+    int itemIndex = 0;
+
     // Iterate through each category (list) in data
-    for (List<ShopItem> categoryItems in data) {
+    for (int rowIndex = 0; rowIndex < data.length; rowIndex++) {
+      List<ShopItem> categoryItems = data[rowIndex];
       List<Widget> rowChildren = [];
       int itemsInCurrentRow = 0; // Keep track of items in the current row
 
       // Iterate through items in the category
-      for (int i = 0; i < categoryItems.length; i++) {
+      for (int colIndex = 0; colIndex < categoryItems.length; colIndex++) {
+        // Calculate the linear index based on row and column indices
+        int linearIndex = rowIndex * 2 + colIndex;
+
+        // Access cartCircleColors using the linear index
+        Color color = cartCircleColors[linearIndex];
         if (itemsInCurrentRow >= 2) {
           // Start a new row if two items are already in the current row
           rows.add(
@@ -50,12 +72,13 @@ class _AllScreenState extends State<AllScreen> {
           itemsInCurrentRow = 0;
         }
 
-        ShopItem item = categoryItems[i];
+        ShopItem item = categoryItems[colIndex];
         rowChildren.add(
-          _buildShopItem(item.imgPath, item.name, item.rating, item.price),
+          _buildShopItem(linearIndex, item.imgPath, item.name, item.rating, item.price), // Pass the linearIndex
         );
 
         itemsInCurrentRow++; // Increment the count of items in the current row
+        itemIndex++; // Increment the itemIndex
       }
 
       // Add the remaining items in the last row, if any
@@ -77,7 +100,7 @@ class _AllScreenState extends State<AllScreen> {
   }
 
   Widget _buildShopItem(
-      String image, String name, double rating, double price) {
+      int index, String image, String name, double rating, double price) {
     return Container(
       margin: EdgeInsets.symmetric(
         horizontal: 10,
@@ -124,7 +147,7 @@ class _AllScreenState extends State<AllScreen> {
                 Text(
                   rating.toString(),
                   style: TextStyle(
-                    fontSize: 20, 
+                    fontSize: 20,
                     fontWeight: FontWeight.bold,
                   ),
                 )
@@ -137,7 +160,7 @@ class _AllScreenState extends State<AllScreen> {
               Text(
                 name,
                 style: TextStyle(
-                  fontSize: 20, 
+                  fontSize: 20,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -150,7 +173,7 @@ class _AllScreenState extends State<AllScreen> {
                   Text(
                     "\$" + price.toString(),
                     style: TextStyle(
-                      fontSize: 20, 
+                      fontSize: 20,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -158,27 +181,25 @@ class _AllScreenState extends State<AllScreen> {
                   InkWell(
                     onTap: () {
                       setState(() {
-                        // Change the color when tapped
-                        cartCircleColor = Colors.grey; // Replace with your desired color
+                        // Change the color when tapped based on the index
+                        cartCircleColors[index] = Colors.grey; // Replace with your desired color
                       });
 
-                      CartItem cartItem =
-                          CartItem(image, name, rating, price, 1);
-                      final cartProvider =
-                          Provider.of<CartProvider>(context, listen: false);
+                      CartItem cartItem = CartItem(image, name, rating, price, 1);
+                      final cartProvider = Provider.of<CartProvider>(context, listen: false);
                       cartProvider.addItemToCart(cartItem);
 
                       // Revert the color change after 0.05 seconds
                       Future.delayed(Duration(milliseconds: 50), () {
                         setState(() {
-                          cartCircleColor = Colors.black; // Revert to the default color
+                          cartCircleColors[index] = Colors.black; // Revert to the default color
                         });
                       });
                     },
                     child: Container(
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
-                        color: cartCircleColor, // Set the color here
+                        color: cartCircleColors[index], // Set the color based on the index
                       ),
                       padding: EdgeInsets.all(10),
                       child: Icon(
