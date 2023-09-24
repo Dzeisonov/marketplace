@@ -103,7 +103,7 @@ class TabBarExample extends StatelessWidget {
     );
 
     return Container(
-      margin: EdgeInsets.only(left: 15, right: 15, top: 25),
+      margin: EdgeInsets.only(left: 15, right: 15, top: 30),
       alignment: Alignment.topCenter,
       child: Column(
         children: [

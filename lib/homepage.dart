@@ -30,13 +30,12 @@ class _HomePageState extends State<HomePage> {
       backgroundColor: Colors.white,
       body: Container(
           child: Column(
-          children: [
-            SizedBox(height: 10),
-            _buildSearchBar(),
-            _buildHomePageUI(),
-          ],
-        )
-      ),
+        children: [
+          SizedBox(height: 10),
+          _buildSearchBar(),
+          _buildHomePageUI(),
+        ],
+      )),
     );
   }
 
@@ -86,7 +85,7 @@ class _HomePageState extends State<HomePage> {
     );
 
     return Container(
-      margin: EdgeInsets.only(left: 15, right: 15, top: 25),
+      margin: EdgeInsets.only(left: 15, right: 15, top: 25, bottom: 10),
       alignment: Alignment.topCenter,
       child: Column(
         children: [
@@ -309,7 +308,7 @@ class _HomePageState extends State<HomePage> {
               child: Text(
                 title,
                 style: TextStyle(
-                  fontSize: 16, 
+                  fontSize: 16,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -321,9 +320,8 @@ class _HomePageState extends State<HomePage> {
                 onTap: onTapCallback,
                 child: Row(
                   children: [
-                    Text(
-                      "See more",
-                      style: TextStyle(fontSize: 16, color: Colors.black)),
+                    Text("See more",
+                        style: TextStyle(fontSize: 16, color: Colors.black)),
                     SizedBox(
                       width: 5,
                     ),
@@ -424,7 +422,7 @@ class _HomePageState extends State<HomePage> {
                 Text(
                   rating.toString(),
                   style: TextStyle(
-                    fontSize: 20, 
+                    fontSize: 20,
                     fontWeight: FontWeight.bold,
                   ),
                 )
@@ -437,7 +435,7 @@ class _HomePageState extends State<HomePage> {
               Text(
                 name,
                 style: TextStyle(
-                  fontSize: 20, 
+                  fontSize: 20,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -450,7 +448,7 @@ class _HomePageState extends State<HomePage> {
                   Text(
                     "\$" + price.toString(),
                     style: TextStyle(
-                      fontSize: 20, 
+                      fontSize: 20,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
