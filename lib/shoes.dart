@@ -105,7 +105,7 @@ class _ShoesScreenState extends State<ShoesScreen> {
                   style: TextStyle(
                     fontSize: 20, 
                     fontWeight: FontWeight.bold,
-                    color: kProductTextColor,),
+                  ),
                 )
               ],
             ),
@@ -118,7 +118,6 @@ class _ShoesScreenState extends State<ShoesScreen> {
                 style: TextStyle(
                   fontSize: 20, 
                   fontWeight: FontWeight.bold,
-                  color: kProductTextColor,
                 ),
               ),
             ]),
@@ -132,7 +131,6 @@ class _ShoesScreenState extends State<ShoesScreen> {
                     style: TextStyle(
                       fontSize: 20, 
                       fontWeight: FontWeight.bold,
-                      color: kProductTextColor,
                     ),
                   ),
                   Spacer(),

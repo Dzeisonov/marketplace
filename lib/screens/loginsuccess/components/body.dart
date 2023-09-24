@@ -4,6 +4,7 @@ import 'package:marketplace/homepage.dart';
 import 'package:marketplace/sizeconfig.dart';
 
 import '../../../components/default_button.dart';
+import '../../../navbar.dart';
 
 class Body extends StatelessWidget {
   const Body({super.key});
@@ -37,7 +38,7 @@ class Body extends StatelessWidget {
           DefaultButton(
             text: "Let's shop!",
             press: () {
-              Navigator.pushNamed(context, HomePage.routeName);
+              Navigator.pushNamed(context, NavBar.routeName);
             },
           ),
         ],

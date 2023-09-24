@@ -151,7 +151,6 @@ class _HomePageState extends State<HomePage> {
               "Categories",
               style: TextStyle(
                 fontSize: 16,
-                color: kProductTextColor,
                 fontWeight: FontWeight.bold,
               ),
             ),
@@ -235,7 +234,6 @@ class _HomePageState extends State<HomePage> {
                             descriptions[index],
                             style: TextStyle(
                               fontSize: 12,
-                              color: kProductTextColor,
                             ),
                           ),
                         ],
@@ -312,7 +310,6 @@ class _HomePageState extends State<HomePage> {
                 style: TextStyle(
                   fontSize: 16, 
                   fontWeight: FontWeight.bold,
-                  color: kProductTextColor,
                 ),
               ),
             ),
@@ -428,7 +425,6 @@ class _HomePageState extends State<HomePage> {
                   style: TextStyle(
                     fontSize: 20, 
                     fontWeight: FontWeight.bold,
-                    color: kProductTextColor,
                   ),
                 )
               ],
@@ -442,7 +438,6 @@ class _HomePageState extends State<HomePage> {
                 style: TextStyle(
                   fontSize: 20, 
                   fontWeight: FontWeight.bold,
-                  color: kProductTextColor,
                 ),
               ),
             ]),
@@ -456,7 +451,6 @@ class _HomePageState extends State<HomePage> {
                     style: TextStyle(
                       fontSize: 20, 
                       fontWeight: FontWeight.bold,
-                      color: kProductTextColor,
                     ),
                   ),
                   Spacer(),

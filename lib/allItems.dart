@@ -124,7 +124,6 @@ class _AllScreenState extends State<AllScreen> {
                   style: TextStyle(
                     fontSize: 20, 
                     fontWeight: FontWeight.bold,
-                    color: kProductTextColor,
                   ),
                 )
               ],
@@ -138,7 +137,6 @@ class _AllScreenState extends State<AllScreen> {
                 style: TextStyle(
                   fontSize: 20, 
                   fontWeight: FontWeight.bold,
-                  color: kProductTextColor,
                 ),
               ),
             ]),
@@ -152,7 +150,6 @@ class _AllScreenState extends State<AllScreen> {
                     style: TextStyle(
                       fontSize: 20, 
                       fontWeight: FontWeight.bold,
-                      color: kProductTextColor,
                     ),
                   ),
                   Spacer(),

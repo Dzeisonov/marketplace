@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'constants.dart';
+
 class ProfileScreen extends StatefulWidget {
   ProfileScreen({Key? key}) : super(key: key);
 
@@ -58,7 +60,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
       margin: EdgeInsets.only(left: 12, top: 10, bottom: 10),
       child: Text(
         item,
-        style: TextStyle(fontSize: 20),
+        style: TextStyle(
+          fontSize: 20,
+        ),
       ),
     );
   }

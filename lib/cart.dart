@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:marketplace/constants.dart';
 
 class CartPage extends StatefulWidget {
   CartPage({Key? key}) : super(key: key);
@@ -101,7 +102,8 @@ class _CartPageState extends State<CartPage> {
                                     item.name,
                                     style: TextStyle(
                                         fontSize: 16,
-                                        fontWeight: FontWeight.bold),
+                                        fontWeight: FontWeight.bold,
+                                      ),
                                   ),
                                   Text(
                                     "\$" + item.price.toString(),
@@ -164,7 +166,10 @@ class _CartPageState extends State<CartPage> {
                   SizedBox(width: 5),
                   Text(
                     item.amount.toString(),
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                    style: TextStyle(
+                      fontSize: 16, 
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                   SizedBox(width: 5),
                   InkWell(

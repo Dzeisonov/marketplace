@@ -105,7 +105,6 @@ class _AccsScreenState extends State<AccsScreen> {
                   style: TextStyle(
                     fontSize: 20, 
                     fontWeight: FontWeight.bold,
-                    color: kProductTextColor,
                   ),
                 )
               ],
@@ -119,7 +118,6 @@ class _AccsScreenState extends State<AccsScreen> {
                 style: TextStyle(
                   fontSize: 20, 
                   fontWeight: FontWeight.bold,
-                  color: kProductTextColor,
                 ),
               ),
             ]),
@@ -133,7 +131,7 @@ class _AccsScreenState extends State<AccsScreen> {
                     style: TextStyle(
                       fontSize: 20, 
                       fontWeight: FontWeight.bold,
-                      color: kProductTextColor,),
+                    ),
                   ),
                   Spacer(),
                   GestureDetector(

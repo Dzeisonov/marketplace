@@ -105,7 +105,6 @@ class _HatsScreenState extends State<HatsScreen> {
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
-                    color: kProductTextColor,
                   ),
                 )
               ],
@@ -119,7 +118,6 @@ class _HatsScreenState extends State<HatsScreen> {
                 style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
-                  color: kProductTextColor,
                 ),
               ),
             ]),
@@ -133,7 +131,6 @@ class _HatsScreenState extends State<HatsScreen> {
                     style: TextStyle(
                       fontSize: 20, 
                       fontWeight: FontWeight.bold,
-                      color: kProductTextColor,
                     ),
                   ),
                   Spacer(),
