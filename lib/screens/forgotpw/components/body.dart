@@ -31,11 +31,7 @@ class Body extends StatelessWidget {
                 SizedBox(height: getProportionateScreenHeight(30)),
                 Text(
                   "Forgot Password",
-                  style: TextStyle(
-                    fontSize: getProportionateScreenWidth(28),
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                  ),
+                  style: headingStyle,
                 ),
                 SizedBox(height: getProportionateScreenHeight(10)),
                 Text(

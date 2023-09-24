@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:marketplace/constants.dart';
-import 'package:marketplace/screens/signup/signup.dart';
+
+import '../constants.dart';
+import '../screens/login/login.dart';
 import '../sizeconfig.dart';
 
-class noAccount extends StatelessWidget {
-  const noAccount({
+class haveAccount extends StatelessWidget {
+  const haveAccount({
     super.key,
   });
 
@@ -14,16 +15,16 @@ class noAccount extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(
-          "Don't have an account? ",
+          "Already have an account? ",
           style: TextStyle(
             fontSize: getProportionateScreenWidth(12),
             color: kTextLightColor,
           ),
         ),
         GestureDetector(
-          onTap: () => Navigator.pushNamed(context, SignUpScreen.routeName),
+          onTap: () => Navigator.pushNamed(context, LogInScreen.routeName),
           child: Text(
-            "Sign Up",
+            "Log in",
             style: TextStyle(
               fontSize: getProportionateScreenWidth(12),
               fontWeight: FontWeight.bold,

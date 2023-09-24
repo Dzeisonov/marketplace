@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:marketplace/constants.dart';
-import 'package:marketplace/homepage.dart';
 import 'package:marketplace/sizeconfig.dart';
 
 import '../../../components/default_button.dart';

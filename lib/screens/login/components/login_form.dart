@@ -24,6 +24,7 @@ class _LogInFormState extends State<LogInForm> {
   late String password;
   bool remember = false;
   final List<String> errors = [];
+
   @override
   Widget build(BuildContext context) {
     return Form(

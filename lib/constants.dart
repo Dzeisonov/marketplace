@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:marketplace/sizeconfig.dart';
 
 const kPrimaryColor = Color(0xFFFFFFFF);
 const kPrimaryLightColor = Color(0xFFCED4DA);
@@ -13,6 +14,12 @@ const kTextLightColor = Color(0xFFF8F9FA);
 const kProductTextColor = Color(0xFF212529);
 
 const kAnimationDuration = Duration(milliseconds: 200);
+
+final headingStyle = TextStyle(
+                      fontSize: getProportionateScreenWidth(28),
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    );
 
 // Form Error
 final RegExp emailValidatorRegExp =

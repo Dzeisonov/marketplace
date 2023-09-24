@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:marketplace/constants.dart';
-import 'package:marketplace/screens/forgotpw/forgotpw.dart';
 import 'package:marketplace/sizeconfig.dart';
 
 import '../../../components/no_account.dart';
@@ -32,11 +31,7 @@ class Body extends StatelessWidget {
                 SizedBox(height: getProportionateScreenHeight(30)),
                 Text(
                   "Welcome Back",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: getProportionateScreenWidth(28),
-                    fontWeight: FontWeight.bold,
-                  ),
+                  style: headingStyle,
                 ),
                 SizedBox(height: getProportionateScreenHeight(10)),
                 Text(
