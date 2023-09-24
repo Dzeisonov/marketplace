@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:marketplace/constants.dart';
 import 'package:marketplace/sizeconfig.dart';
 
 class FormError extends StatelessWidget {
@@ -29,7 +30,12 @@ class FormError extends StatelessWidget {
           SizedBox(
             width: getProportionateScreenWidth(10),
           ),
-          Text(error),
+          Text(
+            error,
+            style: TextStyle(
+              color: kTextLightColor,
+            ),
+          ),
         ]
       );
   }

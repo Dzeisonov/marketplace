@@ -40,7 +40,10 @@ class Body extends StatelessWidget {
                 SizedBox(height: getProportionateScreenHeight(10)),
                 Text(
                   "Please enter your email and we will send \nyou a link to reset your password",
-                  textAlign: TextAlign.center,  
+                  textAlign: TextAlign.center, 
+                  style: TextStyle(
+                    color: kTextLightColor,
+                  ), 
                 ),
                 SizedBox(height: getProportionateScreenHeight(25)),
                 Padding(
@@ -92,7 +95,7 @@ class _ForgotPwFormState extends State<ForgotPwForm> {
               return null;
             },
             style: TextStyle(
-              color: kTextColor,
+              color: kTextLightColor,
             ),
             validator: (value) {
               if ((value == null || value.isEmpty) && !errors.contains(kEmailNullError)) {
@@ -110,11 +113,11 @@ class _ForgotPwFormState extends State<ForgotPwForm> {
             decoration: InputDecoration(
               labelText: "Email",
               labelStyle: TextStyle(
-                color: kTextColor,
+                color: kTextLightColor,
               ),
               hintText: "Enter your email",
               hintStyle: TextStyle(
-                color: kTextColor,
+                color: kTextLightColor,
                 fontWeight: FontWeight.w100,
                 fontSize: 14
               ),

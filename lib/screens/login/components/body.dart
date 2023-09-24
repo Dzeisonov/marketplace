@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:marketplace/constants.dart';
 import 'package:marketplace/screens/forgotpw/forgotpw.dart';
 import 'package:marketplace/sizeconfig.dart';
 
@@ -41,6 +42,9 @@ class Body extends StatelessWidget {
                 Text(
                   "Log in with your email and password\n or continue with social media",
                   textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: kTextLightColor,
+                  ),
                 ),
                 SizedBox(height: getProportionateScreenHeight(25)),
                 LogInForm(),
@@ -48,6 +52,9 @@ class Body extends StatelessWidget {
                 Text(
                   "or using",
                   textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: kTextLightColor,
+                  ),
                 ),
                 SizedBox(height: getProportionateScreenHeight(25)),
                 Row(

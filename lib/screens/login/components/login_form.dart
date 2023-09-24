@@ -69,7 +69,12 @@ class _LogInFormState extends State<LogInForm> {
                   },
                 ),
               ),
-              Text("Remember me"),
+              Text(
+                "Remember me",
+                style: TextStyle(
+                  color: kTextLightColor,
+                ),
+              ),
               Spacer(),
               GestureDetector(
                 onTap: () => Navigator.pushNamed(
@@ -81,7 +86,10 @@ class _LogInFormState extends State<LogInForm> {
                   ),
                   child: Text(
                     "Forgot Password",
-                    style: TextStyle(decoration: TextDecoration.underline),
+                    style: TextStyle(
+                      decoration: TextDecoration.underline,
+                      color: kTextLightColor,
+                    ),
                   ),
                 ),
               ),
@@ -134,16 +142,16 @@ class _LogInFormState extends State<LogInForm> {
             return null;
           },
           style: TextStyle(
-            color: kTextColor,
+            color: kTextLightColor,
           ),
           decoration: InputDecoration(
             labelText: "Password",
             labelStyle: TextStyle(
-              color: kTextColor,
+              color: kTextLightColor,
             ),
             hintText: "Enter your password",
             hintStyle: TextStyle(
-              color: kTextColor,
+              color: kTextLightColor,
               fontWeight: FontWeight.w100,
               fontSize: 14,
             ),
@@ -170,7 +178,7 @@ class _LogInFormState extends State<LogInForm> {
             return null;
           },
           style: TextStyle(
-            color: kTextColor,
+            color: kTextLightColor,
           ),
           validator: (value) {
             if ((value == null || value.isEmpty) && !errors.contains(kEmailNullError)) {
@@ -188,11 +196,11 @@ class _LogInFormState extends State<LogInForm> {
           decoration: InputDecoration(
             labelText: "Email",
             labelStyle: TextStyle(
-              color: kTextColor,
+              color: kTextLightColor,
             ),
             hintText: "Enter your email",
             hintStyle: TextStyle(
-              color: kTextColor,
+              color: kTextLightColor,
               fontWeight: FontWeight.w100,
               fontSize: 14
             ),
