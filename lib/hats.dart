@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:marketplace/cart.dart';
 import 'package:marketplace/data.dart';
@@ -12,6 +14,9 @@ class HatsScreen extends StatefulWidget {
 }
 
 class _HatsScreenState extends State<HatsScreen> {
+  late Timer _timer;
+  List<bool> isCartTappedList = List.filled(ShopItem.shopItemsHats.length, false);
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -37,8 +42,9 @@ class _HatsScreenState extends State<HatsScreen> {
 
       for (int i = 0; i < 2 && shopItems.isNotEmpty; i++) {
         ShopItem item = shopItems.removeAt(0);
-        rowChildren.add(
-            _buildShopItem(item.imgPath, item.name, item.rating, item.price));
+        int itemIndex = data.indexOf(item); // Get the index of the item
+
+        rowChildren.add(_buildShopItem(item.imgPath, item.name, item.rating, item.price, itemIndex));
       }
 
       rows.add(
@@ -57,7 +63,7 @@ class _HatsScreenState extends State<HatsScreen> {
   }
 
   Widget _buildShopItem(
-      String image, String name, double rating, double price) {
+      String image, String name, double rating, double price, int itemIndex) {
     return Container(
       margin: EdgeInsets.symmetric(
         horizontal: 10,
@@ -66,7 +72,7 @@ class _HatsScreenState extends State<HatsScreen> {
       height: 295,
       width: 170,
       decoration: BoxDecoration(
-        color: Colors.white, // Set the background color
+        color: Colors.white,
         borderRadius: BorderRadius.circular(10),
         boxShadow: [
           BoxShadow(
@@ -75,7 +81,7 @@ class _HatsScreenState extends State<HatsScreen> {
             blurRadius: 5,
             offset: Offset(0, 3),
           )
-        ], // Set the border-radius value
+        ],
       ),
       child: Column(children: [
         Container(
@@ -103,10 +109,7 @@ class _HatsScreenState extends State<HatsScreen> {
                 SizedBox(width: 2),
                 Text(
                   rating.toString(),
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  ),
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 )
               ],
             ),
@@ -116,10 +119,7 @@ class _HatsScreenState extends State<HatsScreen> {
             Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
               Text(
                 name,
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                ),
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
             ]),
             SizedBox(height: 10),
@@ -129,24 +129,29 @@ class _HatsScreenState extends State<HatsScreen> {
                 children: [
                   Text(
                     "\$" + price.toString(),
-                    style: TextStyle(
-                      fontSize: 20, 
-                      fontWeight: FontWeight.bold,
-                    ),
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                   ),
                   Spacer(),
                   GestureDetector(
                     onTap: () {
-                      CartItem cartItem =
-                          CartItem(image, name, rating, price, 1);
-                      final cartProvider =
-                          Provider.of<CartProvider>(context, listen: false);
+                      setState(() {
+                        isCartTappedList[itemIndex] = true; // Set the tapped state for this button
+                      });
+                      CartItem cartItem = CartItem(image, name, rating, price, 1);
+                      final cartProvider = Provider.of<CartProvider>(context, listen: false);
                       cartProvider.addItemToCart(cartItem);
+
+                      // Start a timer to reset the color after 1 second
+                      _timer = Timer(Duration(milliseconds: 50), () {
+                        setState(() {
+                          isCartTappedList[itemIndex] = false; // Reset the tapped state for this button
+                        });
+                      });
                     },
                     child: Container(
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
-                        color: Colors.black,
+                        color: isCartTappedList[itemIndex] ? Colors.grey : Colors.black,
                       ),
                       padding: EdgeInsets.all(10),
                       child: Icon(
@@ -154,7 +159,7 @@ class _HatsScreenState extends State<HatsScreen> {
                         color: Colors.white,
                       ),
                     ),
-                  ),
+                  )
                 ],
               ),
             )

@@ -12,6 +12,7 @@ class AllScreen extends StatefulWidget {
 }
 
 class _AllScreenState extends State<AllScreen> {
+  Color cartCircleColor = Colors.black;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -154,18 +155,30 @@ class _AllScreenState extends State<AllScreen> {
                     ),
                   ),
                   Spacer(),
-                  GestureDetector(
+                  InkWell(
                     onTap: () {
+                      setState(() {
+                        // Change the color when tapped
+                        cartCircleColor = Colors.grey; // Replace with your desired color
+                      });
+
                       CartItem cartItem =
                           CartItem(image, name, rating, price, 1);
                       final cartProvider =
                           Provider.of<CartProvider>(context, listen: false);
                       cartProvider.addItemToCart(cartItem);
+
+                      // Revert the color change after 0.05 seconds
+                      Future.delayed(Duration(milliseconds: 50), () {
+                        setState(() {
+                          cartCircleColor = Colors.black; // Revert to the default color
+                        });
+                      });
                     },
                     child: Container(
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
-                        color: Colors.black,
+                        color: cartCircleColor, // Set the color here
                       ),
                       padding: EdgeInsets.all(10),
                       child: Icon(
