@@ -79,12 +79,10 @@ class _HomePageState extends State<HomePage> {
     final cartProvider = Provider.of<CartProvider>(context, listen: false);
     cartProvider.addItemToCart(cartItem);
   }
-  
-  
+
   void handleShoesCartIconTap(int index) {
     setState(() {
-      shoesCartIconColors[index] =
-          Colors.grey;
+      shoesCartIconColors[index] = Colors.grey;
     });
 
     Timer(Duration(milliseconds: 50), () {
@@ -107,8 +105,7 @@ class _HomePageState extends State<HomePage> {
 
   void handleBestSellerCartIconTap(int index) {
     setState(() {
-      bestSellerCartIconColors[index] =
-          Colors.grey;
+      bestSellerCartIconColors[index] = Colors.grey;
     });
 
     Timer(Duration(milliseconds: 50), () {
@@ -119,7 +116,8 @@ class _HomePageState extends State<HomePage> {
 
     // Create a CartItem and add it to the cart
     CartItem cartItem = CartItem(
-      ShopItem.shopItemsBestSeller[index].imgPath, // Use the appropriate image path
+      ShopItem
+          .shopItemsBestSeller[index].imgPath, // Use the appropriate image path
       ShopItem.shopItemsBestSeller[index].name,
       ShopItem.shopItemsBestSeller[index].rating,
       ShopItem.shopItemsBestSeller[index].price,
@@ -234,7 +232,7 @@ class _HomePageState extends State<HomePage> {
           ),
           _buildItemContainer(
             ShopItem.shopItemsBestSeller,
-            bestSellerCartIconColors, // Pass the color list for Hats section
+            bestSellerCartIconColors, // Pass the color list for Best Seller section
             handleBestSellerCartIconTap, // Pass the tap handling function
           ),
 /////////////////////////

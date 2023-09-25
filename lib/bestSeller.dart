@@ -114,7 +114,7 @@ class _BestSellerScreenState extends State<BestSellerScreen> {
                 Text(
                   rating.toString(),
                   style: TextStyle(
-                    fontSize: 20, 
+                    fontSize: 20,
                     fontWeight: FontWeight.bold,
                     fontFamily: "Montserrat",
                   ),
@@ -128,7 +128,7 @@ class _BestSellerScreenState extends State<BestSellerScreen> {
               Text(
                 name,
                 style: TextStyle(
-                  fontSize: 20, 
+                  fontSize: 20,
                   fontWeight: FontWeight.bold,
                   fontFamily: "Montserrat",
                 ),
@@ -142,7 +142,7 @@ class _BestSellerScreenState extends State<BestSellerScreen> {
                   Text(
                     "\$" + price.toString(),
                     style: TextStyle(
-                      fontSize: 20, 
+                      fontSize: 20,
                       fontWeight: FontWeight.bold,
                       fontFamily: "Montserrat",
                     ),

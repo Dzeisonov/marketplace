@@ -14,7 +14,7 @@ class _BestSellerPageState extends State<BestSellerPage> {
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.black,
-          title: Text("BestSeller"),
+          title: Text("Best Seller"),
         ),
         backgroundColor: Colors.white,
         body: Padding(
