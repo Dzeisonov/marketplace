@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:elegant_notification/elegant_notification.dart';
+import 'package:elegant_notification/resources/arrays.dart';
 import 'package:flutter/material.dart';
 import 'package:marketplace/cart.dart';
 import 'package:marketplace/data.dart';
@@ -15,7 +17,8 @@ class AccsScreen extends StatefulWidget {
 
 class _AccsScreenState extends State<AccsScreen> {
   late Timer _timer;
-  List<bool> isCartTappedList = List.filled(ShopItem.shopItemsAcc.length, false);
+  List<bool> isCartTappedList =
+      List.filled(ShopItem.shopItemsAcc.length, false);
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +47,8 @@ class _AccsScreenState extends State<AccsScreen> {
         ShopItem item = shopItems.removeAt(0);
         int itemIndex = data.indexOf(item); // Get the index of the item
 
-        rowChildren.add(_buildShopItem(item.imgPath, item.name, item.rating, item.price, itemIndex));
+        rowChildren.add(_buildShopItem(
+            item.imgPath, item.name, item.rating, item.price, itemIndex));
       }
 
       rows.add(
@@ -135,23 +139,42 @@ class _AccsScreenState extends State<AccsScreen> {
                   GestureDetector(
                     onTap: () {
                       setState(() {
-                        isCartTappedList[itemIndex] = true; // Set the tapped state for this button
+                        isCartTappedList[itemIndex] =
+                            true; // Set the tapped state for this button
                       });
-                      CartItem cartItem = CartItem(image, name, rating, price, 1);
-                      final cartProvider = Provider.of<CartProvider>(context, listen: false);
+                      CartItem cartItem =
+                          CartItem(image, name, rating, price, 1);
+                      final cartProvider =
+                          Provider.of<CartProvider>(context, listen: false);
                       cartProvider.addItemToCart(cartItem);
 
                       // Start a timer to reset the color after 1 second
                       _timer = Timer(Duration(milliseconds: 50), () {
                         setState(() {
-                          isCartTappedList[itemIndex] = false; // Reset the tapped state for this button
+                          isCartTappedList[itemIndex] =
+                              false; // Reset the tapped state for this button
                         });
                       });
+                      ElegantNotification(
+                        notificationPosition: NotificationPosition.topCenter,
+                        animation: AnimationType.fromTop,
+                        width: 360,
+                        height: 50,
+                        // title: const Text('Success!'),
+                        description: Text("$name added to cart"),
+                        icon: const Icon(
+                          Icons.check_circle,
+                          color: Colors.black,
+                        ),
+                        progressIndicatorColor: Colors.black,
+                      ).show(context);
                     },
                     child: Container(
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
-                        color: isCartTappedList[itemIndex] ? Colors.grey : Colors.black,
+                        color: isCartTappedList[itemIndex]
+                            ? Colors.grey
+                            : Colors.black,
                       ),
                       padding: EdgeInsets.all(10),
                       child: Icon(

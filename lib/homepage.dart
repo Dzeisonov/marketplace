@@ -1,3 +1,5 @@
+import 'package:elegant_notification/elegant_notification.dart';
+import 'package:elegant_notification/resources/arrays.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:marketplace/accspage.dart';
@@ -47,7 +49,8 @@ class _HomePageState extends State<HomePage> {
   void handleTrendingCartIconTap(int index) {
     // Change the color of the specific shopping cart icon in the Trending section
     setState(() {
-      trendingCartIconColors[index] = Colors.grey; // Change to grey or any color you prefer
+      trendingCartIconColors[index] =
+          Colors.grey; // Change to grey or any color you prefer
     });
 
     // Use a Timer to change the color back to the original color after 1 second
@@ -74,7 +77,8 @@ class _HomePageState extends State<HomePage> {
   void handleHatsCartIconTap(int index) {
     // Change the color of the specific shopping cart icon in the Hats section
     setState(() {
-      hatsCartIconColors[index] = Colors.grey; // Change to grey or any color you prefer
+      hatsCartIconColors[index] =
+          Colors.grey; // Change to grey or any color you prefer
     });
 
     // Use a Timer to change the color back to the original color after 1 second
@@ -97,7 +101,7 @@ class _HomePageState extends State<HomePage> {
     cartProvider.addItemToCart(cartItem);
   }
 
-@override
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
@@ -114,52 +118,52 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
-  // Method to build the search bar
-Widget _buildSearchBar() {
-  OutlineInputBorder outlineInputBorder = OutlineInputBorder(
-    borderRadius: BorderRadius.circular(20.0),
-    borderSide: BorderSide(color: Colors.black),
-  );
 
-  return Container(
-    margin: EdgeInsets.only(left: 15, right: 15, top: 25, bottom: 10),
-    alignment: Alignment.topCenter,
-    child: Column(
-      children: [
-        Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20.0),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withOpacity(0.8),
-                offset: Offset(0, 3),
-                blurRadius: 4,
-                spreadRadius: -1,
-              )
-            ],
-          ),
-          child: TextField(
-            onTap: () {
-              Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (context) => SearchBarA()));
-            },
-            decoration: InputDecoration(
-              fillColor: Colors.white,
-              filled: true,
-              contentPadding:
-                  const EdgeInsets.symmetric(vertical: 10.0, horizontal: 15),
-              hintText: "Search",
-              suffixIcon: const Icon(Icons.search),
-              enabledBorder: outlineInputBorder,
-              focusedBorder: outlineInputBorder,
+  // Method to build the search bar
+  Widget _buildSearchBar() {
+    OutlineInputBorder outlineInputBorder = OutlineInputBorder(
+      borderRadius: BorderRadius.circular(20.0),
+      borderSide: BorderSide(color: Colors.black),
+    );
+
+    return Container(
+      margin: EdgeInsets.only(left: 15, right: 15, top: 25, bottom: 10),
+      alignment: Alignment.topCenter,
+      child: Column(
+        children: [
+          Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(20.0),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.8),
+                  offset: Offset(0, 3),
+                  blurRadius: 4,
+                  spreadRadius: -1,
+                )
+              ],
+            ),
+            child: TextField(
+              onTap: () {
+                Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => SearchBarA()));
+              },
+              decoration: InputDecoration(
+                fillColor: Colors.white,
+                filled: true,
+                contentPadding:
+                    const EdgeInsets.symmetric(vertical: 10.0, horizontal: 15),
+                hintText: "Search",
+                suffixIcon: const Icon(Icons.search),
+                enabledBorder: outlineInputBorder,
+                focusedBorder: outlineInputBorder,
+              ),
             ),
           ),
-        ),
-      ],
-    ),
-  );
-}
-
+        ],
+      ),
+    );
+  }
 
   Widget _buildHomePageUI() {
     return Expanded(
@@ -210,218 +214,215 @@ Widget _buildSearchBar() {
   }
 
   // Method to build the icon list for categories
-Widget _buildIconList() {
-  List<String> categories = [
-    "Category 1",
-    "Category 2",
-    "Category 3",
-    "Category 4",
-    "Category 5",
-  ];
+  Widget _buildIconList() {
+    List<String> categories = [
+      "Category 1",
+      "Category 2",
+      "Category 3",
+      "Category 4",
+      "Category 5",
+    ];
 
-  List<String> categoryImages = [
-    "lib/images/all.png",
-    "lib/images/dress.png",
-    "lib/images/shoe.png",
-    "lib/images/cap.png",
-    "lib/images/necklace.png",
-  ];
+    List<String> categoryImages = [
+      "lib/images/all.png",
+      "lib/images/dress.png",
+      "lib/images/shoe.png",
+      "lib/images/cap.png",
+      "lib/images/necklace.png",
+    ];
 
-  return Container(
-    height: 150,
-    child: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Padding(
-          padding: const EdgeInsets.only(left: 20, top: 10),
-          child: Text(
-            "Categories",
-            style: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ),
-        SingleChildScrollView(
-          scrollDirection: Axis.horizontal,
-          child: Row(
-            children: List.generate(
-              categories.length,
-              (index) {
-                List<String> descriptions = [
-                  "List all",
-                  "Clothes",
-                  "Shoes",
-                  "Hats",
-                  "Accessories",
-                ];
-
-                bool isFirstShape = index == 0;
-
-                return GestureDetector(
-                  onVerticalDragDown: (_) {
-                    setState(() {});
-                  },
-                  onVerticalDragEnd: (_) {
-                    setState(() {});
-                  },
-                  onTap: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) {
-                          switch (categories[index]) {
-                            case "Category 1":
-                              return AllPage();
-                            case "Category 2":
-                              return ClothesPage();
-                            case "Category 3":
-                              return ShoesPage();
-                            case "Category 4":
-                              return HatsPage();
-                            case "Category 5":
-                              return AccsPage();
-                            default:
-                              return AllPage();
-                          }
-                        },
-                      ),
-                    );
-                  },
-                  child: Padding(
-                    padding: EdgeInsets.only(left: 15.0, top: 10.0),
-                    child: Column(
-                      children: [
-                        Container(
-                          width: 77,
-                          height: 80,
-                          decoration: BoxDecoration(
-                            shape: isFirstShape
-                                ? BoxShape.circle
-                                : BoxShape.rectangle,
-                            borderRadius: isFirstShape
-                                ? null
-                                : BorderRadius.circular(12.0),
-                            color: Colors.white,
-                          ),
-                          child: Center(
-                            child: Image.asset(
-                              categoryImages[index],
-                              width: 80,
-                              height: 80,
-                            ),
-                          ),
-                        ),
-                        SizedBox(height: 1),
-                        Text(
-                          descriptions[index],
-                          style: TextStyle(
-                            fontSize: 12,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                );
-              },
-            ),
-          ),
-        ),
-      ],
-    ),
-  );
-}
-
-// Method to build the carousel slider
-Widget _buildCarouselSlide() {
-  final imageAssets = [
-    "lib/images/adds/offer1.jpg",
-    "lib/images/adds/offer2.jpg",
-    "lib/images/adds/offer3.jpg",
-  ];
-
-  double screenWidth = MediaQuery.of(context).size.width;
-  double widths = screenWidth - 30;
-  double heights = screenWidth * 8 / 18;
-
-  return Container(
-    margin: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-    width: widths,
-    height: heights,
-    child: CarouselSlider.builder(
-      itemCount: imageAssets.length,
-      options: CarouselOptions(
-        autoPlay: true,
-        viewportFraction: 1.0,
-      ),
-      itemBuilder: (context, index, realIndex) {
-        final imageAsset = imageAssets[index];
-
-        return Container(
-          width: widths,
-          height: heights,
-          child: Image.asset(
-            imageAsset,
-            fit: BoxFit.cover,
-          ),
-        );
-      },
-    ),
-  );
-}
-
-// Method to build the item category with "See more" link
-Widget _buildItemCategory(
-  String title,
-  Function() onTapCallback,
-) {
-  return Container(
-    margin: EdgeInsets.symmetric(horizontal: 15),
-    alignment: Alignment.center,
-    child: Column(children: [
-      Row(
+    return Container(
+      height: 150,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Align(
-            alignment: Alignment.topLeft,
+          Padding(
+            padding: const EdgeInsets.only(left: 20, top: 10),
             child: Text(
-              title,
+              "Categories",
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
               ),
             ),
           ),
-          Spacer(),
-          Align(
-            alignment: Alignment.topRight,
-            child: GestureDetector(
-              onTap: onTapCallback,
-              child: Row(
-                children: [
-                  Text("See more",
-                      style: TextStyle(fontSize: 16, color: Colors.black)),
-                  SizedBox(
-                    width: 5,
-                  ),
-                  Text(">",
-                      style: TextStyle(
-                          fontSize: 18,
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold))
-                ],
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              children: List.generate(
+                categories.length,
+                (index) {
+                  List<String> descriptions = [
+                    "List all",
+                    "Clothes",
+                    "Shoes",
+                    "Hats",
+                    "Accessories",
+                  ];
+
+                  bool isFirstShape = index == 0;
+
+                  return GestureDetector(
+                    onVerticalDragDown: (_) {
+                      setState(() {});
+                    },
+                    onVerticalDragEnd: (_) {
+                      setState(() {});
+                    },
+                    onTap: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) {
+                            switch (categories[index]) {
+                              case "Category 1":
+                                return AllPage();
+                              case "Category 2":
+                                return ClothesPage();
+                              case "Category 3":
+                                return ShoesPage();
+                              case "Category 4":
+                                return HatsPage();
+                              case "Category 5":
+                                return AccsPage();
+                              default:
+                                return AllPage();
+                            }
+                          },
+                        ),
+                      );
+                    },
+                    child: Padding(
+                      padding: EdgeInsets.only(left: 15.0, top: 10.0),
+                      child: Column(
+                        children: [
+                          Container(
+                            width: 77,
+                            height: 80,
+                            decoration: BoxDecoration(
+                              shape: isFirstShape
+                                  ? BoxShape.circle
+                                  : BoxShape.rectangle,
+                              borderRadius: isFirstShape
+                                  ? null
+                                  : BorderRadius.circular(12.0),
+                              color: Colors.white,
+                            ),
+                            child: Center(
+                              child: Image.asset(
+                                categoryImages[index],
+                                width: 80,
+                                height: 80,
+                              ),
+                            ),
+                          ),
+                          SizedBox(height: 1),
+                          Text(
+                            descriptions[index],
+                            style: TextStyle(
+                              fontSize: 12,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  );
+                },
               ),
             ),
           ),
         ],
       ),
-    ]),
-  );
-}
+    );
+  }
 
+// Method to build the carousel slider
+  Widget _buildCarouselSlide() {
+    final imageAssets = [
+      "lib/images/adds/offer1.jpg",
+      "lib/images/adds/offer2.jpg",
+      "lib/images/adds/offer3.jpg",
+    ];
 
+    double screenWidth = MediaQuery.of(context).size.width;
+    double widths = screenWidth - 30;
+    double heights = screenWidth * 8 / 18;
 
+    return Container(
+      margin: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+      width: widths,
+      height: heights,
+      child: CarouselSlider.builder(
+        itemCount: imageAssets.length,
+        options: CarouselOptions(
+          autoPlay: true,
+          viewportFraction: 1.0,
+        ),
+        itemBuilder: (context, index, realIndex) {
+          final imageAsset = imageAssets[index];
 
+          return Container(
+            width: widths,
+            height: heights,
+            child: Image.asset(
+              imageAsset,
+              fit: BoxFit.cover,
+            ),
+          );
+        },
+      ),
+    );
+  }
 
-    Widget _buildItemContainer(List<ShopItem> data, List<Color> cartIconColors, Function(int) onTapCallback) {
+// Method to build the item category with "See more" link
+  Widget _buildItemCategory(
+    String title,
+    Function() onTapCallback,
+  ) {
+    return Container(
+      margin: EdgeInsets.symmetric(horizontal: 15),
+      alignment: Alignment.center,
+      child: Column(children: [
+        Row(
+          children: [
+            Align(
+              alignment: Alignment.topLeft,
+              child: Text(
+                title,
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+            Spacer(),
+            Align(
+              alignment: Alignment.topRight,
+              child: GestureDetector(
+                onTap: onTapCallback,
+                child: Row(
+                  children: [
+                    Text("See more",
+                        style: TextStyle(fontSize: 16, color: Colors.black)),
+                    SizedBox(
+                      width: 5,
+                    ),
+                    Text(">",
+                        style: TextStyle(
+                            fontSize: 18,
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold))
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+      ]),
+    );
+  }
+
+  Widget _buildItemContainer(List<ShopItem> data, List<Color> cartIconColors,
+      Function(int) onTapCallback) {
     double screenWidth = MediaQuery.of(context).size.width;
     double containerWidth = screenWidth * 0.016;
 
@@ -434,8 +435,8 @@ Widget _buildItemCategory(
       while (shopItems.isNotEmpty) {
         ShopItem item = shopItems.removeAt(0);
         int index = rows.length + rowChildren.length;
-        rowChildren.add(_buildShopItem(
-            item.imgPath, item.name, item.rating, item.price, index, cartIconColors[index], onTapCallback));
+        rowChildren.add(_buildShopItem(item.imgPath, item.name, item.rating,
+            item.price, index, cartIconColors[index], onTapCallback));
       }
 
       rows.add(
@@ -457,8 +458,8 @@ Widget _buildItemCategory(
   }
 
   // Method to build a shop item widget
-  Widget _buildShopItem(
-      String image, String name, double rating, double price, int index, Color iconColor, Function(int) onTapCallback) {
+  Widget _buildShopItem(String image, String name, double rating, double price,
+      int index, Color iconColor, Function(int) onTapCallback) {
     return Container(
       margin: EdgeInsets.symmetric(
         horizontal: 10,
@@ -540,6 +541,19 @@ Widget _buildItemCategory(
                     onTap: () {
                       // Call the function to handle the tap and pass the index
                       onTapCallback(index);
+                      ElegantNotification(
+                        notificationPosition: NotificationPosition.topCenter,
+                        animation: AnimationType.fromTop,
+                        width: 360,
+                        height: 50,
+                        // title: const Text('Success!'),
+                        description: Text("$name added to cart"),
+                        icon: const Icon(
+                          Icons.check_circle,
+                          color: Colors.black,
+                        ),
+                        progressIndicatorColor: Colors.black,
+                      ).show(context);
                     },
                     child: Container(
                       decoration: BoxDecoration(
