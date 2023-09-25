@@ -127,6 +127,9 @@ class TabBarExample extends StatelessWidget {
                   contentPadding: const EdgeInsets.symmetric(
                       vertical: 10.0, horizontal: 15),
                   hintText: "Search",
+                  hintStyle: TextStyle(
+                    fontFamily: "Montserrat",
+                  ),
                   suffixIcon: const Icon(Icons.search),
                   enabledBorder: outlineInputBorder,
                   focusedBorder: outlineInputBorder,
@@ -159,7 +162,10 @@ class TabBarExample extends StatelessWidget {
           )),
       child: Text(
         tab,
-        style: TextStyle(color: Colors.black),
+        style: TextStyle(
+          color: Colors.black,
+          fontFamily: "Montserrat",
+        ),
       ),
     );
   }

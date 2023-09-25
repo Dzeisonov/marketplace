@@ -113,7 +113,11 @@ class _AccsScreenState extends State<AccsScreen> {
                 SizedBox(width: 2),
                 Text(
                   rating.toString(),
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                    fontSize: 20, 
+                    fontWeight: FontWeight.bold,
+                    fontFamily: "Montserrat",
+                  ),
                 )
               ],
             ),
@@ -123,7 +127,11 @@ class _AccsScreenState extends State<AccsScreen> {
             Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
               Text(
                 name,
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                style: TextStyle(
+                  fontSize: 20, 
+                  fontWeight: FontWeight.bold,
+                  fontFamily: "Montserrat",
+                ),
               ),
             ]),
             SizedBox(height: 10),
@@ -133,7 +141,11 @@ class _AccsScreenState extends State<AccsScreen> {
                 children: [
                   Text(
                     "\$" + price.toString(),
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    style: TextStyle(
+                      fontSize: 20, 
+                      fontWeight: FontWeight.bold,
+                      fontFamily: "Montserrat",
+                    ),
                   ),
                   Spacer(),
                   GestureDetector(

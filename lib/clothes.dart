@@ -113,7 +113,11 @@ class _ClothesScreenState extends State<ClothesScreen> {
                 SizedBox(width: 2),
                 Text(
                   rating.toString(),
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                    fontSize: 20, 
+                    fontWeight: FontWeight.bold,
+                    fontFamily: "Montserrat",
+                  ),
                 )
               ],
             ),
@@ -123,7 +127,11 @@ class _ClothesScreenState extends State<ClothesScreen> {
             Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
               Text(
                 name,
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                style: TextStyle(
+                  fontSize: 20, 
+                  fontWeight: FontWeight.bold,
+                  fontFamily: "Montserrat",
+                ),
               ),
             ]),
             SizedBox(height: 10),
