@@ -150,7 +150,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
   void _navigateToProfileScreen() {
     Navigator.push(context, MaterialPageRoute(builder: (_) {
-      return ProfileScreen();
+      return EditProfileScreen();
     }));
   }
 
