@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:marketplace/editprofile.dart';
 import 'package:marketplace/payments.dart';
+import 'package:marketplace/screens/login/login.dart';
 import 'package:marketplace/settings.dart';
 import 'package:marketplace/login.dart';
 
@@ -130,7 +131,8 @@ class _ProfilePageState extends State<ProfilePage> {
                 trailing: Icon(
                   Icons.logout,
                   color: Colors.red,
-                  size: 24,),
+                  size: 24,
+                ),
                 onTap: () {
                   _logOut();
                 },
@@ -165,6 +167,8 @@ class _ProfilePageState extends State<ProfilePage> {
   }
 
   void _logOut() {
-   // Belum saya tambahkan.. sabar ya
+    Navigator.push(context, MaterialPageRoute(builder: (_) {
+      return LogInScreen();
+    }));
   }
 }
