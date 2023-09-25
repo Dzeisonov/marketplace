@@ -14,127 +14,108 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.blueGrey[100], // Ganti warna latar belakang dengan yang sesuai.
       body: SafeArea(
-        child: Container(
-          alignment: Alignment.centerLeft,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
+                  CircleAvatar(
+                    radius: 80,
+                    backgroundImage: AssetImage('lib/images/profile.png'), 
+                  ),
+                  SizedBox(height: 10),
+                  Text(
+                    "Manière",
+                    style: TextStyle(
+                      fontSize: 28,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  Text(
+                    "maniere@gmail.com",
+                    style: TextStyle(fontSize: 16),
+                  ),
+                  Text(
+                    "+62xxxxxxxxxxx",
+                    style: TextStyle(fontSize: 16),
+                  ),
+                  SizedBox(height: 10),
                   Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      SizedBox(height: 15),
-                      _buildProfileIcon("lib/images/profile.png"),
+                      Text(
+                        "Followers 0",
+                        style: TextStyle(fontSize: 14),
+                      ),
+                      SizedBox(width: 10),
+                      Text(
+                        "Following 0",
+                        style: TextStyle(fontSize: 14),
+                      ),
                     ],
                   ),
-                  SizedBox(width: 25),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      SizedBox(height: 45),
-                      Text(
-                        "Manière",
-                        style: TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      SizedBox(height: 15),
-                      Text(
-                        "maniere@gmail.com",
-                        style: TextStyle(fontSize: 14),
-                      ),
-                      SizedBox(height: 2),
-                      Text(
-                        "+62xxxxxxxxxxx",
-                        style: TextStyle(fontSize: 14),
-                      ),
-                      SizedBox(height: 2),
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "Followers 0",
-                            style: TextStyle(fontSize: 12),
-                          ),
-                          SizedBox(width: 5),
-                          Text(
-                            "Following 0",
-                            style: TextStyle(fontSize: 12),
-                          ),
-                        ],
-                      ),
-                    ],
-                  )
                 ],
               ),
-              SizedBox(height: 20),
-              _buildMenuItem("Edit Profile", () {
-                // Customize this part to navigate to your ProfileScreen.
-                Navigator.push(context, MaterialPageRoute(builder: (_) {
-                  return ProfileScreen(); // Replace with your ProfileScreen widget.
-                }));
-              }),
-              _buildDivider(10, 10),
-              _buildMenuItem("Payments", () {
-                // Customize this part to navigate to your ProfileScreen.
-                Navigator.push(context, MaterialPageRoute(builder: (_) {
-                  return PaymentsScreen(); // Replace with your ProfileScreen widget.
-                }));
-              }),
-              _buildDivider(10, 10),
-              _buildMenuItem("Settings", () {
-                // Customize this part to navigate to your ProfileScreen.
-                Navigator.push(context, MaterialPageRoute(builder: (_) {
-                  return SettingsScreen(); // Replace with your ProfileScreen widget.
-                }));
-              }),
-            ],
-          ),
+            ),
+            Divider(
+              thickness: 2,
+              color: Colors.black,
+            ),
+            ListTile(
+              title: Text("Edit Profile", style: TextStyle(fontSize: 18)),
+              trailing: Icon(Icons.edit),
+              onTap: () {
+                _navigateToProfileScreen();
+              },
+            ),
+            Divider(
+              thickness: 2,
+              color: Colors.black,
+            ),
+            ListTile(
+              title: Text("Payments", style: TextStyle(fontSize: 18)),
+              trailing: Icon(Icons.payment),
+              onTap: () {
+                _navigateToPaymentsScreen();
+              },
+            ),
+            Divider(
+              thickness: 2,
+              color: Colors.black,
+            ),
+            ListTile(
+              title: Text("Settings", style: TextStyle(fontSize: 18)),
+              trailing: Icon(Icons.settings),
+              onTap: () {
+                _navigateToSettingsScreen();
+              },
+            ),
+          ],
         ),
       ),
     );
   }
 
-  Widget _buildProfileIcon(String path) {
-    return Container(
-      padding: EdgeInsets.only(top: 25, left: 25),
-      alignment: Alignment.center,
-      child: CircleAvatar(
-        radius: 60,
-        backgroundImage: AssetImage(path),
-      ),
-    );
+  void _navigateToProfileScreen() {
+    Navigator.push(context, MaterialPageRoute(builder: (_) {
+      return ProfileScreen();
+    }));
   }
 
-  Widget _buildMenuItem(String text, VoidCallback onTap) {
-    return GestureDetector(
-      onTap: onTap, // Specify the callback to be called when tapped.
-      child: Container(
-        color: Colors.white, // Background color
-        padding: EdgeInsets.all(8.0), // Adjust padding as needed
-        child: Text(
-          text,
-          style: TextStyle(
-            fontSize: 20, // Text size
-            color: Colors.black, // Text color
-          ),
-        ),
-      ),
-    );
+  void _navigateToPaymentsScreen() {
+    Navigator.push(context, MaterialPageRoute(builder: (_) {
+      return PaymentsScreen();
+    }));
   }
 
-  Widget _buildDivider(double indent, double endIndent) {
-    return Divider(
-      height: 1,
-      thickness: 2,
-      color: Colors.black,
-      indent: indent, // Customize the space before the divider
-      endIndent: endIndent, // Customize the space after the divider
-    );
+  void _navigateToSettingsScreen() {
+    Navigator.push(context, MaterialPageRoute(builder: (_) {
+      return SettingsScreen(); 
+    }));
   }
 }
