@@ -21,8 +21,57 @@ class _ProfilePageState extends State<ProfilePage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(height: 15),
-              _buildProfileIcon("lib/images/profile.png"),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(height: 15),
+                      _buildProfileIcon("lib/images/profile.png"),
+                    ],
+                  ),
+                  SizedBox(width: 25),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(height: 45),
+                      Text(
+                        "Manière",
+                        style: TextStyle(
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      SizedBox(height: 15),
+                      Text(
+                        "maniere@gmail.com",
+                        style: TextStyle(fontSize: 14),
+                      ),
+                      SizedBox(height: 2),
+                      Text(
+                        "+62xxxxxxxxxxx",
+                        style: TextStyle(fontSize: 14),
+                      ),
+                      SizedBox(height: 2),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Followers 0",
+                            style: TextStyle(fontSize: 12),
+                          ),
+                          SizedBox(width: 5),
+                          Text(
+                            "Following 0",
+                            style: TextStyle(fontSize: 12),
+                          ),
+                        ],
+                      ),
+                    ],
+                  )
+                ],
+              ),
               SizedBox(height: 20),
               _buildMenuItem("Edit Profile", () {
                 // Customize this part to navigate to your ProfileScreen.
@@ -53,6 +102,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
   Widget _buildProfileIcon(String path) {
     return Container(
+      padding: EdgeInsets.only(top: 25, left: 25),
       alignment: Alignment.center,
       child: CircleAvatar(
         radius: 60,
