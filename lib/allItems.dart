@@ -1,3 +1,5 @@
+import 'package:elegant_notification/elegant_notification.dart';
+import 'package:elegant_notification/resources/arrays.dart';
 import 'package:flutter/material.dart';
 import 'package:marketplace/cart.dart';
 import 'package:marketplace/data.dart';
@@ -74,7 +76,8 @@ class _AllScreenState extends State<AllScreen> {
 
         ShopItem item = categoryItems[colIndex];
         rowChildren.add(
-          _buildShopItem(linearIndex, item.imgPath, item.name, item.rating, item.price), // Pass the linearIndex
+          _buildShopItem(linearIndex, item.imgPath, item.name, item.rating,
+              item.price), // Pass the linearIndex
         );
 
         itemsInCurrentRow++; // Increment the count of items in the current row
@@ -182,24 +185,43 @@ class _AllScreenState extends State<AllScreen> {
                     onTap: () {
                       setState(() {
                         // Change the color when tapped based on the index
-                        cartCircleColors[index] = Colors.grey; // Replace with your desired color
+                        cartCircleColors[index] =
+                            Colors.grey; // Replace with your desired color
                       });
 
-                      CartItem cartItem = CartItem(image, name, rating, price, 1);
-                      final cartProvider = Provider.of<CartProvider>(context, listen: false);
+                      CartItem cartItem =
+                          CartItem(image, name, rating, price, 1);
+                      final cartProvider =
+                          Provider.of<CartProvider>(context, listen: false);
                       cartProvider.addItemToCart(cartItem);
 
                       // Revert the color change after 0.05 seconds
                       Future.delayed(Duration(milliseconds: 50), () {
                         setState(() {
-                          cartCircleColors[index] = Colors.black; // Revert to the default color
+                          cartCircleColors[index] =
+                              Colors.black; // Revert to the default color
                         });
                       });
+
+                      ElegantNotification(
+                        notificationPosition: NotificationPosition.topCenter,
+                        animation: AnimationType.fromTop,
+                        width: 360,
+                        height: 50,
+                        // title: const Text('Success!'),
+                        description: Text("$name added to cart"),
+                        icon: const Icon(
+                          Icons.check_circle,
+                          color: Colors.black,
+                        ),
+                        progressIndicatorColor: Colors.black,
+                      ).show(context);
                     },
                     child: Container(
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
-                        color: cartCircleColors[index], // Set the color based on the index
+                        color: cartCircleColors[
+                            index], // Set the color based on the index
                       ),
                       padding: EdgeInsets.all(10),
                       child: Icon(

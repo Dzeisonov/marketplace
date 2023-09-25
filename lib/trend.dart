@@ -1,3 +1,5 @@
+import 'package:elegant_notification/elegant_notification.dart';
+import 'package:elegant_notification/resources/arrays.dart';
 import 'package:flutter/material.dart';
 import 'package:marketplace/cart.dart';
 import 'package:marketplace/constants.dart';
@@ -119,7 +121,7 @@ class _TrendScreenState extends State<TrendScreen> {
               Text(
                 name,
                 style: TextStyle(
-                  fontSize: 20, 
+                  fontSize: 20,
                   fontWeight: FontWeight.bold,
                   color: kProductTextColor,
                 ),
@@ -133,7 +135,7 @@ class _TrendScreenState extends State<TrendScreen> {
                   Text(
                     "\$" + price.toString(),
                     style: TextStyle(
-                      fontSize: 20, 
+                      fontSize: 20,
                       fontWeight: FontWeight.bold,
                       color: kProductTextColor,
                     ),
@@ -146,6 +148,20 @@ class _TrendScreenState extends State<TrendScreen> {
                       final cartProvider =
                           Provider.of<CartProvider>(context, listen: false);
                       cartProvider.addItemToCart(cartItem);
+
+                      ElegantNotification(
+                        notificationPosition: NotificationPosition.topCenter,
+                        animation: AnimationType.fromTop,
+                        width: 360,
+                        height: 50,
+                        // title: const Text('Success!'),
+                        description: Text("$name added to cart"),
+                        icon: const Icon(
+                          Icons.check_circle,
+                          color: Colors.black,
+                        ),
+                        progressIndicatorColor: Colors.black,
+                      ).show(context);
                     },
                     child: Container(
                       decoration: BoxDecoration(

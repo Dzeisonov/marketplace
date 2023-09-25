@@ -14,37 +14,41 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.white,
-        body: Container(
-            alignment: Alignment.centerLeft,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(height: 15),
-                _buildProfileIcon("lib/images/profile.png"),
-                SizedBox(height: 20),
-                _buildMenuItem("Edit Profile", () {
-                  // Customize this part to navigate to your ProfileScreen.
-                  Navigator.push(context, MaterialPageRoute(builder: (_) {
-                    return ProfileScreen(); // Replace with your ProfileScreen widget.
-                  }));
-                }),
-                _buildDivider(10, 10),
-                _buildMenuItem("Payments", () {
-                  // Customize this part to navigate to your ProfileScreen.
-                  Navigator.push(context, MaterialPageRoute(builder: (_) {
-                    return PaymentsScreen(); // Replace with your ProfileScreen widget.
-                  }));
-                }),
-                _buildDivider(10, 10),
-                _buildMenuItem("Settings", () {
-                  // Customize this part to navigate to your ProfileScreen.
-                  Navigator.push(context, MaterialPageRoute(builder: (_) {
-                    return SettingsScreen(); // Replace with your ProfileScreen widget.
-                  }));
-                }),
-              ],
-            )));
+      backgroundColor: Colors.white,
+      body: SafeArea(
+        child: Container(
+          alignment: Alignment.centerLeft,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(height: 15),
+              _buildProfileIcon("lib/images/profile.png"),
+              SizedBox(height: 20),
+              _buildMenuItem("Edit Profile", () {
+                // Customize this part to navigate to your ProfileScreen.
+                Navigator.push(context, MaterialPageRoute(builder: (_) {
+                  return ProfileScreen(); // Replace with your ProfileScreen widget.
+                }));
+              }),
+              _buildDivider(10, 10),
+              _buildMenuItem("Payments", () {
+                // Customize this part to navigate to your ProfileScreen.
+                Navigator.push(context, MaterialPageRoute(builder: (_) {
+                  return PaymentsScreen(); // Replace with your ProfileScreen widget.
+                }));
+              }),
+              _buildDivider(10, 10),
+              _buildMenuItem("Settings", () {
+                // Customize this part to navigate to your ProfileScreen.
+                Navigator.push(context, MaterialPageRoute(builder: (_) {
+                  return SettingsScreen(); // Replace with your ProfileScreen widget.
+                }));
+              }),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 
   Widget _buildProfileIcon(String path) {
