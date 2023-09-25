@@ -97,17 +97,19 @@ class _HomePageState extends State<HomePage> {
     cartProvider.addItemToCart(cartItem);
   }
 
-  @override
+@override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: Container(
-        child: Column(
-          children: [
-            SizedBox(height: 10),
-            _buildSearchBar(),
-            _buildHomePageUI(),
-          ],
+      body: SafeArea(
+        child: Container(
+          child: Column(
+            children: [
+              SizedBox(height: 10),
+              _buildSearchBar(),
+              _buildHomePageUI(),
+            ],
+          ),
         ),
       ),
     );

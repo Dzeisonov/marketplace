@@ -20,27 +20,29 @@ class _CartPageState extends State<CartPage> {
 
     return Scaffold(
       backgroundColor: Colors.white,
-      body: Padding(
-        padding: const EdgeInsets.only(top: 20, bottom: 25),
-        child: Align(
-            alignment: Alignment.topCenter,
-            child: cartItems.isEmpty
-                ? Center(
-                    child: Text(
-                      "Your cart is empty",
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.only(top: 20, bottom: 25),
+          child: Align(
+              alignment: Alignment.topCenter,
+              child: cartItems.isEmpty
+                  ? Center(
+                      child: Text(
+                        "Your cart is empty",
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
-                    ),
-                  )
-                : ListView.builder(
-                    itemCount: cartItems.length,
-                    itemBuilder: (context, index) {
-                      final cartItem = cartItems[index];
-                      return _buildCartItem(cartItem);
-                    },
-                  )),
+                    )
+                  : ListView.builder(
+                      itemCount: cartItems.length,
+                      itemBuilder: (context, index) {
+                        final cartItem = cartItems[index];
+                        return _buildCartItem(cartItem);
+                      },
+                    )),
+        ),
       ),
     );
   }
