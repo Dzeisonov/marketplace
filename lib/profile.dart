@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:marketplace/editprofile.dart';
 import 'package:marketplace/payments.dart';
 import 'package:marketplace/screens/login/login.dart';
+import 'package:marketplace/screens/loginsuccess/loginscs.dart';
+import 'package:marketplace/screens/splash/splash_screen.dart';
 import 'package:marketplace/settings.dart';
 import 'package:marketplace/login.dart';
 
@@ -168,7 +170,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
   void _logOut() {
     Navigator.push(context, MaterialPageRoute(builder: (_) {
-      return LogInScreen();
+      return SplashScreen();
     }));
   }
 }

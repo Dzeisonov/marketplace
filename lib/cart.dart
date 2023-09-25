@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:marketplace/components/default_button_black.dart';
 import 'package:marketplace/provider.dart';
 import 'package:provider/provider.dart';
 
@@ -19,32 +20,39 @@ class _CartPageState extends State<CartPage> {
     final cartItems = cartProvider.cartItems;
 
     return Scaffold(
-      backgroundColor: Colors.white,
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.only(top: 20, bottom: 25),
-          child: Align(
-              alignment: Alignment.topCenter,
-              child: cartItems.isEmpty
-                  ? Center(
-                      child: Text(
-                        "Your cart is empty",
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    )
-                  : ListView.builder(
-                      itemCount: cartItems.length,
-                      itemBuilder: (context, index) {
-                        final cartItem = cartItems[index];
-                        return _buildCartItem(cartItem);
-                      },
-                    )),
-        ),
-      ),
-    );
+        backgroundColor: Colors.white,
+        body: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.only(top: 20),
+            child: Column(
+              children: [
+                Flexible(
+                  child: Align(
+                    alignment: Alignment.topCenter,
+                    child: cartItems.isEmpty
+                        ? Center(
+                            child: Text(
+                              "Your cart is empty",
+                              style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          )
+                        : ListView.builder(
+                            itemCount: cartItems.length,
+                            itemBuilder: (context, index) {
+                              final cartItem = cartItems[index];
+                              return _buildCartItem(cartItem);
+                            },
+                          ),
+                  ),
+                ),
+                _priceAndContinue(cartItems),
+              ],
+            ),
+          ),
+        ));
   }
 
   Widget _buildCartItem(CartItem item) {
@@ -197,6 +205,72 @@ class _CartPageState extends State<CartPage> {
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget _priceAndContinue(List<CartItem> cartItems) {
+    double totalPrice = 0;
+
+    for (var item in cartItems) {
+      totalPrice += item.price * item.amount;
+    }
+
+    return Container(
+      width: 400,
+      height: 110,
+      child: Stack(
+        children: [
+          Positioned(
+            left: 0,
+            top: 0,
+            child: Container(
+              width: 394,
+              height: 110,
+              decoration: ShapeDecoration(
+                color: Color(0xFFD9D9D9),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(40),
+                    topRight: Radius.circular(40),
+                  ),
+                ),
+              ),
+            ),
+          ),
+          Positioned(
+            left: 226,
+            top: 17,
+            child: Container(
+              width: 400,
+              height: 18,
+              child: Stack(
+                children: [
+                  Positioned(
+                    left: 0,
+                    top: 0,
+                    child: SizedBox(
+                        width: 180,
+                        height: 18,
+                        child: Text(
+                          'Total Price: \$${totalPrice.toStringAsFixed(2)}',
+                          style: TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        )),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          Positioned(
+            left: 18,
+            top: 52,
+            child:
+                DefaultButtonBlack(width: 343, text: "Continue", press: () {}),
+          ),
+        ],
       ),
     );
   }
