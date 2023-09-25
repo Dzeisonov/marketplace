@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+
 
 class EditProfileScreen extends StatefulWidget {
   EditProfileScreen({Key? key}) : super(key: key);
@@ -8,6 +10,16 @@ class EditProfileScreen extends StatefulWidget {
 }
 
 class _EditProfileScreenState extends State<EditProfileScreen> {
+  void _showToast(String message) {
+    Fluttertoast.showToast(
+      msg: message,
+      toastLength: Toast.LENGTH_SHORT,
+      gravity: ToastGravity.BOTTOM,
+      backgroundColor: Colors.black,
+      textColor: Colors.white,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,7 +29,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       ),
       backgroundColor: Colors.white,
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.symmetric(horizontal: 24.0),
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -48,7 +60,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         TextFormField(
           style: TextStyle(fontSize: 18),
           decoration: InputDecoration(
-            labelText: label, // Label di atas input
+            labelText: label, 
             border: OutlineInputBorder(),
           ),
         ),
@@ -58,19 +70,66 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   }
 
   Widget _buildProfileIcon(String path) {
-  return Container(
-    margin: EdgeInsets.all(10.0), 
-    padding: EdgeInsets.all(4.0),  
-    decoration: BoxDecoration(
-      shape: BoxShape.circle,
-      border: Border.all(
-        color: Color.fromARGB(255, 226, 222, 222), 
-        width: 4.0, 
+  return GestureDetector(
+    onTap: () {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text("Profile Photo"),
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                ListTile(
+                  leading: Icon(Icons.camera),
+                  title: Text("Take a Photo"),
+                  onTap: () {
+                    Navigator.pop(context); 
+                  },
+                ),
+                ListTile(
+                  leading: Icon(Icons.photo),
+                  title: Text("Choose from Gallery"),
+                  onTap: () {
+                    Navigator.pop(context); 
+                  },
+                ),
+              ],
+            ),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(context); 
+                },
+                child: Text("Cancel"),
+              ),
+            ],
+          );
+        },
+      );
+    },
+    child: Container(
+      margin: EdgeInsets.all(10.0),
+      padding: EdgeInsets.all(4.0),
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        border: Border.all(
+          color: const Color.fromARGB(255, 204, 204, 204),
+          width: 4.0,
+        ),
       ),
-    ),
-    child: CircleAvatar(
-      radius: 60,
-      backgroundImage: AssetImage(path),
+      child: CircleAvatar(
+        radius: 60,
+        backgroundImage: AssetImage(path),
+        child: Center(
+          // Icon + untuk ubah foto profil (ambil foto baru atau pilih dari galeri)
+          child: Icon(
+            Icons.add,
+            size: 60, 
+            color: Colors.grey, 
+          ),
+        ),
+      ),
     ),
   );
 }
@@ -79,7 +138,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     return Center(
       child: ElevatedButton(
         onPressed: () {
-          // Implement logic to save changes here
+          _showToast("Data saved successfully");
         },
         style: ElevatedButton.styleFrom(
           primary: Colors.black,

@@ -43,6 +43,7 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  fluttertoast: ^8.0.8
   # run flutter pub get and flutter pub run flutter_native_splash:create
   flutter_native_splash: ^2.3.2
   # run flutter pub get and flutter pub run flutter_launcher_icons:main
