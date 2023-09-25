@@ -46,6 +46,13 @@ class ShopItem {
     ShopItem("lib/images/clothes/accs/ACC5.jpg", "Acc5", 9.5, 3.99),
     ShopItem("lib/images/clothes/accs/ACC6.jpg", "Acc6", 9.5, 3.99),
   ];
+  static List<ShopItem> shopItemsBestSeller = [
+    ShopItem("lib/images/clothes/shoes/SHOES4.jpg", "Shoes4", 9.5, 3.99),
+    ShopItem("lib/images/clothes/accs/ACC5.jpg", "Acc5", 9.5, 3.99),
+    ShopItem("lib/images/clothes/clothes/SHIRT1.jpg", "Clothes1", 9.5, 3.99),
+    ShopItem("lib/images/clothes/clothes/SHIRT2.jpg", "Clothes2", 9.5, 3.99),
+
+  ];
   static List<List<ShopItem>> combinedList = [
     shopItemsAcc,
     shopItemsClothes,

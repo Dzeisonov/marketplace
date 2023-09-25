@@ -2,6 +2,7 @@ import 'package:elegant_notification/elegant_notification.dart';
 import 'package:elegant_notification/resources/arrays.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:marketplace/bestSellerPage.dart';
 import 'package:marketplace/accspage.dart';
 import 'package:marketplace/allItemsPage.dart';
 import 'package:marketplace/cart.dart';
@@ -29,7 +30,9 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   // Create separate lists of color variables for each section
   List<Color> trendingCartIconColors = [];
-  List<Color> hatsCartIconColors = [];
+  List<Color> bestSellerCartIconColors = [];
+
+  List<Color> shoesCartIconColors = [];
 
   @override
   void initState() {
@@ -39,9 +42,13 @@ class _HomePageState extends State<HomePage> {
       ShopItem.shopItemsTrend.length,
       (index) => Colors.black, // Initialize all to black for Trending section
     );
-    hatsCartIconColors = List.generate(
-      ShopItem.shopItemsHats.length,
+    bestSellerCartIconColors = List.generate(
+      ShopItem.shopItemsBestSeller.length,
       (index) => Colors.black, // Initialize all to black for Hats section
+    );
+    shoesCartIconColors = List.generate(
+      ShopItem.shopItemsShoes.length,
+      (index) => Colors.black, // Initialize all to black for shoes section
     );
   }
 
@@ -72,28 +79,50 @@ class _HomePageState extends State<HomePage> {
     final cartProvider = Provider.of<CartProvider>(context, listen: false);
     cartProvider.addItemToCart(cartItem);
   }
-
-  // Function to handle the shopping cart icon tap for Hats section
-  void handleHatsCartIconTap(int index) {
-    // Change the color of the specific shopping cart icon in the Hats section
+  
+  
+  void handleShoesCartIconTap(int index) {
     setState(() {
-      hatsCartIconColors[index] =
-          Colors.grey; // Change to grey or any color you prefer
+      shoesCartIconColors[index] =
+          Colors.grey;
     });
 
-    // Use a Timer to change the color back to the original color after 1 second
     Timer(Duration(milliseconds: 50), () {
       setState(() {
-        hatsCartIconColors[index] = Colors.black; // Change it back to black
+        shoesCartIconColors[index] = Colors.black;
+      });
+    });
+
+    CartItem cartItem = CartItem(
+      ShopItem.shopItemsShoes[index].imgPath,
+      ShopItem.shopItemsShoes[index].name,
+      ShopItem.shopItemsShoes[index].rating,
+      ShopItem.shopItemsShoes[index].price,
+      1,
+    );
+
+    final cartProvider = Provider.of<CartProvider>(context, listen: false);
+    cartProvider.addItemToCart(cartItem);
+  }
+
+  void handleBestSellerCartIconTap(int index) {
+    setState(() {
+      bestSellerCartIconColors[index] =
+          Colors.grey;
+    });
+
+    Timer(Duration(milliseconds: 50), () {
+      setState(() {
+        bestSellerCartIconColors[index] = Colors.black;
       });
     });
 
     // Create a CartItem and add it to the cart
     CartItem cartItem = CartItem(
-      ShopItem.shopItemsHats[index].imgPath, // Use the appropriate image path
-      ShopItem.shopItemsHats[index].name,
-      ShopItem.shopItemsHats[index].rating,
-      ShopItem.shopItemsHats[index].price,
+      ShopItem.shopItemsBestSeller[index].imgPath, // Use the appropriate image path
+      ShopItem.shopItemsBestSeller[index].name,
+      ShopItem.shopItemsBestSeller[index].rating,
+      ShopItem.shopItemsBestSeller[index].price,
       1,
     );
 
@@ -192,26 +221,45 @@ class _HomePageState extends State<HomePage> {
             handleTrendingCartIconTap, // Pass the tap handling function
           ),
           _buildItemCategory(
-            "Hats",
+            "Best Seller",
             () {
               Navigator.of(context).push(
                 MaterialPageRoute(
                   builder: (context) {
-                    return HatsPage();
+                    return BestSellerPage();
                   },
                 ),
               );
             },
           ),
           _buildItemContainer(
-            ShopItem.shopItemsHats,
-            hatsCartIconColors, // Pass the color list for Hats section
-            handleHatsCartIconTap, // Pass the tap handling function
+            ShopItem.shopItemsBestSeller,
+            bestSellerCartIconColors, // Pass the color list for Hats section
+            handleBestSellerCartIconTap, // Pass the tap handling function
+          ),
+/////////////////////////
+          _buildItemCategory(
+            "Shoes",
+            () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) {
+                    return ShoesPage();
+                  },
+                ),
+              );
+            },
+          ),
+          _buildItemContainer(
+            ShopItem.shopItemsShoes,
+            shoesCartIconColors, // Pass the color list for Trending section
+            handleShoesCartIconTap, // Pass the tap handling function
           ),
         ]),
       ),
     );
   }
+  /////////////////////////
 
   // Method to build the icon list for categories
   Widget _buildIconList() {
