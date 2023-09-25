@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:marketplace/accs.dart';
 import 'package:marketplace/clothes.dart';
 import 'package:marketplace/hats.dart';
+import 'package:marketplace/search.dart';
 import 'package:marketplace/shoes.dart';
 
 class CatalogPage extends StatefulWidget {
@@ -12,19 +13,6 @@ class CatalogPage extends StatefulWidget {
 }
 
 class _CatalogPageState extends State<CatalogPage> {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: TabBarExample(),
-      debugShowCheckedModeBanner: false,
-    );
-  }
-}
-
-class TabBarExample extends StatelessWidget {
-  const TabBarExample({super.key});
-  // int page = 0;
-  // TabBarExample(this.page);
 
   @override
   Widget build(BuildContext context) {
@@ -121,6 +109,10 @@ class TabBarExample extends StatelessWidget {
                 ],
               ),
               child: TextField(
+                onTap: () {
+                Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => SearchBarA()));
+              },
                 decoration: InputDecoration(
                   fillColor: Colors.white,
                   filled: true,
