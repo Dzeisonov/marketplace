@@ -11,6 +11,7 @@ import 'package:marketplace/search.dart';
 import 'package:marketplace/shoesPage.dart';
 import 'package:marketplace/trendpage.dart';
 import 'package:provider/provider.dart';
+import 'dart:async';
 
 class HomePage extends StatefulWidget {
   static String routeName = "/homepage";
@@ -24,336 +25,415 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  // Create separate lists of color variables for each section
+  List<Color> trendingCartIconColors = [];
+  List<Color> hatsCartIconColors = [];
+
+  @override
+  void initState() {
+    super.initState();
+    // Initialize the color lists with default colors
+    trendingCartIconColors = List.generate(
+      ShopItem.shopItemsTrend.length,
+      (index) => Colors.black, // Initialize all to black for Trending section
+    );
+    hatsCartIconColors = List.generate(
+      ShopItem.shopItemsHats.length,
+      (index) => Colors.black, // Initialize all to black for Hats section
+    );
+  }
+
+  // Function to handle the shopping cart icon tap for Trending section
+  void handleTrendingCartIconTap(int index) {
+    // Change the color of the specific shopping cart icon in the Trending section
+    setState(() {
+      trendingCartIconColors[index] = Colors.grey; // Change to grey or any color you prefer
+    });
+
+    // Use a Timer to change the color back to the original color after 1 second
+    Timer(Duration(milliseconds: 50), () {
+      setState(() {
+        trendingCartIconColors[index] = Colors.black; // Change it back to black
+      });
+    });
+
+    // Create a CartItem and add it to the cart
+    CartItem cartItem = CartItem(
+      ShopItem.shopItemsTrend[index].imgPath, // Use the appropriate image path
+      ShopItem.shopItemsTrend[index].name,
+      ShopItem.shopItemsTrend[index].rating,
+      ShopItem.shopItemsTrend[index].price,
+      1,
+    );
+
+    final cartProvider = Provider.of<CartProvider>(context, listen: false);
+    cartProvider.addItemToCart(cartItem);
+  }
+
+  // Function to handle the shopping cart icon tap for Hats section
+  void handleHatsCartIconTap(int index) {
+    // Change the color of the specific shopping cart icon in the Hats section
+    setState(() {
+      hatsCartIconColors[index] = Colors.grey; // Change to grey or any color you prefer
+    });
+
+    // Use a Timer to change the color back to the original color after 1 second
+    Timer(Duration(milliseconds: 50), () {
+      setState(() {
+        hatsCartIconColors[index] = Colors.black; // Change it back to black
+      });
+    });
+
+    // Create a CartItem and add it to the cart
+    CartItem cartItem = CartItem(
+      ShopItem.shopItemsHats[index].imgPath, // Use the appropriate image path
+      ShopItem.shopItemsHats[index].name,
+      ShopItem.shopItemsHats[index].rating,
+      ShopItem.shopItemsHats[index].price,
+      1,
+    );
+
+    final cartProvider = Provider.of<CartProvider>(context, listen: false);
+    cartProvider.addItemToCart(cartItem);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
       body: Container(
-          child: Column(
-        children: [
-          SizedBox(height: 10),
-          _buildSearchBar(),
-          _buildHomePageUI(),
-        ],
-      )),
+        child: Column(
+          children: [
+            SizedBox(height: 10),
+            _buildSearchBar(),
+            _buildHomePageUI(),
+          ],
+        ),
+      ),
     );
   }
+  // Method to build the search bar
+Widget _buildSearchBar() {
+  OutlineInputBorder outlineInputBorder = OutlineInputBorder(
+    borderRadius: BorderRadius.circular(20.0),
+    borderSide: BorderSide(color: Colors.black),
+  );
+
+  return Container(
+    margin: EdgeInsets.only(left: 15, right: 15, top: 25, bottom: 10),
+    alignment: Alignment.topCenter,
+    child: Column(
+      children: [
+        Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(20.0),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.8),
+                offset: Offset(0, 3),
+                blurRadius: 4,
+                spreadRadius: -1,
+              )
+            ],
+          ),
+          child: TextField(
+            onTap: () {
+              Navigator.of(context)
+                  .push(MaterialPageRoute(builder: (context) => SearchBarA()));
+            },
+            decoration: InputDecoration(
+              fillColor: Colors.white,
+              filled: true,
+              contentPadding:
+                  const EdgeInsets.symmetric(vertical: 10.0, horizontal: 15),
+              hintText: "Search",
+              suffixIcon: const Icon(Icons.search),
+              enabledBorder: outlineInputBorder,
+              focusedBorder: outlineInputBorder,
+            ),
+          ),
+        ),
+      ],
+    ),
+  );
+}
+
 
   Widget _buildHomePageUI() {
     return Expanded(
-        child: SingleChildScrollView(
-      scrollDirection: Axis.vertical,
-      child: Column(children: [
-        _buildIconList(),
-        SizedBox(height: 10),
-        _buildCarouselSlide(),
-        SizedBox(height: 10),
-        _buildItemCategory(
-          "Trending",
-          () {
-            Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (context) {
-                  return TrendPage(); // Replace MyPage with the desired class
-                },
-              ),
-            );
-          },
-        ),
-        _buildItemContainer(ShopItem.shopItemsTrend),
-        _buildItemCategory(
-          "Hats",
-          () {
-            Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (context) {
-                  return HatsPage(); // Replace MyPage with the desired class
-                },
-              ),
-            );
-          },
-        ),
-        _buildItemContainer(ShopItem.shopItemsHats),
-      ]),
-    ));
-  }
-
-  Widget _buildSearchBar() {
-    OutlineInputBorder outlineInputBorder = OutlineInputBorder(
-      borderRadius: BorderRadius.circular(20.0),
-      borderSide: BorderSide(color: Colors.black),
-    );
-
-    return Container(
-      margin: EdgeInsets.only(left: 15, right: 15, top: 25, bottom: 10),
-      alignment: Alignment.topCenter,
-      child: Column(
-        children: [
-          Container(
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20.0),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withOpacity(0.8),
-                    offset: Offset(0, 3),
-                    blurRadius: 4,
-                    spreadRadius: -1,
-                  )
-                ]),
-            child: TextField(
-              onTap: () {
-                Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => SearchBarA()));
-              },
-              decoration: InputDecoration(
-                fillColor: Colors.white,
-                filled: true,
-                contentPadding:
-                    const EdgeInsets.symmetric(vertical: 10.0, horizontal: 15),
-                hintText: "Search",
-                suffixIcon: const Icon(Icons.search),
-                enabledBorder: outlineInputBorder,
-                focusedBorder: outlineInputBorder,
-              ),
-            ),
+      child: SingleChildScrollView(
+        scrollDirection: Axis.vertical,
+        child: Column(children: [
+          _buildIconList(),
+          SizedBox(height: 10),
+          _buildCarouselSlide(),
+          SizedBox(height: 10),
+          _buildItemCategory(
+            "Trending",
+            () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) {
+                    return TrendPage();
+                  },
+                ),
+              );
+            },
           ),
-        ],
+          _buildItemContainer(
+            ShopItem.shopItemsTrend,
+            trendingCartIconColors, // Pass the color list for Trending section
+            handleTrendingCartIconTap, // Pass the tap handling function
+          ),
+          _buildItemCategory(
+            "Hats",
+            () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) {
+                    return HatsPage();
+                  },
+                ),
+              );
+            },
+          ),
+          _buildItemContainer(
+            ShopItem.shopItemsHats,
+            hatsCartIconColors, // Pass the color list for Hats section
+            handleHatsCartIconTap, // Pass the tap handling function
+          ),
+        ]),
       ),
     );
   }
 
-////////////////////////////////////////////////////////////
-  Widget _buildIconList() {
-    List<String> categories = [
-      "Category 1",
-      "Category 2",
-      "Category 3",
-      "Category 4",
-      "Category 5",
-    ];
+  // Method to build the icon list for categories
+Widget _buildIconList() {
+  List<String> categories = [
+    "Category 1",
+    "Category 2",
+    "Category 3",
+    "Category 4",
+    "Category 5",
+  ];
 
-    List<String> categoryImages = [
-      "lib/images/all.png",
-      "lib/images/dress.png",
-      "lib/images/shoe.png",
-      "lib/images/cap.png",
-      "lib/images/necklace.png",
-    ];
+  List<String> categoryImages = [
+    "lib/images/all.png",
+    "lib/images/dress.png",
+    "lib/images/shoe.png",
+    "lib/images/cap.png",
+    "lib/images/necklace.png",
+  ];
 
-    return Container(
-      height: 150,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+  return Container(
+    height: 150,
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(left: 20, top: 10),
+          child: Text(
+            "Categories",
+            style: TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+        SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Row(
+            children: List.generate(
+              categories.length,
+              (index) {
+                List<String> descriptions = [
+                  "List all",
+                  "Clothes",
+                  "Shoes",
+                  "Hats",
+                  "Accessories",
+                ];
+
+                bool isFirstShape = index == 0;
+
+                return GestureDetector(
+                  onVerticalDragDown: (_) {
+                    setState(() {});
+                  },
+                  onVerticalDragEnd: (_) {
+                    setState(() {});
+                  },
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) {
+                          switch (categories[index]) {
+                            case "Category 1":
+                              return AllPage();
+                            case "Category 2":
+                              return ClothesPage();
+                            case "Category 3":
+                              return ShoesPage();
+                            case "Category 4":
+                              return HatsPage();
+                            case "Category 5":
+                              return AccsPage();
+                            default:
+                              return AllPage();
+                          }
+                        },
+                      ),
+                    );
+                  },
+                  child: Padding(
+                    padding: EdgeInsets.only(left: 15.0, top: 10.0),
+                    child: Column(
+                      children: [
+                        Container(
+                          width: 77,
+                          height: 80,
+                          decoration: BoxDecoration(
+                            shape: isFirstShape
+                                ? BoxShape.circle
+                                : BoxShape.rectangle,
+                            borderRadius: isFirstShape
+                                ? null
+                                : BorderRadius.circular(12.0),
+                            color: Colors.white,
+                          ),
+                          child: Center(
+                            child: Image.asset(
+                              categoryImages[index],
+                              width: 80,
+                              height: 80,
+                            ),
+                          ),
+                        ),
+                        SizedBox(height: 1),
+                        Text(
+                          descriptions[index],
+                          style: TextStyle(
+                            fontSize: 12,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+              },
+            ),
+          ),
+        ),
+      ],
+    ),
+  );
+}
+
+// Method to build the carousel slider
+Widget _buildCarouselSlide() {
+  final imageAssets = [
+    "lib/images/adds/offer1.jpg",
+    "lib/images/adds/offer2.jpg",
+    "lib/images/adds/offer3.jpg",
+  ];
+
+  double screenWidth = MediaQuery.of(context).size.width;
+  double widths = screenWidth - 30;
+  double heights = screenWidth * 8 / 18;
+
+  return Container(
+    margin: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+    width: widths,
+    height: heights,
+    child: CarouselSlider.builder(
+      itemCount: imageAssets.length,
+      options: CarouselOptions(
+        autoPlay: true,
+        viewportFraction: 1.0,
+      ),
+      itemBuilder: (context, index, realIndex) {
+        final imageAsset = imageAssets[index];
+
+        return Container(
+          width: widths,
+          height: heights,
+          child: Image.asset(
+            imageAsset,
+            fit: BoxFit.cover,
+          ),
+        );
+      },
+    ),
+  );
+}
+
+// Method to build the item category with "See more" link
+Widget _buildItemCategory(
+  String title,
+  Function() onTapCallback,
+) {
+  return Container(
+    margin: EdgeInsets.symmetric(horizontal: 15),
+    alignment: Alignment.center,
+    child: Column(children: [
+      Row(
         children: [
-          Padding(
-            padding: const EdgeInsets.only(left: 20, top: 10),
+          Align(
+            alignment: Alignment.topLeft,
             child: Text(
-              "Categories",
+              title,
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
               ),
             ),
           ),
-          SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: Row(
-              children: List.generate(
-                categories.length,
-                (index) {
-                  List<String> descriptions = [
-                    "List all",
-                    "Clothes",
-                    "Shoes",
-                    "Hats",
-                    "Accessories",
-                  ];
-
-                  bool isFirstShape = index == 0;
-
-                  return GestureDetector(
-                    //NgeFix jika pas hover+scrolling di button langsung ke page lain
-                    //Mungkin berguna? mungkin enggak
-                    onVerticalDragDown: (_) {
-                      setState(() {});
-                    },
-                    onVerticalDragEnd: (_) {
-                      setState(() {});
-                    },
-                    onTap: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) {
-                            // Use the category name to select the right page
-                            switch (categories[index]) {
-                              case "Category 1":
-                                return AllPage();
-                              case "Category 2":
-                                return ClothesPage();
-                              case "Category 3":
-                                return ShoesPage();
-                              case "Category 4":
-                                return HatsPage();
-                              case "Category 5":
-                                return AccsPage();
-                              // Add more cases for other categories
-                              default:
-                                return AllPage(); // Default to Category 1 for now
-                            }
-                          },
-                        ),
-                      );
-                    },
-
-                    child: Padding(
-                      padding: EdgeInsets.only(left: 15.0, top: 10.0),
-                      child: Column(
-                        children: [
-                          Container(
-                            width: 77,
-                            height: 80,
-                            decoration: BoxDecoration(
-                              shape: isFirstShape
-                                  ? BoxShape.circle
-                                  : BoxShape.rectangle,
-                              borderRadius: isFirstShape
-                                  ? null
-                                  : BorderRadius.circular(12.0),
-                              color: Colors.white,
-                            ),
-                            child: Center(
-                              child: Image.asset(
-                                categoryImages[index],
-                                width: 80,
-                                height: 80,
-                              ),
-                            ),
-                          ),
-                          SizedBox(height: 1),
-                          Text(
-                            descriptions[index],
-                            style: TextStyle(
-                              fontSize: 12,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  );
-                },
+          Spacer(),
+          Align(
+            alignment: Alignment.topRight,
+            child: GestureDetector(
+              onTap: onTapCallback,
+              child: Row(
+                children: [
+                  Text("See more",
+                      style: TextStyle(fontSize: 16, color: Colors.black)),
+                  SizedBox(
+                    width: 5,
+                  ),
+                  Text(">",
+                      style: TextStyle(
+                          fontSize: 18,
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold))
+                ],
               ),
             ),
           ),
         ],
       ),
-    );
-  }
+    ]),
+  );
+}
 
-///////////////////////////////////////////////////////////////
-  Widget _buildCarouselSlide() {
-    final imageAssets = [
-      "lib/images/adds/offer1.jpg",
-      "lib/images/adds/offer2.jpg",
-      "lib/images/adds/offer3.jpg",
-    ];
 
-    double screenWidth = MediaQuery.of(context).size.width;
-    double widths = screenWidth - 30;
-    double heights = screenWidth * 8 / 18;
 
-    return Container(
-        margin: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-        width: widths,
-        height: heights,
-        child: CarouselSlider.builder(
-          itemCount: imageAssets.length,
-          options: CarouselOptions(
-            autoPlay: true,
-            viewportFraction: 1.0,
-          ),
-          itemBuilder: (context, index, realIndex) {
-            final imageAsset = imageAssets[index];
 
-            return Container(
-                width: widths,
-                height: heights,
-                child: Image.asset(
-                  imageAsset,
-                  fit: BoxFit.cover,
-                ));
-          },
-        ));
-  }
 
-  Widget _buildImage(String imagesArr, int index) => Container(
-          child: Image.network(
-        imagesArr,
-        fit: BoxFit.fill,
-        height: 150,
-        width: 400,
-      ));
-
-  Widget _buildItemCategory(
-    String title,
-    Function() onTapCallback,
-  ) {
-    return Container(
-      margin: EdgeInsets.symmetric(horizontal: 15),
-      alignment: Alignment.center,
-      child: Column(children: [
-        Row(
-          children: [
-            Align(
-              alignment: Alignment.topLeft,
-              child: Text(
-                title,
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-            Spacer(),
-            Align(
-              alignment: Alignment.topRight,
-              child: GestureDetector(
-                onTap: onTapCallback,
-                child: Row(
-                  children: [
-                    Text("See more",
-                        style: TextStyle(fontSize: 16, color: Colors.black)),
-                    SizedBox(
-                      width: 5,
-                    ),
-                    Text(">",
-                        style: TextStyle(
-                            fontSize: 18,
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold))
-                  ],
-                ),
-              ),
-            ),
-          ],
-        ),
-      ]),
-    );
-  }
-
-  Widget _buildItemContainer(List<ShopItem> data) {
+    Widget _buildItemContainer(List<ShopItem> data, List<Color> cartIconColors, Function(int) onTapCallback) {
     double screenWidth = MediaQuery.of(context).size.width;
     double containerWidth = screenWidth * 0.016;
 
     List<Widget> rows = [];
-    List<ShopItem> shopItems = List.from(data); // Create a copy
+    List<ShopItem> shopItems = List.from(data);
 
     while (shopItems.isNotEmpty) {
       List<Widget> rowChildren = [];
 
       while (shopItems.isNotEmpty) {
         ShopItem item = shopItems.removeAt(0);
-        rowChildren.add(
-            _buildShopItem(item.imgPath, item.name, item.rating, item.price));
+        int index = rows.length + rowChildren.length;
+        rowChildren.add(_buildShopItem(
+            item.imgPath, item.name, item.rating, item.price, index, cartIconColors[index], onTapCallback));
       }
 
       rows.add(
@@ -374,8 +454,9 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+  // Method to build a shop item widget
   Widget _buildShopItem(
-      String image, String name, double rating, double price) {
+      String image, String name, double rating, double price, int index, Color iconColor, Function(int) onTapCallback) {
     return Container(
       margin: EdgeInsets.symmetric(
         horizontal: 10,
@@ -384,7 +465,7 @@ class _HomePageState extends State<HomePage> {
       height: 295,
       width: 170,
       decoration: BoxDecoration(
-        color: Colors.white, // Set the background color
+        color: Colors.white,
         borderRadius: BorderRadius.circular(10),
         boxShadow: [
           BoxShadow(
@@ -393,7 +474,7 @@ class _HomePageState extends State<HomePage> {
             blurRadius: 5,
             offset: Offset(0, 3),
           )
-        ], // Set the border-radius value
+        ],
       ),
       child: Column(children: [
         Container(
@@ -455,16 +536,13 @@ class _HomePageState extends State<HomePage> {
                   Spacer(),
                   GestureDetector(
                     onTap: () {
-                      CartItem cartItem =
-                          CartItem(image, name, rating, price, 1);
-                      final cartProvider =
-                          Provider.of<CartProvider>(context, listen: false);
-                      cartProvider.addItemToCart(cartItem);
+                      // Call the function to handle the tap and pass the index
+                      onTapCallback(index);
                     },
                     child: Container(
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
-                        color: Colors.black,
+                        color: iconColor, // Use the color from the list
                       ),
                       padding: EdgeInsets.all(10),
                       child: Icon(
