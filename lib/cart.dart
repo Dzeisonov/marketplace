@@ -270,7 +270,7 @@ class _CartPageState extends State<CartPage> {
             top: 52,
             child: DefaultButtonBlack(
                 width: 343,
-                text: "Continue",
+                text: "Checkout",
                 press: () {
                   if (cartItems.isEmpty) {
                   } else {
