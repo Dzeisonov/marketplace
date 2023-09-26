@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:marketplace/components/default_button_black.dart';
 import 'package:marketplace/provider.dart';
+import 'package:marketplace/screens/paysuccess/payscs.dart';
 import 'package:provider/provider.dart';
 
 class CartPage extends StatefulWidget {
@@ -267,8 +268,21 @@ class _CartPageState extends State<CartPage> {
           Positioned(
             left: 18,
             top: 52,
-            child:
-                DefaultButtonBlack(width: 343, text: "Continue", press: () {}),
+            child: DefaultButtonBlack(
+                width: 343,
+                text: "Continue",
+                press: () {
+                  if (cartItems.isEmpty) {
+                  } else {
+                    final cartProvider =
+                        Provider.of<CartProvider>(context, listen: false);
+                    cartProvider.clearCart();
+                    Navigator.pushNamed(
+                      context,
+                      PayScsScreen.routeName,
+                    );
+                  }
+                }),
           ),
         ],
       ),
@@ -283,5 +297,11 @@ class CartItem {
   final double price;
   int amount;
 
-  CartItem(this.image, this.name, this.rating, this.price, this.amount);
+  CartItem(
+    this.image,
+    this.name,
+    this.rating,
+    this.price,
+    this.amount,
+  );
 }

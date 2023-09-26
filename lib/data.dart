@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 class ShopItem {
   final String imgPath;
   final String name;

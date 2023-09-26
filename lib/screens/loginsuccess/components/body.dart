@@ -23,14 +23,12 @@ class Body extends StatelessWidget {
           SizedBox(
             height: SizeConfig.screenHeight * 0.08,
           ),
-          Text(
-            "Login Success",
-            style: TextStyle(
-              fontSize: getProportionateScreenWidth(30),
-              fontWeight: FontWeight.bold,
-              color: kPrimaryColor,
-            )
-          ),
+          Text("Login Success",
+              style: TextStyle(
+                fontSize: getProportionateScreenWidth(30),
+                fontWeight: FontWeight.bold,
+                color: kPrimaryColor,
+              )),
           SizedBox(
             height: SizeConfig.screenHeight * 0.08,
           ),
