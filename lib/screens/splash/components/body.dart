@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:marketplace/data.dart';
 import '../../login/login.dart';
 import '../components/splash_content.dart';
 import '../../../components/default_button.dart';
@@ -32,6 +33,12 @@ class _BodyState extends State<Body> {
                   (
                     text: "Continue",
                     press: () {
+                      ShopItem.fetchData("Shoes");
+                      ShopItem.fetchData("Accessories");
+                      ShopItem.fetchData("Clothes");
+                      ShopItem.fetchData("Hats");
+                      ShopItem.fetchData("Trends");
+                      ShopItem.fetchData("BestSeller");
                       Navigator.pushNamed(context, LogInScreen.routeName);
                     },
                   ),

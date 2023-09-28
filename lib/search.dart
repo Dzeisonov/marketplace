@@ -91,7 +91,7 @@ class _SearchBarAState extends State<SearchBarA> {
                     title: Text(item.name),
                     subtitle: Text("\$" + item.price.toString()),
                     trailing: Text("⭐ " + item.rating.toString()),
-                    leading: Image.asset(
+                    leading: Image.network(
                       item.imgPath,
                     ),
                   );

@@ -18,7 +18,8 @@ class CategoryScreen extends StatefulWidget {
 }
 
 class _CategoryScreenState extends State<CategoryScreen> {
-  List<bool> isCartTappedList = List.filled(ShopItem.shopItemsShoes.length, false);
+  List<bool> isCartTappedList =
+      List.filled(ShopItem.shopItemsShoes.length, false);
 
   @override
   Widget build(BuildContext context) {
@@ -93,7 +94,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
           child: ClipRRect(
             borderRadius: BorderRadius.circular(10),
             child: Image(
-              image: AssetImage(image),
+              image: NetworkImage(image),
               width: 160,
               height: 160,
               fit: BoxFit.fill,
@@ -114,7 +115,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
                 Text(
                   rating.toString(),
                   style: TextStyle(
-                    fontSize: 20, 
+                    fontSize: 20,
                     fontWeight: FontWeight.bold,
                     fontFamily: "Montserrat",
                   ),
@@ -128,7 +129,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
               Text(
                 name,
                 style: TextStyle(
-                  fontSize: 20, 
+                  fontSize: 20,
                   fontWeight: FontWeight.bold,
                   fontFamily: "Montserrat",
                 ),
@@ -142,7 +143,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
                   Text(
                     "\$" + price.toString(),
                     style: TextStyle(
-                      fontSize: 20, 
+                      fontSize: 20,
                       fontWeight: FontWeight.bold,
                       fontFamily: "Montserrat",
                     ),
