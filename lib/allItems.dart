@@ -47,9 +47,6 @@ class _AllScreenState extends State<AllScreen> {
 
     List<Widget> rows = [];
 
-    // Initialize itemIndex with 0
-    int itemIndex = 0;
-
     // Iterate through each category (list) in data
     for (int rowIndex = 0; rowIndex < data.length; rowIndex++) {
       List<ShopItem> categoryItems = data[rowIndex];
@@ -61,8 +58,6 @@ class _AllScreenState extends State<AllScreen> {
         // Calculate the linear index based on row and column indices
         int linearIndex = rowIndex * 2 + colIndex;
 
-        // Access cartCircleColors using the linear index
-        Color color = cartCircleColors[linearIndex];
         if (itemsInCurrentRow >= 2) {
           // Start a new row if two items are already in the current row
           rows.add(
@@ -81,7 +76,6 @@ class _AllScreenState extends State<AllScreen> {
         );
 
         itemsInCurrentRow++; // Increment the count of items in the current row
-        itemIndex++; // Increment the itemIndex
       }
 
       // Add the remaining items in the last row, if any

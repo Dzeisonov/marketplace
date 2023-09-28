@@ -2,17 +2,13 @@ import 'package:elegant_notification/elegant_notification.dart';
 import 'package:elegant_notification/resources/arrays.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:marketplace/bestSellerPage.dart';
-import 'package:marketplace/accspage.dart';
-import 'package:marketplace/allItemsPage.dart';
+import 'package:marketplace/allItems.dart';
 import 'package:marketplace/cart.dart';
-import 'package:marketplace/clothesPage.dart';
-import 'package:marketplace/hatspage.dart';
+import 'package:marketplace/categoryScreen.dart';
+import 'package:marketplace/customPage.dart';
 import 'package:marketplace/data.dart';
 import 'package:marketplace/provider.dart';
 import 'package:marketplace/search.dart';
-import 'package:marketplace/shoesPage.dart';
-import 'package:marketplace/trendpage.dart';
 import 'package:provider/provider.dart';
 import 'dart:async';
 
@@ -207,7 +203,10 @@ class _HomePageState extends State<HomePage> {
               Navigator.of(context).push(
                 MaterialPageRoute(
                   builder: (context) {
-                    return TrendPage();
+                    return CustomPage(
+                        appBarTitle: "Trending",
+                        lastChild:
+                            CategoryScreen(shopItems: ShopItem.shopItemsTrend));
                   },
                 ),
               );
@@ -224,7 +223,10 @@ class _HomePageState extends State<HomePage> {
               Navigator.of(context).push(
                 MaterialPageRoute(
                   builder: (context) {
-                    return BestSellerPage();
+                    return CustomPage(
+                        appBarTitle: "Best Seller",
+                        lastChild: CategoryScreen(
+                            shopItems: ShopItem.shopItemsBestSeller));
                   },
                 ),
               );
@@ -242,7 +244,10 @@ class _HomePageState extends State<HomePage> {
               Navigator.of(context).push(
                 MaterialPageRoute(
                   builder: (context) {
-                    return ShoesPage();
+                    return CustomPage(
+                        appBarTitle: "Shoes",
+                        lastChild:
+                            CategoryScreen(shopItems: ShopItem.shopItemsShoes));
                   },
                 ),
               );
@@ -321,17 +326,33 @@ class _HomePageState extends State<HomePage> {
                           builder: (context) {
                             switch (categories[index]) {
                               case "Category 1":
-                                return AllPage();
+                                return CustomPage(
+                                    appBarTitle: "All Items",
+                                    lastChild: AllScreen());
                               case "Category 2":
-                                return ClothesPage();
+                                return CustomPage(
+                                    appBarTitle: "Clothes",
+                                    lastChild: CategoryScreen(
+                                        shopItems: ShopItem.shopItemsClothes));
                               case "Category 3":
-                                return ShoesPage();
+                                return CustomPage(
+                                    appBarTitle: "Shoes",
+                                    lastChild: CategoryScreen(
+                                        shopItems: ShopItem.shopItemsShoes));
                               case "Category 4":
-                                return HatsPage();
+                                return CustomPage(
+                                    appBarTitle: "Hats",
+                                    lastChild: CategoryScreen(
+                                        shopItems: ShopItem.shopItemsHats));
                               case "Category 5":
-                                return AccsPage();
+                                return CustomPage(
+                                    appBarTitle: "Accessories",
+                                    lastChild: CategoryScreen(
+                                        shopItems: ShopItem.shopItemsAcc));
                               default:
-                                return AllPage();
+                                return CustomPage(
+                                    appBarTitle: "All Items",
+                                    lastChild: AllScreen());
                             }
                           },
                         ),

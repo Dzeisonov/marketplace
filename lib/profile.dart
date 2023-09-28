@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:marketplace/editprofile.dart';
 import 'package:marketplace/payments.dart';
-import 'package:marketplace/screens/login/login.dart';
-import 'package:marketplace/screens/loginsuccess/loginscs.dart';
 import 'package:marketplace/screens/splash/splash_screen.dart';
 import 'package:marketplace/settings.dart';
-import 'package:marketplace/login.dart';
 
 class ProfilePage extends StatefulWidget {
   ProfilePage({Key? key}) : super(key: key);

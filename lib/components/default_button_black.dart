@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:marketplace/sizeconfig.dart';
-import 'package:marketplace/constants.dart';
 
 class DefaultButtonBlack extends StatelessWidget {
   const DefaultButtonBlack({

@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:marketplace/accs.dart';
-import 'package:marketplace/clothes.dart';
-import 'package:marketplace/hats.dart';
+import 'package:marketplace/categoryScreen.dart';
+import 'package:marketplace/data.dart';
 import 'package:marketplace/search.dart';
-import 'package:marketplace/shoes.dart';
 
 class CatalogPage extends StatefulWidget {
   CatalogPage({Key? key}) : super(key: key);
@@ -13,7 +11,6 @@ class CatalogPage extends StatefulWidget {
 }
 
 class _CatalogPageState extends State<CatalogPage> {
-
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -64,16 +61,16 @@ class _CatalogPageState extends State<CatalogPage> {
               child: TabBarView(
                 children: <Widget>[
                   Center(
-                    child: ClothesScreen(),
+                    child: CategoryScreen(shopItems: ShopItem.shopItemsClothes),
                   ),
                   Center(
-                    child: ShoesScreen(),
+                    child: CategoryScreen(shopItems: ShopItem.shopItemsShoes),
                   ),
                   Center(
-                    child: HatsScreen(),
+                    child: CategoryScreen(shopItems: ShopItem.shopItemsHats),
                   ),
                   Center(
-                    child: AccsScreen(),
+                    child: CategoryScreen(shopItems: ShopItem.shopItemsAcc),
                   ),
                 ],
               ),
@@ -110,9 +107,9 @@ class _CatalogPageState extends State<CatalogPage> {
               ),
               child: TextField(
                 onTap: () {
-                Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => SearchBarA()));
-              },
+                  Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) => SearchBarA()));
+                },
                 decoration: InputDecoration(
                   fillColor: Colors.white,
                   filled: true,
