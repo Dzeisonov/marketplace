@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class EditProfileScreen extends StatefulWidget {
   EditProfileScreen({Key? key}) : super(key: key);
@@ -9,7 +10,14 @@ class EditProfileScreen extends StatefulWidget {
 }
 
 class _EditProfileScreenState extends State<EditProfileScreen> {
-  String selectedAvatar = "lib/images/avatar1.jpg"; // avatar1 dijadikan sebagai foto profil default
+  String selectedAvatar = "lib/images/avatar1.jpg";
+
+  TextEditingController fullNameController = TextEditingController();
+  TextEditingController usernameController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController phoneNumberController = TextEditingController();
+  TextEditingController addressController = TextEditingController();
+  TextEditingController bioController = TextEditingController();
 
   void _showToast(String message) {
     Fluttertoast.showToast(
@@ -28,6 +36,45 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     Navigator.pop(context);
   }
 
+  void _saveData() async {
+    String fullName = fullNameController.text;
+    String username = usernameController.text;
+    String email = emailController.text;
+    String phoneNumber = phoneNumberController.text;
+    String address = addressController.text;
+    String bio = bioController.text;
+
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString('fullName', fullName);
+    await prefs.setString('username', username);
+    await prefs.setString('email', email);
+    await prefs.setString('phoneNumber', phoneNumber);
+    await prefs.setString('address', address);
+    await prefs.setString('bio', bio);
+    await prefs.setString('avatar', selectedAvatar);
+
+    _showToast("Data saved successfully");
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _loadSavedData();
+  }
+
+  void _loadSavedData() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      fullNameController.text = prefs.getString('fullName') ?? "";
+      usernameController.text = prefs.getString('username') ?? "";
+      emailController.text = prefs.getString('email') ?? "";
+      phoneNumberController.text = prefs.getString('phoneNumber') ?? "";
+      addressController.text = prefs.getString('address') ?? "";
+      bioController.text = prefs.getString('bio') ?? "";
+      selectedAvatar = prefs.getString('avatar') ?? selectedAvatar; 
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,17 +89,17 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(height: 20), 
+              SizedBox(height: 20),
               Center(
                 child: _buildProfileIcon(selectedAvatar),
               ),
               SizedBox(height: 20),
-              _buildEditProfileItem("Full Name", "Enter your full name..."),
-              _buildEditProfileItem("Username", "Enter your username..."),
-              _buildEditProfileItem("Email", "Enter your email..."),
-              _buildEditProfileItem("Phone Number", "Enter your phone number..."),
-              _buildEditProfileItem("Address", "Enter your address..."),
-              _buildEditProfileItem("Bio", "Enter your bio..."),
+              _buildEditProfileItem("Full Name", "Enter your full name...", controller: fullNameController),
+              _buildEditProfileItem("Username", "Enter your username...", controller: usernameController),
+              _buildEditProfileItem("Email", "Enter your email...", controller: emailController),
+              _buildEditProfileItem("Phone Number", "Enter your phone number...", controller: phoneNumberController),
+              _buildEditProfileItem("Address", "Enter your address...", controller: addressController),
+              _buildEditProfileItem("Bio", "Enter your bio...", controller: bioController),
               SizedBox(height: 20),
               _buildSaveButton(),
             ],
@@ -62,11 +109,12 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     );
   }
 
-  Widget _buildEditProfileItem(String label, String hint) {
+  Widget _buildEditProfileItem(String label, String hint, {TextEditingController? controller}) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         TextFormField(
+          controller: controller,
           style: TextStyle(fontSize: 18),
           decoration: InputDecoration(
             labelText: label,
@@ -94,7 +142,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 3,
                   ),
-                  itemCount: 6, 
+                  itemCount: 6,
                   itemBuilder: (context, index) {
                     final avatarPath = "lib/images/avatar${index + 1}.jpg";
                     final isSelected = avatarPath == selectedAvatar;
@@ -107,7 +155,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                         margin: EdgeInsets.all(8.0),
                         decoration: BoxDecoration(
                           border: Border.all(
-                            color: isSelected ? Colors.green : Colors.transparent, // Menampilkan border hijau jika dipilih
+                            color: isSelected ? Colors.green : Colors.transparent,
                             width: 4.0,
                           ),
                           shape: BoxShape.circle,
@@ -164,9 +212,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   Widget _buildSaveButton() {
     return Center(
       child: ElevatedButton(
-        onPressed: () {
-          _showToast("Data saved successfully");
-        },
+        onPressed: _saveData,
         style: ElevatedButton.styleFrom(
           primary: Colors.black,
           padding: EdgeInsets.symmetric(horizontal: 40, vertical: 16),
