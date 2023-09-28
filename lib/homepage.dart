@@ -24,51 +24,45 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  // Create separate lists of color variables for each section
   List<Color> trendingCartIconColors = [];
   List<Color> bestSellerCartIconColors = [];
-
   List<Color> shoesCartIconColors = [];
 
   @override
   void initState() {
     super.initState();
-    // Initialize the color lists with default colors
     trendingCartIconColors = List.generate(
       ShopItem.shopItemsTrend.length,
-      (index) => Colors.black, // Initialize all to black for Trending section
+      (index) => Colors.black,
     );
     bestSellerCartIconColors = List.generate(
       ShopItem.shopItemsBestSeller.length,
-      (index) => Colors.black, // Initialize all to black for Hats section
+      (index) => Colors.black,
     );
     shoesCartIconColors = List.generate(
       ShopItem.shopItemsShoes.length,
-      (index) => Colors.black, // Initialize all to black for shoes section
+      (index) => Colors.black,
     );
   }
 
-  // Function to handle the shopping cart icon tap for Trending section
-  void handleTrendingCartIconTap(int index) {
-    // Change the color of the specific shopping cart icon in the Trending section
+  ////////////////////////////
+  
+  void handleCartIconTap(int index, List<Color> cartIconColors, List<ShopItem> shopItems) {
     setState(() {
-      trendingCartIconColors[index] =
-          Colors.grey; // Change to grey or any color you prefer
+      cartIconColors[index] = Colors.grey;
     });
 
-    // Use a Timer to change the color back to the original color after 1 second
     Timer(Duration(milliseconds: 50), () {
       setState(() {
-        trendingCartIconColors[index] = Colors.black; // Change it back to black
+        cartIconColors[index] = Colors.black;
       });
     });
 
-    // Create a CartItem and add it to the cart
     CartItem cartItem = CartItem(
-      ShopItem.shopItemsTrend[index].imgPath, // Use the appropriate image path
-      ShopItem.shopItemsTrend[index].name,
-      ShopItem.shopItemsTrend[index].rating,
-      ShopItem.shopItemsTrend[index].price,
+      shopItems[index].imgPath,
+      shopItems[index].name,
+      shopItems[index].rating,
+      shopItems[index].price,
       1,
     );
 
@@ -76,53 +70,20 @@ class _HomePageState extends State<HomePage> {
     cartProvider.addItemToCart(cartItem);
   }
 
-  void handleShoesCartIconTap(int index) {
-    setState(() {
-      shoesCartIconColors[index] = Colors.grey;
-    });
-
-    Timer(Duration(milliseconds: 50), () {
-      setState(() {
-        shoesCartIconColors[index] = Colors.black;
-      });
-    });
-
-    CartItem cartItem = CartItem(
-      ShopItem.shopItemsShoes[index].imgPath,
-      ShopItem.shopItemsShoes[index].name,
-      ShopItem.shopItemsShoes[index].rating,
-      ShopItem.shopItemsShoes[index].price,
-      1,
-    );
-
-    final cartProvider = Provider.of<CartProvider>(context, listen: false);
-    cartProvider.addItemToCart(cartItem);
+  void _handleTrendingCartIconTap(int index) {
+    handleCartIconTap(index, trendingCartIconColors, ShopItem.shopItemsTrend);
   }
 
-  void handleBestSellerCartIconTap(int index) {
-    setState(() {
-      bestSellerCartIconColors[index] = Colors.grey;
-    });
-
-    Timer(Duration(milliseconds: 50), () {
-      setState(() {
-        bestSellerCartIconColors[index] = Colors.black;
-      });
-    });
-
-    // Create a CartItem and add it to the cart
-    CartItem cartItem = CartItem(
-      ShopItem
-          .shopItemsBestSeller[index].imgPath, // Use the appropriate image path
-      ShopItem.shopItemsBestSeller[index].name,
-      ShopItem.shopItemsBestSeller[index].rating,
-      ShopItem.shopItemsBestSeller[index].price,
-      1,
-    );
-
-    final cartProvider = Provider.of<CartProvider>(context, listen: false);
-    cartProvider.addItemToCart(cartItem);
+  void _handleBestSellerCartIconTap(int index) {
+    handleCartIconTap(index, bestSellerCartIconColors, ShopItem.shopItemsBestSeller);
   }
+
+  void _handleShoesCartIconTap(int index) {
+    handleCartIconTap(index, shoesCartIconColors, ShopItem.shopItemsShoes);
+  }
+
+
+   ////////////////////////////
 
   @override
   Widget build(BuildContext context) {
@@ -189,6 +150,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget _buildHomePageUI() {
+
     return Expanded(
       child: SingleChildScrollView(
         scrollDirection: Axis.vertical,
@@ -197,72 +159,42 @@ class _HomePageState extends State<HomePage> {
           SizedBox(height: 10),
           _buildCarouselSlide(),
           SizedBox(height: 10),
-          _buildItemCategory(
-            "Trending",
-            () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) {
-                    return CustomPage(
-                        appBarTitle: "Trending",
-                        lastChild:
-                            CategoryScreen(shopItems: ShopItem.shopItemsTrend));
-                  },
-                ),
-              );
-            },
-          ),
-          _buildItemContainer(
-            ShopItem.shopItemsTrend,
-            trendingCartIconColors, // Pass the color list for Trending section
-            handleTrendingCartIconTap, // Pass the tap handling function
-          ),
-          _buildItemCategory(
-            "Best Seller",
-            () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) {
-                    return CustomPage(
-                        appBarTitle: "Best Seller",
-                        lastChild: CategoryScreen(
-                            shopItems: ShopItem.shopItemsBestSeller));
-                  },
-                ),
-              );
-            },
-          ),
-          _buildItemContainer(
-            ShopItem.shopItemsBestSeller,
-            bestSellerCartIconColors, // Pass the color list for Best Seller section
-            handleBestSellerCartIconTap, // Pass the tap handling function
-          ),
-/////////////////////////
-          _buildItemCategory(
-            "Shoes",
-            () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) {
-                    return CustomPage(
-                        appBarTitle: "Shoes",
-                        lastChild:
-                            CategoryScreen(shopItems: ShopItem.shopItemsShoes));
-                  },
-                ),
-              );
-            },
-          ),
-          _buildItemContainer(
-            ShopItem.shopItemsShoes,
-            shoesCartIconColors, // Pass the color list for Trending section
-            handleShoesCartIconTap, // Pass the tap handling function
-          ),
+
+          //Penyederhanaan
+          _buildCategory("Trending", ShopItem.shopItemsTrend, trendingCartIconColors, _handleTrendingCartIconTap),
+          _buildCategory("Best Seller", ShopItem.shopItemsBestSeller, bestSellerCartIconColors, _handleBestSellerCartIconTap),
+          _buildCategory("Shoes", ShopItem.shopItemsShoes, shoesCartIconColors, _handleShoesCartIconTap),
+
+
         ]),
       ),
     );
   }
-  /////////////////////////
+
+
+
+
+  Widget _buildCategory(String title, List<ShopItem> items, List<Color> colors, Function(int) onTap){
+    return Column(
+    children: [
+      _buildItemCategory(title, () {
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) {
+              return CustomPage(
+                appBarTitle: title,
+                lastChild: CategoryScreen(shopItems: items),
+              );
+            },
+          ),
+        );
+      }),
+      _buildItemContainer(items, colors, onTap),
+    ],
+  );
+  }
+
+
 
   // Method to build the icon list for categories
   Widget _buildIconList() {
@@ -606,14 +538,12 @@ class _HomePageState extends State<HomePage> {
                   Spacer(),
                   GestureDetector(
                     onTap: () {
-                      // Call the function to handle the tap and pass the index
                       onTapCallback(index);
                       ElegantNotification(
                         notificationPosition: NotificationPosition.topCenter,
                         animation: AnimationType.fromTop,
                         width: 360,
                         height: 50,
-                        // title: const Text('Success!'),
                         description: Text("$name added to cart"),
                         icon: const Icon(
                           Icons.check_circle,
@@ -625,7 +555,7 @@ class _HomePageState extends State<HomePage> {
                     child: Container(
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
-                        color: iconColor, // Use the color from the list
+                        color: iconColor,
                       ),
                       padding: EdgeInsets.all(10),
                       child: Icon(
