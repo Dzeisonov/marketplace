@@ -2,8 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+
+typedef void ProfileUpdateCallback(String username, String email, int phoneNumber);
+
+typedef void AvatarUpdateCallback(String newAvatarPath);
+
+
 class EditProfileScreen extends StatefulWidget {
-  EditProfileScreen({Key? key}) : super(key: key);
+  final ProfileUpdateCallback? onProfileUpdate;
+  final AvatarUpdateCallback? onAvatarUpdate;
+
+  EditProfileScreen({Key? key, this.onProfileUpdate, this.onAvatarUpdate}) : super(key: key);
 
   @override
   State<EditProfileScreen> createState() => _EditProfileScreenState();
@@ -40,20 +49,37 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     String fullName = fullNameController.text;
     String username = usernameController.text;
     String email = emailController.text;
-    String phoneNumber = phoneNumberController.text;
+    String phoneNumberText = phoneNumberController.text;
     String address = addressController.text;
     String bio = bioController.text;
+
+    int phoneNumber;
+
+    try {
+      phoneNumber = int.parse(phoneNumberText);
+    } catch (e) {
+      phoneNumber = 0;
+  }
 
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setString('fullName', fullName);
     await prefs.setString('username', username);
     await prefs.setString('email', email);
-    await prefs.setString('phoneNumber', phoneNumber);
+    await prefs.setInt('phoneNumber', phoneNumber);
     await prefs.setString('address', address);
     await prefs.setString('bio', bio);
     await prefs.setString('avatar', selectedAvatar);
 
     _showToast("Data saved successfully");
+
+    if (widget.onProfileUpdate != null) {
+      widget.onProfileUpdate?.call(username, email, phoneNumber);
+    }
+
+    if (widget.onAvatarUpdate != null) {
+      widget.onAvatarUpdate?.call(selectedAvatar);
+    }
+
   }
 
   @override
@@ -68,7 +94,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       fullNameController.text = prefs.getString('fullName') ?? "";
       usernameController.text = prefs.getString('username') ?? "";
       emailController.text = prefs.getString('email') ?? "";
-      phoneNumberController.text = prefs.getString('phoneNumber') ?? "";
+      int phoneNumber = prefs.getInt('phoneNumber') ?? 0;
+      phoneNumberController.text = phoneNumber.toString();
       addressController.text = prefs.getString('address') ?? "";
       bioController.text = prefs.getString('bio') ?? "";
       selectedAvatar = prefs.getString('avatar') ?? selectedAvatar; 

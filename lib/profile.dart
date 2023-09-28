@@ -3,6 +3,7 @@ import 'package:marketplace/editprofile.dart';
 import 'package:marketplace/payments.dart';
 import 'package:marketplace/screens/splash/splash_screen.dart';
 import 'package:marketplace/settings.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ProfilePage extends StatefulWidget {
   ProfilePage({Key? key}) : super(key: key);
@@ -12,6 +13,45 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
+  String username = "";
+  String email = "";
+  int phoneNumber = 1234567890;
+  String selectedAvatar = "lib/images/avatar1.jpg";
+
+
+  @override
+  void initState() {
+    super.initState();
+    _loadUserData();
+  }
+
+  void _loadUserData() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      username = prefs.getString('username') ?? "";
+      email = prefs.getString('email') ?? "";
+      phoneNumber = prefs.getInt('phoneNumber') ?? 0;
+      selectedAvatar = prefs.getString('avatar') ?? "lib/images/avatar1.jpg";
+
+    });
+  }
+
+    void _updateProfile(String newUsername, String newEmail, int newPhoneNumber) {
+    setState(() {
+      username = newUsername;
+      email = newEmail;
+      phoneNumber = newPhoneNumber;
+    });
+  }
+  
+  void _updateAvatar(String newAvatarPath) {
+    setState(() {
+      selectedAvatar = newAvatarPath;
+    });
+  }
+
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,11 +69,13 @@ class _ProfilePageState extends State<ProfilePage> {
                   children: [
                     CircleAvatar(
                       radius: 80,
-                      backgroundImage: AssetImage('lib/images/profile.png'),
+                      //Ambil dari sharedPref
+                      backgroundImage: AssetImage(selectedAvatar),
                     ),
                     SizedBox(height: 10),
                     Text(
-                      "Manière",
+                      //Ambil dari sharedPref
+                      username,
                       style: TextStyle(
                         fontSize: 28,
                         fontWeight: FontWeight.bold,
@@ -41,7 +83,8 @@ class _ProfilePageState extends State<ProfilePage> {
                     ),
                     SizedBox(height: 10),
                     Text(
-                      "maniere@gmail.com",
+                      //Ambil dari sharedPref
+                      email,
                       style: TextStyle(
                         fontSize: 16,
                         color: Colors.blue,
@@ -50,7 +93,8 @@ class _ProfilePageState extends State<ProfilePage> {
                     ),
                     SizedBox(height: 10),
                     Text(
-                      "+62xxxxxxxxxxx",
+                      //Ambil dari sharedPref
+                      phoneNumber.toString(),
                       style: TextStyle(
                         fontSize: 16,
                       ),
@@ -149,7 +193,10 @@ class _ProfilePageState extends State<ProfilePage> {
 
   void _navigateToProfileScreen() {
     Navigator.push(context, MaterialPageRoute(builder: (_) {
-      return EditProfileScreen();
+      return EditProfileScreen(
+        onProfileUpdate: _updateProfile,
+        onAvatarUpdate: _updateAvatar,
+        );
     }));
   }
 
