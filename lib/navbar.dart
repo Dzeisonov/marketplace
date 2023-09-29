@@ -18,6 +18,7 @@ void main() {
     ),
   );
 }
+
 class NavBar extends StatefulWidget {
   static String routeName = '/navbar';
 

@@ -8,6 +8,7 @@ import 'package:marketplace/categoryScreen.dart';
 import 'package:marketplace/customPage.dart';
 import 'package:marketplace/data.dart';
 import 'package:marketplace/provider.dart';
+import 'package:marketplace/screens/details/details_screen.dart';
 import 'package:marketplace/search.dart';
 import 'package:provider/provider.dart';
 import 'dart:async';
@@ -46,8 +47,9 @@ class _HomePageState extends State<HomePage> {
   }
 
   ////////////////////////////
-  
-  void handleCartIconTap(int index, List<Color> cartIconColors, List<ShopItem> shopItems) {
+
+  void handleCartIconTap(
+      int index, List<Color> cartIconColors, List<ShopItem> shopItems) {
     setState(() {
       cartIconColors[index] = Colors.grey;
     });
@@ -75,15 +77,15 @@ class _HomePageState extends State<HomePage> {
   }
 
   void _handleBestSellerCartIconTap(int index) {
-    handleCartIconTap(index, bestSellerCartIconColors, ShopItem.shopItemsBestSeller);
+    handleCartIconTap(
+        index, bestSellerCartIconColors, ShopItem.shopItemsBestSeller);
   }
 
   void _handleShoesCartIconTap(int index) {
     handleCartIconTap(index, shoesCartIconColors, ShopItem.shopItemsShoes);
   }
 
-
-   ////////////////////////////
+  ////////////////////////////
 
   @override
   Widget build(BuildContext context) {
@@ -150,7 +152,6 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget _buildHomePageUI() {
-
     return Expanded(
       child: SingleChildScrollView(
         scrollDirection: Axis.vertical,
@@ -161,40 +162,37 @@ class _HomePageState extends State<HomePage> {
           SizedBox(height: 10),
 
           //Penyederhanaan
-          _buildCategory("Trending", ShopItem.shopItemsTrend, trendingCartIconColors, _handleTrendingCartIconTap),
-          _buildCategory("Best Seller", ShopItem.shopItemsBestSeller, bestSellerCartIconColors, _handleBestSellerCartIconTap),
-          _buildCategory("Shoes", ShopItem.shopItemsShoes, shoesCartIconColors, _handleShoesCartIconTap),
-
-
+          _buildCategory("Trending", ShopItem.shopItemsTrend,
+              trendingCartIconColors, _handleTrendingCartIconTap),
+          _buildCategory("Best Seller", ShopItem.shopItemsBestSeller,
+              bestSellerCartIconColors, _handleBestSellerCartIconTap),
+          _buildCategory("Shoes", ShopItem.shopItemsShoes, shoesCartIconColors,
+              _handleShoesCartIconTap),
         ]),
       ),
     );
   }
 
-
-
-
-  Widget _buildCategory(String title, List<ShopItem> items, List<Color> colors, Function(int) onTap){
+  Widget _buildCategory(String title, List<ShopItem> items, List<Color> colors,
+      Function(int) onTap) {
     return Column(
-    children: [
-      _buildItemCategory(title, () {
-        Navigator.of(context).push(
-          MaterialPageRoute(
-            builder: (context) {
-              return CustomPage(
-                appBarTitle: title,
-                lastChild: CategoryScreen(shopItems: items),
-              );
-            },
-          ),
-        );
-      }),
-      _buildItemContainer(items, colors, onTap),
-    ],
-  );
+      children: [
+        _buildItemCategory(title, () {
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) {
+                return CustomPage(
+                  appBarTitle: title,
+                  lastChild: CategoryScreen(shopItems: items),
+                );
+              },
+            ),
+          );
+        }),
+        _buildItemContainer(items, colors, onTap),
+      ],
+    );
   }
-
-
 
   // Method to build the icon list for categories
   Widget _buildIconList() {
@@ -420,156 +418,177 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+// Define your different values for shopItemBestSeller
+  List<List<ShopItem>> shopItemHome = [
+    ShopItem.shopItemsTrend,
+    ShopItem.shopItemsBestSeller,
+    ShopItem.shopItemsShoes,
+  ];
+
   Widget _buildItemContainer(List<ShopItem> data, List<Color> cartIconColors,
       Function(int) onTapCallback) {
     double screenWidth = MediaQuery.of(context).size.width;
     double containerWidth = screenWidth * 0.016;
 
-    List<Widget> rows = [];
-    List<ShopItem> shopItems = List.from(data);
+    // List<Widget> rows = [];
 
-    while (shopItems.isNotEmpty) {
-      List<Widget> rowChildren = [];
+    List<Widget> rowChildren = [];
 
-      while (shopItems.isNotEmpty) {
-        ShopItem item = shopItems.removeAt(0);
-        int index = rows.length + rowChildren.length;
-        rowChildren.add(_buildShopItem(item.imgPath, item.name, item.rating,
-            item.price, index, cartIconColors[index], onTapCallback));
-      }
-
-      rows.add(
-        Row(
-          children: rowChildren,
-        ),
-      );
+    for (int index = 0; index < data.length; index++) {
+      ShopItem item = data[index];
+      rowChildren.add(_buildShopItem(item.imgPath, item.name, item.rating,
+          item.price, index, cartIconColors[index], onTapCallback, data));
     }
+
+    //   rows.add(
+    //     Row(
+    //       children: rowChildren,
+    //     ),
+    //   );
+    // }
 
     return Container(
       margin: EdgeInsets.symmetric(horizontal: containerWidth),
       child: SingleChildScrollView(
         scrollDirection: Axis.horizontal,
-        child: Column(
-          children: rows,
+        child: Row(
+          children: rowChildren,
         ),
       ),
     );
   }
 
   // Method to build a shop item widget
-  Widget _buildShopItem(String image, String name, double rating, double price,
-      int index, Color iconColor, Function(int) onTapCallback) {
-    return Container(
-      margin: EdgeInsets.symmetric(
-        horizontal: 10,
-        vertical: 15,
-      ),
-      height: 295,
-      width: 170,
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(10),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.7),
-            spreadRadius: 2,
-            blurRadius: 5,
-            offset: Offset(0, 3),
-          )
-        ],
-      ),
-      child: Column(children: [
-        Container(
-          margin: EdgeInsets.all(10),
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(10),
-            child: Image(
-              image: NetworkImage(image),
-              width: 160,
-              height: 160,
-              fit: BoxFit.fill,
-              alignment: Alignment.topCenter,
+  Widget _buildShopItem(
+      String image,
+      String name,
+      double rating,
+      double price,
+      int index,
+      Color iconColor,
+      Function(int) onTapCallback,
+      List<ShopItem> shopItemHome) {
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => DetailsScreen(shopItem: shopItemHome[index]),
+          ),
+        );
+      },
+      child: Container(
+        margin: EdgeInsets.symmetric(
+          horizontal: 10,
+          vertical: 15,
+        ),
+        height: 295,
+        width: 170,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(10),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.7),
+              spreadRadius: 2,
+              blurRadius: 5,
+              offset: Offset(0, 3),
+            )
+          ],
+        ),
+        child: Column(children: [
+          Container(
+            margin: EdgeInsets.all(10),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(10),
+              child: Image(
+                image: NetworkImage(image),
+                width: 160,
+                height: 160,
+                fit: BoxFit.fill,
+                alignment: Alignment.topCenter,
+              ),
             ),
           ),
-        ),
-        Container(
-          padding: EdgeInsets.only(left: 10, right: 10),
-          child: Column(children: [
-            Row(
-              children: [
-                Icon(
-                  Icons.star,
-                  color: Colors.yellow,
-                ),
-                SizedBox(width: 2),
-                Text(
-                  rating.toString(),
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  ),
-                )
-              ],
-            ),
-            SizedBox(
-              height: 5,
-            ),
-            Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              Text(
-                name,
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ]),
-            SizedBox(height: 10),
-            Container(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          Container(
+            padding: EdgeInsets.only(left: 10, right: 10),
+            child: Column(children: [
+              Row(
                 children: [
+                  Icon(
+                    Icons.star,
+                    color: Colors.yellow,
+                  ),
+                  SizedBox(width: 2),
                   Text(
-                    "\$" + price.toString(),
+                    rating.toString(),
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
                     ),
-                  ),
-                  Spacer(),
-                  GestureDetector(
-                    onTap: () {
-                      onTapCallback(index);
-                      ElegantNotification(
-                        notificationPosition: NotificationPosition.topCenter,
-                        animation: AnimationType.fromTop,
-                        width: 360,
-                        height: 50,
-                        description: Text("$name added to cart"),
-                        icon: const Icon(
-                          Icons.check_circle,
-                          color: Colors.black,
-                        ),
-                        progressIndicatorColor: Colors.black,
-                      ).show(context);
-                    },
-                    child: Container(
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: iconColor,
-                      ),
-                      padding: EdgeInsets.all(10),
-                      child: Icon(
-                        Icons.shopping_cart,
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
+                  )
                 ],
               ),
-            )
-          ]),
-        ),
-      ]),
+              SizedBox(
+                height: 5,
+              ),
+              Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                Text(
+                  name,
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ]),
+              SizedBox(height: 10),
+              Container(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "\$" + price.toString(),
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Spacer(),
+                    GestureDetector(
+                      onTap: () {
+                        onTapCallback(index);
+                        ElegantNotification(
+                          notificationPosition: NotificationPosition.topCenter,
+                          animation: AnimationType.fromTop,
+                          width: 360,
+                          height: 50,
+                          description: Text("$name added to cart"),
+                          icon: const Icon(
+                            Icons.check_circle,
+                            color: Colors.black,
+                          ),
+                          progressIndicatorColor: Colors.black,
+                        ).show(context);
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: iconColor,
+                        ),
+                        padding: EdgeInsets.all(10),
+                        child: Icon(
+                          Icons.shopping_cart,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              )
+            ]),
+          ),
+        ]),
+      ),
     );
   }
 }

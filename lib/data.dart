@@ -104,3 +104,9 @@ class ShopItem {
     }
   }
 }
+
+String description =
+    "Wearables that give you more confidence in your daily life. Our innovative devices are designed to boost your ...";
+
+String fullDesc =
+    "Wearables that give you more confidence in your daily life. Our innovative devices are designed to boost your self-assurance and empower you to take on every challenge with ease. Whether you're monitoring your health, or enhancing your personal style, our wearables provide the confidence you need to shine.";
