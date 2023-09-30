@@ -76,7 +76,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
           context,
           MaterialPageRoute(
             builder: (context) =>
-                DetailsScreen(shopItem: widget.shopItems[itemIndex]),
+                DetailsScreen(imgPath: image, name: name, rating: rating, price: price,)
           ),
         );
       },

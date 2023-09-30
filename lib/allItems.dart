@@ -73,7 +73,7 @@ class _AllScreenState extends State<AllScreen> {
         ShopItem item = categoryItems[colIndex];
         rowChildren.add(
           _buildShopItem(linearIndex, item.imgPath, item.name, item.rating,
-              item.price, ShopItem.combinedList), // Pass the linearIndex
+              item.price), // Pass the linearIndex
         );
 
         itemsInCurrentRow++; // Increment the count of items in the current row
@@ -97,187 +97,150 @@ class _AllScreenState extends State<AllScreen> {
     );
   }
 
-  int currentCategoryIndex = 0;
-  int currentItemIndex = 0;
-
-  Widget _buildShopItem(int index, String image, String name, double rating,
-      double price, List<List<ShopItem>> category) {
-    // Filter the combinedList based on the selected category and flatten it
-    List<List<ShopItem>> categoryList = ShopItem.combinedList;
-    ShopItem? currentItem;
-    int currentCategoryIndex = 0; // Initialize the category index
-    int currentItemIndex = 0; // Initialize the item index
-    int item = 0;
-
-    // Continue looping until a valid currentItem is found
-    while (currentCategoryIndex < categoryList.length) {
-      // // Check if we've reached the end of the current category
-      // if (currentItemIndex >= categoryList[currentCategoryIndex].length) {
-      //   // Move to the next category
-      //   currentCategoryIndex++;
-      //   item = 0; // Reset the item index to 0
-      //   continue; // Continue to the next iteration of the loop
-      // }
-
-      // Set currentItem here without breaking the loop
-      currentItem = categoryList[currentCategoryIndex][currentItemIndex % 6];
-      currentItemIndex += 1;
-      item++;
-
-      print(currentCategoryIndex);
-      print(currentItemIndex);
-      // Check if item exceeds 6, then move to the next category
-      if (item >= 6) {
-        currentCategoryIndex += 1;
-        item = 0;
-      }
-      if (currentCategoryIndex >= 4) {
-        break;
-      }
-    }
-
-    return GestureDetector(
+  Widget _buildShopItem(
+      int index, String image, String name, double rating, double price) {
+        return GestureDetector(
       onTap: () {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => DetailsScreen(shopItem: currentItem!),
+            builder: (context) =>
+                DetailsScreen(imgPath: image, name: name, rating: rating, price: price,)
           ),
         );
       },
       child: Container(
-        margin: EdgeInsets.symmetric(
-          horizontal: 10,
-          vertical: 15,
-        ),
-        height: 295,
-        width: 170,
-        decoration: BoxDecoration(
-          color: Colors.white, // Set the background color
-          borderRadius: BorderRadius.circular(10),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey.withOpacity(0.7),
-              spreadRadius: 2,
-              blurRadius: 5,
-              offset: Offset(0, 3),
-            )
-          ], // Set the border-radius value
-        ),
-        child: Column(children: [
-          Container(
-            margin: EdgeInsets.all(10),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(10),
-              child: Image(
-                image: NetworkImage(image),
-                width: 160,
-                height: 160,
-                fit: BoxFit.fill,
-                alignment: Alignment.topCenter,
-              ),
+      margin: EdgeInsets.symmetric(
+        horizontal: 10,
+        vertical: 15,
+      ),
+      height: 295,
+      width: 170,
+      decoration: BoxDecoration(
+        color: Colors.white, // Set the background color
+        borderRadius: BorderRadius.circular(10),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.7),
+            spreadRadius: 2,
+            blurRadius: 5,
+            offset: Offset(0, 3),
+          )
+        ], // Set the border-radius value
+      ),
+      child: Column(children: [
+        Container(
+          margin: EdgeInsets.all(10),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(10),
+            child: Image(
+              image: NetworkImage(image),
+              width: 160,
+              height: 160,
+              fit: BoxFit.fill,
+              alignment: Alignment.topCenter,
             ),
           ),
-          Container(
-            padding: EdgeInsets.only(left: 10, right: 10),
-            child: Column(children: [
-              Row(
-                children: [
-                  Icon(
-                    Icons.star,
-                    color: Colors.yellow,
-                  ),
-                  SizedBox(width: 2),
-                  Text(
-                    rating.toString(),
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  )
-                ],
-              ),
-              SizedBox(
-                height: 5,
-              ),
-              Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
+        ),
+        Container(
+          padding: EdgeInsets.only(left: 10, right: 10),
+          child: Column(children: [
+            Row(
+              children: [
+                Icon(
+                  Icons.star,
+                  color: Colors.yellow,
+                ),
+                SizedBox(width: 2),
                 Text(
-                  name,
+                  rating.toString(),
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
                   ),
+                )
+              ],
+            ),
+            SizedBox(
+              height: 5,
+            ),
+            Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
+              Text(
+                name,
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
                 ),
-              ]),
-              SizedBox(height: 10),
-              Container(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      "\$" + price.toString(),
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    Spacer(),
-                    InkWell(
-                      onTap: () {
-                        setState(() {
-                          // Change the color when tapped based on the index
-                          cartCircleColors[index] =
-                              Colors.grey; // Replace with your desired color
-                        });
-
-                        CartItem cartItem =
-                            CartItem(image, name, rating, price, 1);
-                        final cartProvider =
-                            Provider.of<CartProvider>(context, listen: false);
-                        cartProvider.addItemToCart(cartItem);
-
-                        // Revert the color change after 0.05 seconds
-                        Future.delayed(Duration(milliseconds: 50), () {
-                          setState(() {
-                            cartCircleColors[index] =
-                                Colors.black; // Revert to the default color
-                          });
-                        });
-
-                        ElegantNotification(
-                          notificationPosition: NotificationPosition.topCenter,
-                          animation: AnimationType.fromTop,
-                          width: 360,
-                          height: 50,
-                          // title: const Text('Success!'),
-                          description: Text("$name added to cart"),
-                          icon: const Icon(
-                            Icons.check_circle,
-                            color: Colors.black,
-                          ),
-                          progressIndicatorColor: Colors.black,
-                        ).show(context);
-                      },
-                      child: Container(
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: cartCircleColors[
-                              index], // Set the color based on the index
-                        ),
-                        padding: EdgeInsets.all(10),
-                        child: Icon(
-                          Icons.shopping_cart,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              )
+              ),
             ]),
-          ),
-        ]),
-      ),
-    );
+            SizedBox(height: 10),
+            Container(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    "\$" + price.toString(),
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  Spacer(),
+                  InkWell(
+                    onTap: () {
+                      setState(() {
+                        // Change the color when tapped based on the index
+                        cartCircleColors[index] =
+                            Colors.grey; // Replace with your desired color
+                      });
+
+                      CartItem cartItem =
+                          CartItem(image, name, rating, price, 1);
+                      final cartProvider =
+                          Provider.of<CartProvider>(context, listen: false);
+                      cartProvider.addItemToCart(cartItem);
+
+                      // Revert the color change after 0.05 seconds
+                      Future.delayed(Duration(milliseconds: 50), () {
+                        setState(() {
+                          cartCircleColors[index] =
+                              Colors.black; // Revert to the default color
+                        });
+                      });
+
+                      ElegantNotification(
+                        notificationPosition: NotificationPosition.topCenter,
+                        animation: AnimationType.fromTop,
+                        width: 360,
+                        height: 50,
+                        // title: const Text('Success!'),
+                        description: Text("$name added to cart"),
+                        icon: const Icon(
+                          Icons.check_circle,
+                          color: Colors.black,
+                        ),
+                        progressIndicatorColor: Colors.black,
+                      ).show(context);
+                    },
+                    child: Container(
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: cartCircleColors[
+                            index], // Set the color based on the index
+                      ),
+                      padding: EdgeInsets.all(10),
+                      child: Icon(
+                        Icons.shopping_cart,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            )
+          ]),
+        ),
+      ]),
+    ));
   }
 }

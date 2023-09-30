@@ -4,7 +4,6 @@ import 'package:elegant_notification/elegant_notification.dart';
 import 'package:elegant_notification/resources/arrays.dart';
 import 'package:flutter/material.dart';
 import 'package:marketplace/cart.dart';
-import 'package:marketplace/data.dart';
 import 'package:marketplace/provider.dart';
 import 'package:marketplace/screens/details/components/product_description.dart';
 import 'package:marketplace/screens/details/components/product_images.dart';
@@ -12,9 +11,12 @@ import 'package:marketplace/screens/details/components/top_rounded_container.dar
 import 'package:provider/provider.dart';
 
 class Body extends StatefulWidget {
-  final ShopItem shopItem;
+  final String imgPath;
+  final String name;
+  final double rating;
+  final double price;
 
-  const Body({Key? key, required this.shopItem}) : super(key: key);
+  const Body({Key? key, required this.imgPath, required this.name, required this.rating, required this.price,}) : super(key: key);
 
   @override
   State<Body> createState() => _BodyState();
@@ -28,13 +30,14 @@ class _BodyState extends State<Body> {
     return Stack(children: [
       ListView(
         children: [
-          ProductImages(shopItem: widget.shopItem),
+          ProductImages(imgPath: widget.imgPath),
           TopRoundedContainer(
             color: Colors.white,
             child: Column(
               children: [
                 ProductDescription(
-                  shopItem: widget.shopItem,
+                  name: widget.name,
+                  price: widget.price,
                   pressOnSeeMore: () {},
                 ),
               ],
@@ -50,10 +53,10 @@ class _BodyState extends State<Body> {
               isCartTappedList = true; // Set the tapped state for this button
             });
             CartItem cartItem = CartItem(
-              widget.shopItem.imgPath,
-              widget.shopItem.name,
-              widget.shopItem.rating,
-              widget.shopItem.price,
+              widget.imgPath,
+              widget.name,
+              widget.rating,
+              widget.price,
               1,
             );
             final cartProvider =
@@ -74,7 +77,7 @@ class _BodyState extends State<Body> {
               width: 360,
               height: 50,
               // title: const Text('Success!'),
-              description: Text("${widget.shopItem.name} added to cart"),
+              description: Text("${widget.name} added to cart"),
               icon: const Icon(
                 Icons.check_circle,
                 color: Colors.black,

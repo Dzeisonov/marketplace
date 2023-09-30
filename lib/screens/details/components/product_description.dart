@@ -7,11 +7,13 @@ import 'package:marketplace/sizeconfig.dart';
 class ProductDescription extends StatelessWidget {
   const ProductDescription({
     Key? key,
-    required this.shopItem,
+    required this.name,
+    required this.price,
     this.pressOnSeeMore,
   }) : super(key: key);
 
-  final ShopItem shopItem;
+  final String name;
+  final double price;
   final GestureTapCallback? pressOnSeeMore;
 
   @override
@@ -24,7 +26,7 @@ class ProductDescription extends StatelessWidget {
           padding:
               EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(20)),
           child: Text(
-            shopItem.name,
+            name,
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
           ),
         ),
@@ -69,7 +71,7 @@ class ProductDescription extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "Price: \$${shopItem.price}",
+                "Price: \$${price}",
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
             ],

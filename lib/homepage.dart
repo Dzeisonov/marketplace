@@ -473,7 +473,7 @@ class _HomePageState extends State<HomePage> {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => DetailsScreen(shopItem: shopItemHome[index]),
+            builder: (context) => DetailsScreen(imgPath: image, name: name, rating: rating, price: price,),
           ),
         );
       },

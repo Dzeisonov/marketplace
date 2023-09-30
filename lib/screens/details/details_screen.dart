@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:marketplace/data.dart';
 import 'components/body.dart';
 import 'components/app_bar.dart';
 
 class DetailsScreen extends StatelessWidget {
   static const routeName = '/details';
-  final ShopItem shopItem;
+  final String imgPath;
+  final String name;
+  final double rating;
+  final double price;
 
-  DetailsScreen({required this.shopItem});
+  DetailsScreen({required this.imgPath, required this.name, required this.rating, required this.price,});
 
   @override
   Widget build(BuildContext context) {
@@ -15,9 +17,10 @@ class DetailsScreen extends StatelessWidget {
       backgroundColor: Color(0xFFF5F6F9),
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(AppBar().preferredSize.height),
-        child: CustomAppBar(rating: shopItem.rating),
+        child: CustomAppBar(rating: rating),
       ),
-      body: Body(shopItem: shopItem),
+      body: Body(imgPath: imgPath, name: name, rating: 
+      rating, price: price,),
     );
   }
 }

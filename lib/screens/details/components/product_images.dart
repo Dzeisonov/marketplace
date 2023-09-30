@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:marketplace/data.dart';
 import 'package:marketplace/sizeconfig.dart';
 
 class ProductImages extends StatefulWidget {
   const ProductImages({
     Key? key,
-    required this.shopItem,
+    required this.imgPath,
   }) : super(key: key);
 
-  final ShopItem shopItem;
+  final String imgPath;
 
   @override
   _ProductImagesState createState() => _ProductImagesState();
@@ -24,8 +23,8 @@ class _ProductImagesState extends State<ProductImages> {
           child: AspectRatio(
             aspectRatio: 1,
             child: Hero(
-              tag: widget.shopItem.toString(),
-              child: Image.network(widget.shopItem.imgPath),
+              tag: widget.toString(),
+              child: Image.network(widget.imgPath),
             ),
           ),
         )
