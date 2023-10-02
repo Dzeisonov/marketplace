@@ -64,7 +64,6 @@ class _BodyState extends State<Body> {
               children: [
                 _buildProductDescription(
                   name: widget.name,
-                  price: widget.price,
                   description: widget.description,
                 ),
               ],
@@ -74,64 +73,75 @@ class _BodyState extends State<Body> {
       ),
       Align(
         alignment: Alignment.bottomCenter,
-        child: GestureDetector(
-          onTap: () {
-            setState(() {
-              isCartTappedList = true; // Set the tapped state for this button
-            });
-            CartItem cartItem = CartItem(
-              widget.imgPath,
-              widget.name,
-              widget.rating,
-              widget.price,
-              1,
-            );
-            final cartProvider =
-                Provider.of<CartProvider>(context, listen: false);
-            cartProvider.addItemToCart(cartItem);
-
-            // Start a timer to reset the color after 1 second
-            Timer(Duration(milliseconds: 50), () {
-              setState(() {
-                isCartTappedList =
-                    false; // Reset the tapped state for this button
-              });
-            });
-
-            ElegantNotification(
-              notificationPosition: NotificationPosition.topCenter,
-              animation: AnimationType.fromTop,
-              width: 360,
-              height: 50,
-              // title: const Text('Success!'),
-              description: Text("${widget.name} added to cart"),
-              icon: const Icon(
-                Icons.check_circle,
-                color: Colors.black,
-              ),
-              progressIndicatorColor: Colors.black,
-            ).show(context);
-          },
-          child: Container(
-            margin: EdgeInsets.only(bottom: 20),
-            padding: EdgeInsets.only(left: 16, right: 16),
-            width: 240,
-            height: 60,
-            decoration: BoxDecoration(
-              color: Colors.black,
-              borderRadius: BorderRadius.circular(30),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(
+              "Price: \$${widget.price}",
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
-            child: Center(
-              child: Text(
-                "Add To Cart",
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
+            SizedBox(height: 10),
+            GestureDetector(
+              onTap: () {
+                setState(() {
+                  isCartTappedList =
+                      true; // Set the tapped state for this button
+                });
+                CartItem cartItem = CartItem(
+                  widget.imgPath,
+                  widget.name,
+                  widget.rating,
+                  widget.price,
+                  1,
+                );
+                final cartProvider =
+                    Provider.of<CartProvider>(context, listen: false);
+                cartProvider.addItemToCart(cartItem);
+
+                // Start a timer to reset the color after 1 second
+                Timer(Duration(milliseconds: 50), () {
+                  setState(() {
+                    isCartTappedList =
+                        false; // Reset the tapped state for this button
+                  });
+                });
+
+                ElegantNotification(
+                  notificationPosition: NotificationPosition.topCenter,
+                  animation: AnimationType.fromTop,
+                  width: 360,
+                  height: 50,
+                  // title: const Text('Success!'),
+                  description: Text("${widget.name} added to cart"),
+                  icon: const Icon(
+                    Icons.check_circle,
+                    color: Colors.black,
+                  ),
+                  progressIndicatorColor: Colors.black,
+                ).show(context);
+              },
+              child: Container(
+                margin: EdgeInsets.only(bottom: 20),
+                padding: EdgeInsets.only(left: 16, right: 16),
+                width: 240,
+                height: 60,
+                decoration: BoxDecoration(
+                  color: Colors.black,
+                  borderRadius: BorderRadius.circular(30),
+                ),
+                child: Center(
+                  child: Text(
+                    "Add To Cart",
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
+                  ),
                 ),
               ),
             ),
-          ),
+          ],
         ),
       ),
     ]);
@@ -219,46 +229,35 @@ class _BodyState extends State<Body> {
   }
 
   Widget _buildProductDescription(
-      {required String name,
-      required double price,
-      required String description}) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
+      {required String name, required String description}) {
+    return Stack(
       children: [
-        SizedBox(height: 10),
-        Padding(
-          padding:
-              EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(20)),
-          child: Text(
-            name,
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-          ),
-        ),
-        SizedBox(height: 10),
-        Padding(
-          padding: EdgeInsets.only(
-            left: getProportionateScreenWidth(35),
-            right: getProportionateScreenWidth(35),
-            top: 16,
-          ),
-          child: Text(
-            description,
-            textAlign: TextAlign.justify,
-            // maxLines: 3,
-          ),
-        ),
-        SizedBox(height: 165),
-        Padding(
-          padding: EdgeInsets.only(left: 1),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                "Price: \$$price",
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            SizedBox(height: 10),
+            Padding(
+              padding: EdgeInsets.symmetric(
+                  horizontal: getProportionateScreenWidth(20)),
+              child: Text(
+                name,
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
               ),
-            ],
-          ),
+            ),
+            SizedBox(height: 10),
+            Padding(
+              padding: EdgeInsets.only(
+                left: getProportionateScreenWidth(35),
+                right: getProportionateScreenWidth(35),
+                top: 16,
+              ),
+              child: Text(
+                description,
+                textAlign: TextAlign.justify,
+                // maxLines: 3,
+              ),
+            ),
+          ],
         ),
       ],
     );
