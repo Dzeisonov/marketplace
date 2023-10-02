@@ -30,10 +30,11 @@ class Body extends StatefulWidget {
 }
 
 class _BodyState extends State<Body> {
-  bool isCartTappedList = false;
+  bool isCartTapped = false;
 
   @override
   Widget build(BuildContext context) {
+    Color buttonColor = isCartTapped ? Colors.grey : Colors.black;
     return Stack(children: [
       ListView(
         children: [
@@ -81,11 +82,10 @@ class _BodyState extends State<Body> {
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
             SizedBox(height: 10),
-            GestureDetector(
+            InkWell(
               onTap: () {
                 setState(() {
-                  isCartTappedList =
-                      true; // Set the tapped state for this button
+                  isCartTapped = true; // Set the tapped state for this button
                 });
                 CartItem cartItem = CartItem(
                   widget.imgPath,
@@ -101,7 +101,7 @@ class _BodyState extends State<Body> {
                 // Start a timer to reset the color after 1 second
                 Timer(Duration(milliseconds: 50), () {
                   setState(() {
-                    isCartTappedList =
+                    isCartTapped =
                         false; // Reset the tapped state for this button
                   });
                 });
@@ -126,7 +126,7 @@ class _BodyState extends State<Body> {
                 width: 240,
                 height: 60,
                 decoration: BoxDecoration(
-                  color: Colors.black,
+                  color: buttonColor,
                   borderRadius: BorderRadius.circular(30),
                 ),
                 child: Center(
