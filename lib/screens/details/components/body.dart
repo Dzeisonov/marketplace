@@ -1,3 +1,5 @@
+// ignore_for_file: dead_code
+
 import 'dart:async';
 
 import 'package:elegant_notification/elegant_notification.dart';
@@ -31,6 +33,7 @@ class Body extends StatefulWidget {
 
 class _BodyState extends State<Body> {
   bool isCartTapped = false;
+  bool isExpanded = false;
 
   @override
   Widget build(BuildContext context) {
@@ -251,10 +254,41 @@ class _BodyState extends State<Body> {
                 right: getProportionateScreenWidth(35),
                 top: 16,
               ),
-              child: Text(
-                description,
-                textAlign: TextAlign.justify,
-                // maxLines: 3,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    isExpanded
+                        ? description
+                        : description.substring(0, 100) + ' ...',
+                    maxLines: isExpanded ? null : 3,
+                    textAlign: TextAlign.justify,
+                  ),
+                  SizedBox(height: 8),
+                  InkWell(
+                    onTap: () {
+                      setState(() {
+                        isExpanded = !isExpanded;
+                      });
+                    },
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Text(
+                          isExpanded ? 'See less' : 'See more',
+                          style: TextStyle(
+                              fontWeight: FontWeight.w600, color: kTextColor),
+                        ),
+                        SizedBox(width: 5),
+                        Icon(
+                          isExpanded ? Icons.arrow_back : Icons.arrow_forward,
+                          size: 12,
+                          color: kTextColor,
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
               ),
             ),
           ],
