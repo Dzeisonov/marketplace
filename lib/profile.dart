@@ -15,7 +15,7 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends State<ProfilePage> {
   String username = "";
   String email = "";
-  int phoneNumber = 1234567890;
+  String phoneNumber = "1234567890";
   String selectedAvatar = "lib/images/avatar1.jpg";
 
 
@@ -30,13 +30,13 @@ class _ProfilePageState extends State<ProfilePage> {
     setState(() {
       username = prefs.getString('username') ?? "";
       email = prefs.getString('email') ?? "";
-      phoneNumber = prefs.getInt('phoneNumber') ?? 0;
+      phoneNumber = prefs.getString('phoneNumber') ?? "";
       selectedAvatar = prefs.getString('avatar') ?? "lib/images/avatar1.jpg";
 
     });
   }
 
-    void _updateProfile(String newUsername, String newEmail, int newPhoneNumber) {
+    void _updateProfile(String newUsername, String newEmail, String newPhoneNumber) {
     setState(() {
       username = newUsername;
       email = newEmail;
