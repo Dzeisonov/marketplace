@@ -14,6 +14,7 @@ class _PaymentsScreenState extends State<PaymentsScreen> {
   String cardNumber = '';
   String expiresDate = '';
   String cvv = '';
+  bool isExpanded = false; // Set the card to condensed
 
   String maniereCreditsData = '';
   String giftCardsData = '';
@@ -35,7 +36,7 @@ class _PaymentsScreenState extends State<PaymentsScreen> {
     },
   ];
 
-  String giftCode = '';  
+  String giftCode = '';
 
   @override
   Widget build(BuildContext context) {
@@ -80,7 +81,7 @@ class _PaymentsScreenState extends State<PaymentsScreen> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           _buildPaymentsItem("Debit/Credit Cards", Icons.credit_card),
-          if (selectedPayment == "Debit/Credit Cards") ...[
+          if (selectedPayment == "Debit/Credit Cards" && isExpanded) ...[
             SizedBox(height: 16.0),
             _buildCreditCardImage(),
             SizedBox(height: 16.0),
@@ -89,8 +90,9 @@ class _PaymentsScreenState extends State<PaymentsScreen> {
             _buildSaveButton(),
           ],
           _buildDivider(),
-          _buildPaymentsItem("Manière Credits", Icons.monetization_on, showPoints: true),
-          if (selectedPayment == "Manière Credits") ...[
+          _buildPaymentsItem("Manière Credits", Icons.monetization_on,
+              showPoints: true),
+          if (selectedPayment == "Manière Credits" && isExpanded) ...[
             SizedBox(height: 16.0),
             _buildManiereCreditsInfo(),
             SizedBox(height: 16.0),
@@ -98,7 +100,7 @@ class _PaymentsScreenState extends State<PaymentsScreen> {
           ],
           _buildDivider(),
           _buildPaymentsItem("Vouchers", Icons.confirmation_num),
-          if (selectedPayment == "Vouchers") ...[
+          if (selectedPayment == "Vouchers" && isExpanded) ...[
             SizedBox(height: 16.0),
             _buildVouchersForm(),
             SizedBox(height: 16.0),
@@ -106,7 +108,7 @@ class _PaymentsScreenState extends State<PaymentsScreen> {
           ],
           _buildDivider(),
           _buildPaymentsItem("Gift Cards", Icons.card_giftcard),
-          if (selectedPayment == "Gift Cards") ...[
+          if (selectedPayment == "Gift Cards" && isExpanded) ...[
             SizedBox(height: 16.0),
             _buildGiftCardsInstructions(),
             SizedBox(height: 16.0),
@@ -122,23 +124,39 @@ class _PaymentsScreenState extends State<PaymentsScreen> {
     );
   }
 
-  Widget _buildPaymentsItem(String item, IconData iconData, {bool showPoints = false}) {
+  Widget _buildPaymentsItem(String item, IconData iconData,
+      {bool showPoints = false}) {
+    final isSelected = selectedPayment == item;
     return Card(
       elevation: 4.0,
       child: ListTile(
         leading: Icon(
           iconData,
           size: 36.0,
-          color: Colors.blue,
+          color: Colors.black,
         ),
-        title: Text(
-          item,
-          style: TextStyle(fontSize: 20),
+        title: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              item,
+              style: TextStyle(fontSize: 20),
+            ),
+            if (showPoints)
+              Text(
+                "Points: $maniereCreditsPoints",
+                style: TextStyle(fontSize: 13),
+              ),
+          ],
         ),
-        subtitle: showPoints ? Text("Points: $maniereCreditsPoints") : null,
         onTap: () {
           setState(() {
-            selectedPayment = item;
+            if (isSelected) {
+              isExpanded = !isExpanded;
+            } else {
+              selectedPayment = item;
+              isExpanded = true;
+            }
           });
         },
       ),
@@ -210,7 +228,17 @@ class _PaymentsScreenState extends State<PaymentsScreen> {
           fontSize: 16.0,
         );
       },
-      child: Text("Save"),
+      style: ElevatedButton.styleFrom(
+        primary: Colors.black,
+      ),
+      child: Text(
+        "Save",
+        style: TextStyle(
+          fontSize: 14,
+          fontWeight: FontWeight.bold,
+          color: Colors.white,
+        ),
+      ),
     );
   }
 
@@ -283,6 +311,18 @@ class _PaymentsScreenState extends State<PaymentsScreen> {
                   textColor: Colors.white,
                   fontSize: 16.0,
                 );
+              } else {
+                setState(() {
+                  voucher['used'] = false;
+                });
+                Fluttertoast.showToast(
+                  msg: "Voucher '${voucher['name']}' has not been used",
+                  toastLength: Toast.LENGTH_SHORT,
+                  gravity: ToastGravity.BOTTOM,
+                  backgroundColor: Colors.green,
+                  textColor: Colors.white,
+                  fontSize: 16.0,
+                );
               }
             },
           ),
@@ -303,7 +343,17 @@ class _PaymentsScreenState extends State<PaymentsScreen> {
           fontSize: 16.0,
         );
       },
-      child: Text("Save Vouchers"),
+      style: ElevatedButton.styleFrom(
+        primary: Colors.black,
+      ),
+      child: Text(
+        "Save Vouchers",
+        style: TextStyle(
+          fontSize: 14,
+          fontWeight: FontWeight.bold,
+          color: Colors.white,
+        ),
+      ),
     );
   }
 
@@ -352,7 +402,17 @@ class _PaymentsScreenState extends State<PaymentsScreen> {
           fontSize: 16.0,
         );
       },
-      child: Text("Redeem Now"),
+      style: ElevatedButton.styleFrom(
+        primary: Colors.black,
+      ),
+      child: Text(
+        "Redeem Now",
+        style: TextStyle(
+          fontSize: 14,
+          fontWeight: FontWeight.bold,
+          color: Colors.white,
+        ),
+      ),
     );
   }
 }
