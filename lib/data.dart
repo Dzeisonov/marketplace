@@ -5,8 +5,9 @@ class ShopItem {
   final String name;
   final double rating;
   final double price;
+  final String description;
 
-  ShopItem(this.imgPath, this.name, this.rating, this.price);
+  ShopItem(this.imgPath, this.name, this.rating, this.price, this.description);
 
   static List<ShopItem> shopItemsTrend = [
     // ShopItem("lib/images/clothes/shoes/SHOES1.jpg", "Shoes1", 9.5, 3.99),
@@ -76,10 +77,11 @@ class ShopItem {
           String name = document['name'];
           double rating = document['rating'].toDouble();
           double price = document['price'].toDouble();
+          String description = document['description'];
           String category = document['category'];
 
           // Create a new ShopItem and add it to the respective list
-          ShopItem item = ShopItem(imgPath, name, rating, price);
+          ShopItem item = ShopItem(imgPath, name, rating, price, description);
 
           // Determine the category and add the item to the appropriate list
           if (category == 'trend') {
@@ -105,8 +107,8 @@ class ShopItem {
   }
 }
 
-String description =
-    "Wearables that give you more confidence in your daily life. Our innovative devices are designed to boost your ...";
+// String description =
+//     "Wearables that give you more confidence in your daily life. Our innovative devices are designed to boost your ...";
 
-String fullDesc =
-    "Wearables that give you more confidence in your daily life. Our innovative devices are designed to boost your self-assurance and empower you to take on every challenge with ease. Whether you're monitoring your health, or enhancing your personal style, our wearables provide the confidence you need to shine.";
+// String fullDesc =
+//     "Wearables that give you more confidence in your daily life. Our innovative devices are designed to boost your self-assurance and empower you to take on every challenge with ease. Whether you're monitoring your health, or enhancing your personal style, our wearables provide the confidence you need to shine.";

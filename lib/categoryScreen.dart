@@ -49,8 +49,8 @@ class _CategoryScreenState extends State<CategoryScreen> {
         ShopItem item = shopItems.removeAt(0);
         int itemIndex = data.indexOf(item); // Get the index of the item
 
-        rowChildren.add(_buildShopItem(
-            item.imgPath, item.name, item.rating, item.price, itemIndex));
+        rowChildren.add(_buildShopItem(item.imgPath, item.name, item.rating,
+            item.price, item.description, itemIndex));
       }
 
       rows.add(
@@ -68,16 +68,20 @@ class _CategoryScreenState extends State<CategoryScreen> {
     );
   }
 
-  Widget _buildShopItem(
-      String image, String name, double rating, double price, int itemIndex) {
+  Widget _buildShopItem(String image, String name, double rating, double price,
+      String description, int itemIndex) {
     return GestureDetector(
       onTap: () {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) =>
-                DetailsScreen(imgPath: image, name: name, rating: rating, price: price,)
-          ),
+              builder: (context) => DetailsScreen(
+                    imgPath: image,
+                    name: name,
+                    rating: rating,
+                    price: price,
+                    description: description,
+                  )),
         );
       },
       child: Container(

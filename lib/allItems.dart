@@ -73,7 +73,7 @@ class _AllScreenState extends State<AllScreen> {
         ShopItem item = categoryItems[colIndex];
         rowChildren.add(
           _buildShopItem(linearIndex, item.imgPath, item.name, item.rating,
-              item.price), // Pass the linearIndex
+              item.price, item.description), // Pass the linearIndex
         );
 
         itemsInCurrentRow++; // Increment the count of items in the current row
@@ -97,150 +97,155 @@ class _AllScreenState extends State<AllScreen> {
     );
   }
 
-  Widget _buildShopItem(
-      int index, String image, String name, double rating, double price) {
-        return GestureDetector(
-      onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) =>
-                DetailsScreen(imgPath: image, name: name, rating: rating, price: price,)
+  Widget _buildShopItem(int index, String image, String name, double rating,
+      double price, String description) {
+    return GestureDetector(
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => DetailsScreen(
+                      imgPath: image,
+                      name: name,
+                      rating: rating,
+                      price: price,
+                      description: description,
+                    )),
+          );
+        },
+        child: Container(
+          margin: EdgeInsets.symmetric(
+            horizontal: 10,
+            vertical: 15,
           ),
-        );
-      },
-      child: Container(
-      margin: EdgeInsets.symmetric(
-        horizontal: 10,
-        vertical: 15,
-      ),
-      height: 295,
-      width: 170,
-      decoration: BoxDecoration(
-        color: Colors.white, // Set the background color
-        borderRadius: BorderRadius.circular(10),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.7),
-            spreadRadius: 2,
-            blurRadius: 5,
-            offset: Offset(0, 3),
-          )
-        ], // Set the border-radius value
-      ),
-      child: Column(children: [
-        Container(
-          margin: EdgeInsets.all(10),
-          child: ClipRRect(
+          height: 295,
+          width: 170,
+          decoration: BoxDecoration(
+            color: Colors.white, // Set the background color
             borderRadius: BorderRadius.circular(10),
-            child: Image(
-              image: NetworkImage(image),
-              width: 160,
-              height: 160,
-              fit: BoxFit.fill,
-              alignment: Alignment.topCenter,
-            ),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.withOpacity(0.7),
+                spreadRadius: 2,
+                blurRadius: 5,
+                offset: Offset(0, 3),
+              )
+            ], // Set the border-radius value
           ),
-        ),
-        Container(
-          padding: EdgeInsets.only(left: 10, right: 10),
           child: Column(children: [
-            Row(
-              children: [
-                Icon(
-                  Icons.star,
-                  color: Colors.yellow,
-                ),
-                SizedBox(width: 2),
-                Text(
-                  rating.toString(),
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  ),
-                )
-              ],
-            ),
-            SizedBox(
-              height: 5,
-            ),
-            Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              Text(
-                name,
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
+            Container(
+              margin: EdgeInsets.all(10),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(10),
+                child: Image(
+                  image: NetworkImage(image),
+                  width: 160,
+                  height: 160,
+                  fit: BoxFit.fill,
+                  alignment: Alignment.topCenter,
                 ),
               ),
-            ]),
-            SizedBox(height: 10),
+            ),
             Container(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
+              padding: EdgeInsets.only(left: 10, right: 10),
+              child: Column(children: [
+                Row(
+                  children: [
+                    Icon(
+                      Icons.star,
+                      color: Colors.yellow,
+                    ),
+                    SizedBox(width: 2),
+                    Text(
+                      rating.toString(),
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    )
+                  ],
+                ),
+                SizedBox(
+                  height: 5,
+                ),
+                Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
                   Text(
-                    "\$" + price.toString(),
+                    name,
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  Spacer(),
-                  InkWell(
-                    onTap: () {
-                      setState(() {
-                        // Change the color when tapped based on the index
-                        cartCircleColors[index] =
-                            Colors.grey; // Replace with your desired color
-                      });
-
-                      CartItem cartItem =
-                          CartItem(image, name, rating, price, 1);
-                      final cartProvider =
-                          Provider.of<CartProvider>(context, listen: false);
-                      cartProvider.addItemToCart(cartItem);
-
-                      // Revert the color change after 0.05 seconds
-                      Future.delayed(Duration(milliseconds: 50), () {
-                        setState(() {
-                          cartCircleColors[index] =
-                              Colors.black; // Revert to the default color
-                        });
-                      });
-
-                      ElegantNotification(
-                        notificationPosition: NotificationPosition.topCenter,
-                        animation: AnimationType.fromTop,
-                        width: 360,
-                        height: 50,
-                        // title: const Text('Success!'),
-                        description: Text("$name added to cart"),
-                        icon: const Icon(
-                          Icons.check_circle,
-                          color: Colors.black,
+                ]),
+                SizedBox(height: 10),
+                Container(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "\$" + price.toString(),
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
                         ),
-                        progressIndicatorColor: Colors.black,
-                      ).show(context);
-                    },
-                    child: Container(
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: cartCircleColors[
-                            index], // Set the color based on the index
                       ),
-                      padding: EdgeInsets.all(10),
-                      child: Icon(
-                        Icons.shopping_cart,
-                        color: Colors.white,
+                      Spacer(),
+                      InkWell(
+                        onTap: () {
+                          setState(() {
+                            // Change the color when tapped based on the index
+                            cartCircleColors[index] =
+                                Colors.grey; // Replace with your desired color
+                          });
+
+                          CartItem cartItem =
+                              CartItem(image, name, rating, price, 1);
+                          final cartProvider =
+                              Provider.of<CartProvider>(context, listen: false);
+                          cartProvider.addItemToCart(cartItem);
+
+                          // Revert the color change after 0.05 seconds
+                          Future.delayed(Duration(milliseconds: 50), () {
+                            setState(() {
+                              cartCircleColors[index] =
+                                  Colors.black; // Revert to the default color
+                            });
+                          });
+
+                          ElegantNotification(
+                            notificationPosition:
+                                NotificationPosition.topCenter,
+                            animation: AnimationType.fromTop,
+                            width: 360,
+                            height: 50,
+                            // title: const Text('Success!'),
+                            description: Text("$name added to cart"),
+                            icon: const Icon(
+                              Icons.check_circle,
+                              color: Colors.black,
+                            ),
+                            progressIndicatorColor: Colors.black,
+                          ).show(context);
+                        },
+                        child: Container(
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: cartCircleColors[
+                                index], // Set the color based on the index
+                          ),
+                          padding: EdgeInsets.all(10),
+                          child: Icon(
+                            Icons.shopping_cart,
+                            color: Colors.white,
+                          ),
+                        ),
                       ),
-                    ),
+                    ],
                   ),
-                ],
-              ),
-            )
+                )
+              ]),
+            ),
           ]),
-        ),
-      ]),
-    ));
+        ));
   }
 }

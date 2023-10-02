@@ -18,7 +18,6 @@ class _ProfilePageState extends State<ProfilePage> {
   String phoneNumber = "1234567890";
   String selectedAvatar = "lib/images/avatar1.jpg";
 
-
   @override
   void initState() {
     super.initState();
@@ -32,25 +31,23 @@ class _ProfilePageState extends State<ProfilePage> {
       email = prefs.getString('email') ?? "";
       phoneNumber = prefs.getString('phoneNumber') ?? "";
       selectedAvatar = prefs.getString('avatar') ?? "lib/images/avatar1.jpg";
-
     });
   }
 
-    void _updateProfile(String newUsername, String newEmail, String newPhoneNumber) {
+  void _updateProfile(
+      String newUsername, String newEmail, String newPhoneNumber) {
     setState(() {
       username = newUsername;
       email = newEmail;
       phoneNumber = newPhoneNumber;
     });
   }
-  
+
   void _updateAvatar(String newAvatarPath) {
     setState(() {
       selectedAvatar = newAvatarPath;
     });
   }
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -196,7 +193,7 @@ class _ProfilePageState extends State<ProfilePage> {
       return EditProfileScreen(
         onProfileUpdate: _updateProfile,
         onAvatarUpdate: _updateAvatar,
-        );
+      );
     }));
   }
 

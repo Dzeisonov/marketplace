@@ -2,17 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-
-typedef void ProfileUpdateCallback(String username, String email, String phoneNumber);
+typedef void ProfileUpdateCallback(
+    String username, String email, String phoneNumber);
 
 typedef void AvatarUpdateCallback(String newAvatarPath);
-
 
 class EditProfileScreen extends StatefulWidget {
   final ProfileUpdateCallback? onProfileUpdate;
   final AvatarUpdateCallback? onAvatarUpdate;
 
-  EditProfileScreen({Key? key, this.onProfileUpdate, this.onAvatarUpdate}) : super(key: key);
+  EditProfileScreen({Key? key, this.onProfileUpdate, this.onAvatarUpdate})
+      : super(key: key);
 
   @override
   State<EditProfileScreen> createState() => _EditProfileScreenState();
@@ -50,10 +50,10 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     String username = usernameController.text;
     String email = emailController.text;
     // String phoneNumber = phoneNumberController.text;
-    String phoneNumber = phoneNumberController.text.replaceAll(RegExp(r'[^0-9]'), '');
+    String phoneNumber =
+        phoneNumberController.text.replaceAll(RegExp(r'[^0-9]'), '');
     String address = addressController.text;
     String bio = bioController.text;
-
 
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setString('fullName', fullName);
@@ -73,7 +73,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     if (widget.onAvatarUpdate != null) {
       widget.onAvatarUpdate?.call(selectedAvatar);
     }
-
   }
 
   @override
@@ -91,7 +90,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       phoneNumberController.text = prefs.getString('phoneNumber') ?? "0";
       addressController.text = prefs.getString('address') ?? "";
       bioController.text = prefs.getString('bio') ?? "";
-      selectedAvatar = prefs.getString('avatar') ?? selectedAvatar; 
+      selectedAvatar = prefs.getString('avatar') ?? selectedAvatar;
     });
   }
 
@@ -114,12 +113,19 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                 child: _buildProfileIcon(selectedAvatar),
               ),
               SizedBox(height: 20),
-              _buildEditProfileItem("Full Name", "Enter your full name...", controller: fullNameController),
-              _buildEditProfileItem("Username", "Enter your username...", controller: usernameController),
-              _buildEditProfileItem("Email", "Enter your email...", controller: emailController),
-              _buildEditProfileItem("Phone Number", "Enter your phone number...", controller: phoneNumberController),
-              _buildEditProfileItem("Address", "Enter your address...", controller: addressController),
-              _buildEditProfileItem("Bio", "Enter your bio...", controller: bioController),
+              _buildEditProfileItem("Full Name", "Enter your full name...",
+                  controller: fullNameController),
+              _buildEditProfileItem("Username", "Enter your username...",
+                  controller: usernameController),
+              _buildEditProfileItem("Email", "Enter your email...",
+                  controller: emailController),
+              _buildEditProfileItem(
+                  "Phone Number", "Enter your phone number...",
+                  controller: phoneNumberController),
+              _buildEditProfileItem("Address", "Enter your address...",
+                  controller: addressController),
+              _buildEditProfileItem("Bio", "Enter your bio...",
+                  controller: bioController),
               SizedBox(height: 20),
               _buildSaveButton(),
             ],
@@ -129,7 +135,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     );
   }
 
-  Widget _buildEditProfileItem(String label, String hint, {TextEditingController? controller}) {
+  Widget _buildEditProfileItem(String label, String hint,
+      {TextEditingController? controller}) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -175,7 +182,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                         margin: EdgeInsets.all(8.0),
                         decoration: BoxDecoration(
                           border: Border.all(
-                            color: isSelected ? Colors.green : Colors.transparent,
+                            color:
+                                isSelected ? Colors.green : Colors.transparent,
                             width: 4.0,
                           ),
                           shape: BoxShape.circle,

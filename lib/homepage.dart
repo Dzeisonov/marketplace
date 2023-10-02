@@ -436,8 +436,16 @@ class _HomePageState extends State<HomePage> {
 
     for (int index = 0; index < data.length; index++) {
       ShopItem item = data[index];
-      rowChildren.add(_buildShopItem(item.imgPath, item.name, item.rating,
-          item.price, index, cartIconColors[index], onTapCallback, data));
+      rowChildren.add(_buildShopItem(
+          item.imgPath,
+          item.name,
+          item.rating,
+          item.price,
+          item.description,
+          index,
+          cartIconColors[index],
+          onTapCallback,
+          data));
     }
 
     //   rows.add(
@@ -464,6 +472,7 @@ class _HomePageState extends State<HomePage> {
       String name,
       double rating,
       double price,
+      String description,
       int index,
       Color iconColor,
       Function(int) onTapCallback,
@@ -473,7 +482,13 @@ class _HomePageState extends State<HomePage> {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => DetailsScreen(imgPath: image, name: name, rating: rating, price: price,),
+            builder: (context) => DetailsScreen(
+              imgPath: image,
+              name: name,
+              rating: rating,
+              price: price,
+              description: description,
+            ),
           ),
         );
       },
