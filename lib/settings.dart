@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class SettingsScreen extends StatefulWidget {
   SettingsScreen({Key? key}) : super(key: key);
@@ -26,47 +27,117 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
   Widget _buildSettingsScreen() {
     return Expanded(
-      child: SingleChildScrollView(
-        child: Column(children: [
-          _buildSettingsItem("Language"),
-          _buildDivider(10, 10),
-          _buildSettingsItem("Display"),
-          _buildDivider(10, 10),
-          _buildSettingsItem("Notifications"),
-          _buildDivider(10, 10),
-          _buildSettingsItem("Security"),
-          _buildDivider(10, 10),
-          _buildSettingsItem("FAQ"),
-          _buildDivider(10, 10),
-          _buildSettingsItem("Terms & Conditions"),
-          _buildDivider(10, 10),
-          _buildSettingsItem("Privacy Policy"),
-          _buildDivider(10, 10),
-          _buildSettingsItem("About Us"),
-          _buildDivider(10, 10),
-        ]),
+        child: SingleChildScrollView(
+      child: Column(
+        children: [
+          Padding(
+            padding: EdgeInsets.only(left: 20, right: 20, top: 10),
+            child: Column(
+              children: [
+                ListTile(
+                  title: Text("Language", style: TextStyle(fontSize: 18)),
+                  trailing: Icon(Icons.language),
+                  onTap: () {
+                    _showToast("Under Development");
+                  },
+                ),
+                Divider(
+                  thickness: 1,
+                  color: Colors.grey,
+                ),
+                ListTile(
+                  title: Text("Display", style: TextStyle(fontSize: 18)),
+                  trailing: Icon(Icons.settings_display),
+                  onTap: () {
+                    _showToast("Under Development");
+                  },
+                ),
+                Divider(
+                  thickness: 1,
+                  color: Colors.grey,
+                ),
+                ListTile(
+                  title: Text("Notifications", style: TextStyle(fontSize: 18)),
+                  trailing: Icon(Icons.notifications),
+                  onTap: () {
+                    _showToast("Under Development");
+                  },
+                ),
+                Divider(
+                  thickness: 1,
+                  color: Colors.grey,
+                ),
+                ListTile(
+                  title: Text("Security", style: TextStyle(fontSize: 18)),
+                  trailing: Icon(Icons.security),
+                  onTap: () {
+                    _showToast("Under Development");
+                  },
+                ),
+                Divider(
+                  thickness: 1,
+                  color: Colors.grey,
+                ),
+                ListTile(
+                  title: Text("FAQ", style: TextStyle(fontSize: 18)),
+                  trailing: Icon(Icons.question_answer),
+                  onTap: () {
+                    _showToast("Under Development");
+                  },
+                ),
+                Divider(
+                  thickness: 1,
+                  color: Colors.grey,
+                ),
+                ListTile(
+                  title: Text("Terms & Conditions",
+                      style: TextStyle(fontSize: 18)),
+                  trailing: Icon(Icons.assignment_outlined),
+                  onTap: () {
+                    _showToast("Under Development");
+                  },
+                ),
+                Divider(
+                  thickness: 1,
+                  color: Colors.grey,
+                ),
+                ListTile(
+                  title: Text("Privacy Policy", style: TextStyle(fontSize: 18)),
+                  trailing: Icon(Icons.privacy_tip_outlined),
+                  onTap: () {
+                    _showToast("Under Development");
+                  },
+                ),
+                Divider(
+                  thickness: 1,
+                  color: Colors.grey,
+                ),
+                ListTile(
+                  title: Text("About Us", style: TextStyle(fontSize: 18)),
+                  trailing: Icon(Icons.info),
+                  onTap: () {
+                    _showToast("Under Development");
+                  },
+                ),
+                Divider(
+                  thickness: 1,
+                  color: Colors.grey,
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
-    );
+    ));
   }
 
-  Widget _buildSettingsItem(String item) {
-    return Container(
-      alignment: Alignment.topLeft,
-      margin: EdgeInsets.only(left: 12, top: 10, bottom: 10),
-      child: Text(
-        item,
-        style: TextStyle(fontSize: 20),
-      ),
-    );
-  }
-
-  Widget _buildDivider(double indent, double endIndent) {
-    return Divider(
-      height: 1,
-      thickness: 2,
-      color: Colors.black,
-      indent: indent, // Customize the space before the divider
-      endIndent: endIndent, // Customize the space after the divider
+  void _showToast(String message) {
+    Fluttertoast.showToast(
+      msg: message,
+      toastLength: Toast.LENGTH_SHORT,
+      gravity: ToastGravity.BOTTOM,
+      backgroundColor: Colors.black,
+      textColor: Colors.white,
     );
   }
 }
