@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:marketplace/categoryScreen.dart';
 import 'package:marketplace/data.dart';
 import 'package:marketplace/search.dart';
+import 'package:marketplace/sizeconfig.dart';
 
 class CatalogPage extends StatefulWidget {
   CatalogPage({Key? key}) : super(key: key);
@@ -20,8 +21,9 @@ class _CatalogPageState extends State<CatalogPage> {
         body: CustomScrollView(
           slivers: [
             SliverAppBar(
+              automaticallyImplyLeading: false, // Disable the back button
               backgroundColor: Colors.white,
-              expandedHeight: 110, // Adjust the expanded height as needed
+              expandedHeight: 120, // Adjust the expanded height as needed
               floating: false,
               pinned: false,
               flexibleSpace: Column(
@@ -31,9 +33,7 @@ class _CatalogPageState extends State<CatalogPage> {
                     child:
                         _buildSearchBar(), // Place the search bar widget here
                   ),
-                  SizedBox(
-                    height: 10,
-                  ),
+                  SizedBox(height: 10),
                   TabBar(
                     isScrollable: true,
                     indicatorColor: Colors.black,
@@ -88,7 +88,8 @@ class _CatalogPageState extends State<CatalogPage> {
     );
 
     return Container(
-      margin: EdgeInsets.only(left: 15, right: 15, top: 30),
+      margin: EdgeInsets.only(
+          left: 15, right: 15, top: getProportionateScreenHeight(35)),
       alignment: Alignment.topCenter,
       child: Column(
         children: [

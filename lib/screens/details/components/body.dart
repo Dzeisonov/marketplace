@@ -38,116 +38,131 @@ class _BodyState extends State<Body> {
   @override
   Widget build(BuildContext context) {
     Color buttonColor = isCartTapped ? Colors.grey : Colors.black;
-    return Stack(children: [
-      ListView(
-        children: [
-          _buildAppBar(rating: widget.rating),
-          _buildProductImage(imgPath: widget.imgPath),
-          Container(
-            margin: EdgeInsets.only(
-                top: getProportionateScreenWidth(20),
-                bottom: getProportionateScreenWidth(20)),
-            padding: EdgeInsets.only(top: getProportionateScreenWidth(20)),
-            width: double.infinity,
-            height: 450,
-            decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(40),
-                  topRight: Radius.circular(40),
-                ),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey.withOpacity(0.7),
-                    spreadRadius: 2,
-                    offset: Offset(0, -4),
-                    blurRadius: 5,
-                  ),
-                ]),
-            child: Column(
-              children: [
-                _buildProductDescription(
-                  name: widget.name,
-                  description: widget.description,
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-      Align(
-        alignment: Alignment.bottomCenter,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Text(
-              "Price: \$${widget.price}",
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-            ),
-            SizedBox(height: 10),
-            InkWell(
-              onTap: () {
-                setState(() {
-                  isCartTapped = true; // Set the tapped state for this button
-                });
-                CartItem cartItem = CartItem(
-                  widget.imgPath,
-                  widget.name,
-                  widget.rating,
-                  widget.price,
-                  1,
-                );
-                final cartProvider =
-                    Provider.of<CartProvider>(context, listen: false);
-                cartProvider.addItemToCart(cartItem);
-
-                // Start a timer to reset the color after 1 second
-                Timer(Duration(milliseconds: 50), () {
-                  setState(() {
-                    isCartTapped =
-                        false; // Reset the tapped state for this button
-                  });
-                });
-
-                ElegantNotification(
-                  notificationPosition: NotificationPosition.topCenter,
-                  animation: AnimationType.fromTop,
-                  width: 360,
-                  height: 50,
-                  // title: const Text('Success!'),
-                  description: Text("${widget.name} added to cart"),
-                  icon: const Icon(
-                    Icons.check_circle,
-                    color: Colors.black,
-                  ),
-                  progressIndicatorColor: Colors.black,
-                ).show(context);
-              },
-              child: Container(
-                margin: EdgeInsets.only(bottom: 20),
-                padding: EdgeInsets.only(left: 16, right: 16),
-                width: 240,
-                height: 60,
+    return Column(
+      mainAxisSize: MainAxisSize.max,
+      children: [
+        Expanded(
+          child: ListView(
+            physics: NeverScrollableScrollPhysics(),
+            children: [
+              _buildAppBar(rating: widget.rating),
+              _buildProductImage(imgPath: widget.imgPath),
+              Container(
+                margin: EdgeInsets.only(
+                    top: getProportionateScreenWidth(20),
+                    bottom: getProportionateScreenWidth(20)),
+                padding: EdgeInsets.only(top: getProportionateScreenWidth(20)),
+                width: double.infinity,
+                height: getProportionateScreenHeight(475),
                 decoration: BoxDecoration(
-                  color: buttonColor,
-                  borderRadius: BorderRadius.circular(30),
-                ),
-                child: Center(
-                  child: Text(
-                    "Add To Cart",
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
-                    ),
+                  color: Colors.white,
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(40),
+                    topRight: Radius.circular(40),
                   ),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.7),
+                      spreadRadius: 2,
+                      offset: Offset(0, -4),
+                      blurRadius: 5,
+                    ),
+                  ],
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    _buildProductDescription(
+                      name: widget.name,
+                      description: widget.description,
+                    ),
+                    Container(
+                      width: double.infinity,
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 16, vertical: 20),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Text(
+                            "Price: \$${widget.price}",
+                            style: TextStyle(
+                                fontSize: 18, fontWeight: FontWeight.bold),
+                          ),
+                          SizedBox(height: 10),
+                          InkWell(
+                            onTap: () {
+                              setState(() {
+                                isCartTapped =
+                                    true; // Set the tapped state for this button
+                              });
+                              CartItem cartItem = CartItem(
+                                widget.imgPath,
+                                widget.name,
+                                widget.rating,
+                                widget.price,
+                                1,
+                              );
+                              final cartProvider = Provider.of<CartProvider>(
+                                  context,
+                                  listen: false);
+                              cartProvider.addItemToCart(cartItem);
+
+                              // Start a timer to reset the color after 1 second
+                              Timer(Duration(milliseconds: 50), () {
+                                setState(() {
+                                  isCartTapped =
+                                      false; // Reset the tapped state for this button
+                                });
+                              });
+
+                              ElegantNotification(
+                                notificationPosition:
+                                    NotificationPosition.topCenter,
+                                animation: AnimationType.fromTop,
+                                width: 360,
+                                height: 50,
+                                // title: const Text('Success!'),
+                                description:
+                                    Text("${widget.name} added to cart"),
+                                icon: const Icon(
+                                  Icons.check_circle,
+                                  color: Colors.black,
+                                ),
+                                progressIndicatorColor: Colors.black,
+                              ).show(context);
+                            },
+                            child: Container(
+                              margin: EdgeInsets.only(bottom: 20),
+                              padding: EdgeInsets.only(left: 16, right: 16),
+                              width: 240,
+                              height: 60,
+                              decoration: BoxDecoration(
+                                color: buttonColor,
+                                borderRadius: BorderRadius.circular(30),
+                              ),
+                              child: Center(
+                                child: Text(
+                                  "Add To Cart",
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
-      ),
-    ]);
+      ],
+    );
   }
 
   Size get preferredSize => Size.fromHeight(AppBar().preferredSize.height);
@@ -160,7 +175,7 @@ class _BodyState extends State<Body> {
         child: Row(
           children: [
             SizedBox(
-              height: getProportionateScreenWidth(40),
+              height: getProportionateScreenWidth(50),
               width: getProportionateScreenWidth(40),
               child: TextButton(
                 style: TextButton.styleFrom(
@@ -168,7 +183,7 @@ class _BodyState extends State<Body> {
                     borderRadius: BorderRadius.circular(60),
                   ),
                   primary: kPrimaryColor,
-                  backgroundColor: Colors.white,
+                  backgroundColor: Colors.transparent,
                   padding: EdgeInsets.zero,
                 ),
                 onPressed: () => Navigator.pop(context),

@@ -223,7 +223,7 @@ class _PaymentsScreenState extends State<PaymentsScreen> {
           msg: "Your card data has been successfully saved",
           toastLength: Toast.LENGTH_SHORT,
           gravity: ToastGravity.BOTTOM,
-          backgroundColor: Colors.green,
+          backgroundColor: Colors.black,
           textColor: Colors.white,
           fontSize: 16.0,
         );
@@ -307,7 +307,7 @@ class _PaymentsScreenState extends State<PaymentsScreen> {
                   msg: "Voucher '${voucher['name']}' has been used",
                   toastLength: Toast.LENGTH_SHORT,
                   gravity: ToastGravity.BOTTOM,
-                  backgroundColor: Colors.green,
+                  backgroundColor: Colors.black,
                   textColor: Colors.white,
                   fontSize: 16.0,
                 );
@@ -319,7 +319,7 @@ class _PaymentsScreenState extends State<PaymentsScreen> {
                   msg: "Voucher '${voucher['name']}' has not been used",
                   toastLength: Toast.LENGTH_SHORT,
                   gravity: ToastGravity.BOTTOM,
-                  backgroundColor: Colors.green,
+                  backgroundColor: Colors.black,
                   textColor: Colors.white,
                   fontSize: 16.0,
                 );
@@ -338,7 +338,7 @@ class _PaymentsScreenState extends State<PaymentsScreen> {
           msg: "Voucher data has been successfully saved",
           toastLength: Toast.LENGTH_SHORT,
           gravity: ToastGravity.BOTTOM,
-          backgroundColor: Colors.green,
+          backgroundColor: Colors.black,
           textColor: Colors.white,
           fontSize: 16.0,
         );
@@ -397,7 +397,7 @@ class _PaymentsScreenState extends State<PaymentsScreen> {
           msg: "Gift Card has been redeemed",
           toastLength: Toast.LENGTH_SHORT,
           gravity: ToastGravity.BOTTOM,
-          backgroundColor: Colors.green,
+          backgroundColor: Colors.black,
           textColor: Colors.white,
           fontSize: 16.0,
         );

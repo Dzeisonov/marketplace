@@ -113,7 +113,7 @@ class _HomePageState extends State<HomePage> {
     );
 
     return Container(
-      margin: EdgeInsets.only(left: 15, right: 15, top: 25, bottom: 10),
+      margin: EdgeInsets.only(left: 15, right: 15, bottom: 10),
       alignment: Alignment.topCenter,
       child: Column(
         children: [

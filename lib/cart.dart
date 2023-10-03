@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:marketplace/components/default_button_black.dart';
 import 'package:marketplace/provider.dart';
 import 'package:marketplace/screens/paysuccess/payscs.dart';
+import 'package:marketplace/sizeconfig.dart';
 import 'package:provider/provider.dart';
 
 class CartPage extends StatefulWidget {
@@ -218,71 +219,66 @@ class _CartPageState extends State<CartPage> {
     }
 
     return Container(
-      width: 400,
+      // width: 400,
       height: 110,
       child: Stack(
+        alignment: Alignment.center,
         children: [
-          Positioned(
-            left: 0,
-            top: 0,
-            child: Container(
-              width: 394,
-              height: 110,
-              decoration: ShapeDecoration(
-                color: Color(0xFFD9D9D9),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(40),
-                    topRight: Radius.circular(40),
-                  ),
+          Container(
+            width: MediaQuery.of(context).size.width,
+            height: getProportionateScreenHeight(110),
+            decoration: ShapeDecoration(
+              color: Color(0xFFD9D9D9),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(40),
+                  topRight: Radius.circular(40),
                 ),
               ),
             ),
           ),
-          Positioned(
-            left: 226,
-            top: 17,
-            child: Container(
-              width: 400,
-              height: 18,
-              child: Stack(
+          Align(
+            alignment: Alignment.bottomRight,
+            child: Padding(
+              padding: EdgeInsets.only(bottom: 75),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  Positioned(
-                    left: 0,
-                    top: 0,
-                    child: SizedBox(
-                        width: 180,
-                        height: 18,
-                        child: Text(
-                          'Total Price: \$${totalPrice.toStringAsFixed(2)}',
-                          style: TextStyle(
-                            fontSize: 15,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        )),
+                  SizedBox(
+                    width: getProportionateScreenWidth(160),
+                    height: 18,
+                    child: Text(
+                      'Total Price: \$${totalPrice.toStringAsFixed(2)}',
+                      style: TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                   ),
                 ],
               ),
             ),
           ),
-          Positioned(
-            left: 18,
-            top: 52,
-            child: DefaultButtonBlack(
-                width: 343,
-                text: "Checkout",
-                press: () {
-                  if (cartItems.isEmpty) {
-                  } else {
-                    final cartProvider =
-                        Provider.of<CartProvider>(context, listen: false);
-                    cartProvider.clearCart();
-                    Navigator.pushNamed(
-                      context,
-                      PayScsScreen.routeName,
-                    );
-                  }
-                }),
+          Align(
+            alignment: Alignment.center,
+            child: Container(
+              padding: EdgeInsets.only(top: 30, left: 16, right: 16),
+              child: DefaultButtonBlack(
+                  width: getProportionateScreenWidth(343),
+                  text: "Checkout",
+                  press: () {
+                    if (cartItems.isEmpty) {
+                    } else {
+                      final cartProvider =
+                          Provider.of<CartProvider>(context, listen: false);
+                      cartProvider.clearCart();
+                      Navigator.pushNamed(
+                        context,
+                        PayScsScreen.routeName,
+                      );
+                    }
+                  }),
+            ),
           ),
         ],
       ),
