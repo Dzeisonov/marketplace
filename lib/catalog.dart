@@ -111,6 +111,7 @@ class _CatalogPageState extends State<CatalogPage> {
                   Navigator.of(context).push(
                       MaterialPageRoute(builder: (context) => SearchBarA()));
                 },
+                readOnly: true,
                 decoration: InputDecoration(
                   fillColor: Colors.white,
                   filled: true,
@@ -120,7 +121,10 @@ class _CatalogPageState extends State<CatalogPage> {
                   hintStyle: TextStyle(
                     fontFamily: "Montserrat",
                   ),
-                  suffixIcon: const Icon(Icons.search),
+                  suffixIcon: const Icon(
+                    Icons.search,
+                    color: Colors.grey,
+                  ),
                   enabledBorder: outlineInputBorder,
                   focusedBorder: outlineInputBorder,
                 ),

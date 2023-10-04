@@ -134,13 +134,17 @@ class _HomePageState extends State<HomePage> {
                 Navigator.of(context).push(
                     MaterialPageRoute(builder: (context) => SearchBarA()));
               },
+              readOnly: true,
               decoration: InputDecoration(
                 fillColor: Colors.white,
                 filled: true,
                 contentPadding:
                     const EdgeInsets.symmetric(vertical: 10.0, horizontal: 15),
                 hintText: "Search",
-                suffixIcon: const Icon(Icons.search),
+                suffixIcon: const Icon(
+                  Icons.search,
+                  color: Colors.grey,
+                ),
                 enabledBorder: outlineInputBorder,
                 focusedBorder: outlineInputBorder,
               ),
