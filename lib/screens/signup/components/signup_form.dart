@@ -158,7 +158,7 @@ class _SignUpFormState extends State<SignUpForm> {
             labelStyle: TextStyle(
               color: kTextLightColor,
             ),
-            hintText: "Re-nter your password",
+            hintText: "Re-enter your password",
             hintStyle: TextStyle(
               color: kTextLightColor,
               fontWeight: FontWeight.w100,

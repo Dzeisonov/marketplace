@@ -4,9 +4,6 @@ import 'package:marketplace/constants.dart';
 import 'package:marketplace/screens/signupsuccess/signupscs.dart';
 import 'package:marketplace/sizeconfig.dart';
 
-import '../../../components/have_account.dart';
-import '../../../components/social_card.dart';
-
 class Body extends StatelessWidget {
   const Body({super.key});
 
@@ -141,34 +138,6 @@ class _CompleteProfileFormState extends State<CompleteProfileForm> {
           SizedBox(
             height: getProportionateScreenHeight(25),
           ),
-          Text(
-            "or using",
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              color: kTextLightColor,
-            ),
-          ),
-          SizedBox(height: getProportionateScreenHeight(25)),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              SocialCard(
-                icon: "lib/icons/facebook.png",
-                press: () {},
-              ),
-              SocialCard(
-                icon: "lib/icons/google.png",
-                press: () {},
-              ),
-              SocialCard(
-                icon: "lib/icons/instagram.png",
-                press: () {},
-              ),
-            ],
-          ),
-          SizedBox(height: getProportionateScreenHeight(30)),
-          haveAccount(),
-          SizedBox(height: getProportionateScreenHeight(30)),
         ],
       ),
     );
