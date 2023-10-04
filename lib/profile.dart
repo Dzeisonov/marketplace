@@ -50,86 +50,6 @@ class _ProfilePageState extends State<ProfilePage> {
     });
   }
 
-  void _showFollowersPopup(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text("Followers & Following"),
-          content: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text("Followers:",
-                    style:
-                        TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
-                _buildFollowerItem("Marchella Angelina",
-                    "marchella.535220001@stu.untar.ac.id", "avatar1.jpg"),
-                _buildFollowerItem("Jason Permana",
-                    "jason.535220002@stu.untar.ac.id", "avatar4.jpg"),
-                _buildFollowerItem("Arya Wira Kristanto",
-                    "arya.535220004@stu.untar.ac.id", "avatar5.jpg"),
-                _buildFollowerItem("Jafier Andreas",
-                    "jafier.535220013@stu.untar.ac.id", "avatar6.jpg"),
-                _buildFollowerItem("Nicholas Martin",
-                    "nicholas.535220027@stu.untar.ac.id", "avatar4.jpg"),
-                _buildFollowerItem("Kevin Jonathan JM",
-                    "kevin.535220038@stu.untar.ac.id", "avatar5.jpg"),
-                SizedBox(height: 16),
-                Text("Following:",
-                    style:
-                        TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
-                _buildFollowerItem("Marchella Angelina",
-                    "marchella.535220001@stu.untar.ac.id", "avatar1.jpg"),
-                _buildFollowerItem("Jason Permana",
-                    "jason.535220002@stu.untar.ac.id", "avatar4.jpg"),
-                _buildFollowerItem("Arya Wira Kristanto",
-                    "arya.535220004@stu.untar.ac.id", "avatar5.jpg"),
-                _buildFollowerItem("Jafier Andreas",
-                    "jafier.535220013@stu.untar.ac.id", "avatar6.jpg"),
-                _buildFollowerItem("Nicholas Martin",
-                    "nicholas.535220027@stu.untar.ac.id", "avatar4.jpg"),
-                _buildFollowerItem("Kevin Jonathan JM",
-                    "kevin.535220038@stu.untar.ac.id", "avatar5.jpg"),
-              ],
-            ),
-          ),
-          actions: [
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              child: Text("Close"),
-            ),
-          ],
-        );
-      },
-    );
-  }
-
-  Widget _buildFollowerItem(String name, String email, String avatar) {
-    return ListTile(
-      leading: CircleAvatar(
-        backgroundImage: AssetImage("lib/images/$avatar"),
-      ),
-      title: Text(
-        name,
-        style: TextStyle(
-          fontSize: 14.0,
-          fontWeight: FontWeight.bold,
-        ),
-      ),
-      subtitle: Text(
-        email,
-        style: TextStyle(
-          fontSize: 12.0,
-          color: Colors.blue,
-          decoration: TextDecoration.underline,
-        ),
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -146,7 +66,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     CircleAvatar(
-                      radius: 64,
+                      radius: 64, 
                       backgroundImage: AssetImage(selectedAvatar),
                     ),
                     SizedBox(height: 10),
@@ -166,45 +86,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         Text(
                           phoneNumber.toString(),
                           style: TextStyle(
-                              fontSize: 16, fontWeight: FontWeight.bold),
-                        ),
-                      ],
-                    ),
-                    SizedBox(height: 10),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        InkWell(
-                          onTap: () {
-                            _showFollowersPopup(context);
-                          },
-                          child: Row(
-                            children: [
-                              Icon(Icons.people, size: 20),
-                              SizedBox(width: 5),
-                              Text(
-                                "Following 34K",
-                                style: TextStyle(
-                                    fontSize: 14, fontWeight: FontWeight.bold),
-                              ),
-                            ],
-                          ),
-                        ),
-                        SizedBox(width: 10),
-                        InkWell(
-                          onTap: () {
-                            _showFollowersPopup(context);
-                          },
-                          child: Row(
-                            children: [
-                              Icon(Icons.people_outline, size: 20),
-                              SizedBox(width: 5),
-                              Text(
-                                "Followers 85K",
-                                style: TextStyle(
-                                    fontSize: 14, fontWeight: FontWeight.bold),
-                              ),
-                            ],
+                            fontSize: 16,
                           ),
                         ),
                       ],
@@ -237,18 +119,6 @@ class _ProfilePageState extends State<ProfilePage> {
                 trailing: Icon(Icons.edit),
                 onTap: () {
                   _navigateToProfileScreen();
-                },
-              ),
-              Divider(
-                thickness: 1,
-                color: Colors.grey,
-              ),
-              ListTile(
-                title: Text("Followers & Following",
-                    style: TextStyle(fontSize: 18)),
-                trailing: Icon(Icons.people),
-                onTap: () {
-                  _showFollowersPopup(context);
                 },
               ),
               Divider(
