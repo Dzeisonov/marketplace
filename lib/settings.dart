@@ -12,123 +12,77 @@ class _SettingsScreenState extends State<SettingsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.black,
-          title: Text("Settings"),
+      appBar: AppBar(
+        backgroundColor: Colors.black,
+        title: Text("Settings"),
+      ),
+      backgroundColor: Colors.white,
+      body: Padding(
+        padding: const EdgeInsets.only(bottom: 25),
+        child: Align(
+          alignment: Alignment.topLeft,
+          child: _buildSettingsScreen(),
         ),
-        backgroundColor: Colors.white,
-        body: Padding(
-            padding: const EdgeInsets.only(bottom: 25),
-            child: Align(
-              alignment: Alignment.topLeft,
-              child: _buildSettingsScreen(),
-            )));
+      ),
+    );
   }
 
   Widget _buildSettingsScreen() {
-    return Expanded(
-        child: SingleChildScrollView(
+    return SingleChildScrollView(
       child: Column(
         children: [
-          Padding(
-            padding: EdgeInsets.only(left: 20, right: 20, top: 10),
-            child: Column(
-              children: [
-                ListTile(
-                  title: Text("Language", style: TextStyle(fontSize: 18)),
-                  trailing: Icon(Icons.language),
-                  onTap: () {
-                    _showToast("Under Development");
-                  },
+          SizedBox(height: 10),
+          _buildSettingsItem("Language", Icons.language),
+          _buildSettingsItem("Display", Icons.settings_display),
+          _buildSettingsItem("Notifications", Icons.notifications),
+          _buildSettingsItem("Security", Icons.security),
+          _buildSettingsItem("FAQ", Icons.question_answer),
+          _buildSettingsItem("Terms & Conditions", Icons.assignment_outlined),
+          _buildSettingsItem("Privacy Policy", Icons.privacy_tip_outlined),
+          _buildSettingsItem("About Us", Icons.info),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildSettingsItem(String title, IconData icon) {
+    return Container(
+      color: Colors.white, // Warna latar belakang ListTile
+      margin: EdgeInsets.symmetric(horizontal: 10, vertical: 5), // Margin kiri-kanan dan atas-bawah
+      child: Column(
+        children: [
+          ListTileTheme(
+            contentPadding: EdgeInsets.symmetric(horizontal: 20), // Margin kiri-kanan pada ListTile
+            child: ListTile(
+              title: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 10), // Margin kiri-kanan pada teks
+                child: Text(title, style: TextStyle(fontSize: 18)),
+              ),
+              trailing: Container(
+                padding: EdgeInsets.symmetric(horizontal: 10), // Margin kiri-kanan pada ikon
+                decoration: BoxDecoration(
+                  color: Colors.black, // Warna latar belakang icon
+                  shape: BoxShape.circle,
                 ),
-                Divider(
-                  thickness: 1,
-                  color: Colors.grey,
+                child: Icon(
+                  icon,
+                  color: Colors.white, // Warna ikon
                 ),
-                ListTile(
-                  title: Text("Display", style: TextStyle(fontSize: 18)),
-                  trailing: Icon(Icons.settings_display),
-                  onTap: () {
-                    _showToast("Under Development");
-                  },
-                ),
-                Divider(
-                  thickness: 1,
-                  color: Colors.grey,
-                ),
-                ListTile(
-                  title: Text("Notifications", style: TextStyle(fontSize: 18)),
-                  trailing: Icon(Icons.notifications),
-                  onTap: () {
-                    _showToast("Under Development");
-                  },
-                ),
-                Divider(
-                  thickness: 1,
-                  color: Colors.grey,
-                ),
-                ListTile(
-                  title: Text("Security", style: TextStyle(fontSize: 18)),
-                  trailing: Icon(Icons.security),
-                  onTap: () {
-                    _showToast("Under Development");
-                  },
-                ),
-                Divider(
-                  thickness: 1,
-                  color: Colors.grey,
-                ),
-                ListTile(
-                  title: Text("FAQ", style: TextStyle(fontSize: 18)),
-                  trailing: Icon(Icons.question_answer),
-                  onTap: () {
-                    _showToast("Under Development");
-                  },
-                ),
-                Divider(
-                  thickness: 1,
-                  color: Colors.grey,
-                ),
-                ListTile(
-                  title: Text("Terms & Conditions",
-                      style: TextStyle(fontSize: 18)),
-                  trailing: Icon(Icons.assignment_outlined),
-                  onTap: () {
-                    _showToast("Under Development");
-                  },
-                ),
-                Divider(
-                  thickness: 1,
-                  color: Colors.grey,
-                ),
-                ListTile(
-                  title: Text("Privacy Policy", style: TextStyle(fontSize: 18)),
-                  trailing: Icon(Icons.privacy_tip_outlined),
-                  onTap: () {
-                    _showToast("Under Development");
-                  },
-                ),
-                Divider(
-                  thickness: 1,
-                  color: Colors.grey,
-                ),
-                ListTile(
-                  title: Text("About Us", style: TextStyle(fontSize: 18)),
-                  trailing: Icon(Icons.info),
-                  onTap: () {
-                    _showToast("Under Development");
-                  },
-                ),
-                Divider(
-                  thickness: 1,
-                  color: Colors.grey,
-                ),
-              ],
+              ),
+              onTap: () {
+                _showToast("Under Development");
+              },
             ),
+          ),
+          Divider(
+            color: Colors.grey, // Warna divider
+            thickness: 1,
+            indent: 20, // Margin kiri pada divider
+            endIndent: 20, // Margin kanan pada divider
           ),
         ],
       ),
-    ));
+    );
   }
 
   void _showToast(String message) {

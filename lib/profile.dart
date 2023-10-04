@@ -101,7 +101,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          "Following 0",
+                          "Following 34K",
                           style: TextStyle(fontSize: 14),
                         ),
                         SizedBox(width: 5),
@@ -114,7 +114,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         ),
                         SizedBox(width: 5),
                         Text(
-                          "Followers 0",
+                          "Followers 85K",
                           style: TextStyle(fontSize: 14),
                         ),
                       ],
