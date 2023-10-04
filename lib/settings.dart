@@ -47,26 +47,24 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
   Widget _buildSettingsItem(String title, IconData icon) {
     return Container(
-      color: Colors.white, // Warna latar belakang ListTile
-      margin: EdgeInsets.symmetric(horizontal: 10, vertical: 5), // Margin kiri-kanan dan atas-bawah
+      margin: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
       child: Column(
         children: [
           ListTileTheme(
-            contentPadding: EdgeInsets.symmetric(horizontal: 20), // Margin kiri-kanan pada ListTile
+            contentPadding: EdgeInsets.symmetric(horizontal: 20),
             child: ListTile(
               title: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 10), // Margin kiri-kanan pada teks
+                padding: EdgeInsets.symmetric(horizontal: 10),
                 child: Text(title, style: TextStyle(fontSize: 18)),
               ),
               trailing: Container(
-                padding: EdgeInsets.symmetric(horizontal: 10), // Margin kiri-kanan pada ikon
+                padding: EdgeInsets.all(10),
                 decoration: BoxDecoration(
-                  color: Colors.black, // Warna latar belakang icon
                   shape: BoxShape.circle,
                 ),
                 child: Icon(
                   icon,
-                  color: Colors.white, // Warna ikon
+                  color: Colors.black,
                 ),
               ),
               onTap: () {
@@ -75,10 +73,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
             ),
           ),
           Divider(
-            color: Colors.grey, // Warna divider
+            color: Colors.grey,
             thickness: 1,
-            indent: 20, // Margin kiri pada divider
-            endIndent: 20, // Margin kanan pada divider
+            indent: 20,
+            endIndent: 20,
           ),
         ],
       ),
