@@ -56,6 +56,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
       rows.add(
         Row(
           children: rowChildren,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         ),
       );
     }

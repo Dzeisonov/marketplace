@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:marketplace/data.dart';
+import 'package:marketplace/screens/details/details_screen.dart';
 
 class SearchBarA extends StatefulWidget {
   const SearchBarA({Key? key}) : super(key: key);
@@ -86,13 +87,29 @@ class _SearchBarAState extends State<SearchBarA> {
                 itemCount: displayList.length,
                 itemBuilder: (context, index) {
                   final item = displayList[index];
-                  return ListTile(
-                    contentPadding: EdgeInsets.all(8),
-                    title: Text(item.name),
-                    subtitle: Text("\$" + item.price.toString()),
-                    trailing: Text("⭐ " + item.rating.toString()),
-                    leading: Image.network(
-                      item.imgPath,
+                  final EdgeInsets itemPadding =
+                      index < 6 ? EdgeInsets.zero : EdgeInsets.all(8);
+                  return GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => DetailsScreen(
+                                    imgPath: item.imgPath,
+                                    name: item.name,
+                                    rating: item.rating,
+                                    price: item.price,
+                                    description: item.description,
+                                  )));
+                    },
+                    child: ListTile(
+                      contentPadding: itemPadding,
+                      title: Text(item.name),
+                      subtitle: Text("\$" + item.price.toString()),
+                      trailing: Text("⭐ " + item.rating.toString()),
+                      leading: Image.network(
+                        item.imgPath,
+                      ),
                     ),
                   );
                 },

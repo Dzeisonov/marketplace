@@ -64,6 +64,7 @@ class _AllScreenState extends State<AllScreen> {
           rows.add(
             Row(
               children: rowChildren,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             ),
           );
           rowChildren = [];
@@ -84,6 +85,7 @@ class _AllScreenState extends State<AllScreen> {
         rows.add(
           Row(
             children: rowChildren,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           ),
         );
       }
