@@ -307,8 +307,8 @@ class _HomePageState extends State<HomePage> {
                             child: Center(
                               child: Image.asset(
                                 categoryImages[index],
-                                width: 60,
-                                height: 60,
+                                width: 70,
+                                height: 70,
                               ),
                             ),
                           ),
@@ -316,8 +316,7 @@ class _HomePageState extends State<HomePage> {
                           Text(
                             descriptions[index],
                             style: TextStyle(
-                              fontSize: 12,
-                            ),
+                                fontSize: 12, fontWeight: FontWeight.bold),
                           ),
                         ],
                       ),
