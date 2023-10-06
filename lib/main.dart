@@ -36,7 +36,6 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: theme(),
-      // home: SplashScreen(),
       initialRoute: SplashScreen.routeName,
       routes: routes,
     );

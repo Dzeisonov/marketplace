@@ -451,13 +451,6 @@ class _HomePageState extends State<HomePage> {
           data));
     }
 
-    //   rows.add(
-    //     Row(
-    //       children: rowChildren,
-    //     ),
-    //   );
-    // }
-
     return Container(
       margin: EdgeInsets.symmetric(horizontal: containerWidth),
       child: SingleChildScrollView(

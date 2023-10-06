@@ -33,6 +33,7 @@ class _BodyState extends State<Body> {
                   (
                     text: "Continue",
                     press: () {
+                      // Fetch data from firestore database
                       ShopItem.fetchData("Shoes");
                       ShopItem.fetchData("Accessories");
                       ShopItem.fetchData("Clothes");

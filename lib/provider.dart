@@ -9,8 +9,8 @@ class CartProvider extends ChangeNotifier {
 
   void addItemToCart(CartItem item) {
     // Check if the item is already in the cart
-    final existingItemIndex =
-        cartItems.indexWhere((cartItem) => cartItem.name == item.name);
+    final existingItemIndex = cartItems.indexWhere((cartItem) =>
+        cartItem.name == item.name && cartItem.image == item.image);
 
     if (existingItemIndex >= 0) {
       // If the item is already in the cart, increment the quantity
