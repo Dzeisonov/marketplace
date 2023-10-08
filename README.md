@@ -19,6 +19,14 @@ Nama Aplikasi   : Manière
 | Nicholas Martin     | 535220027 | Nicholas-Martin007 |
 | Kevin Jonathan JM   | 535220038 | kvnidn             |
 
+Deskripsi       :
+
+App marketplace “Manière” merupakan aplikasi marketplace yang dikembangkan untuk platform
+android dalam framework flutter, aplikasi ini menjual berbagai macam kategori item fashion,
+seperti pakaian, sepatu, topi, dan aksesoris yang disajikan dalam user interface yang user
+friendly dan interaktif untuk memastikan user experience yang terbaik.
+
+Video Demo        : https://youtu.be/-z87zZ2Oqbk
 
 Contoh Tampilan Apps:
 
