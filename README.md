@@ -22,12 +22,12 @@ Nama Aplikasi   : Manière
 
 Contoh Tampilan Apps:
 
-![Picture1](https://github.com/Dzeisonov/marketplace/assets/100126712/98d5c82a-c4f5-4842-8e55-378c610125fc)
-![Picture2](https://github.com/Dzeisonov/marketplace/assets/100126712/fa437d27-6a66-4a57-8721-da2e2087b078)
+![Picture1](https://github.com/Dzeisonov/marketplace/assets/100126712/646283de-d2db-454f-937b-9b3d00e78580)
+![Picture2](https://github.com/Dzeisonov/marketplace/assets/100126712/b7cb05d6-92ac-447b-8135-0838bc141c40)
 
+![Picture3](https://github.com/Dzeisonov/marketplace/assets/100126712/8b99ee98-dc2a-4377-87c9-8259ea687830)
+![Picture4](https://github.com/Dzeisonov/marketplace/assets/100126712/624d16b5-f007-4434-9c04-d78ae2a89f19)
 
-![Picture3](https://github.com/Dzeisonov/marketplace/assets/100126712/facd0ff8-675e-43c1-b08b-e01a36847f2b)
-![Picture4](https://github.com/Dzeisonov/marketplace/assets/100126712/8cd7c824-a4aa-46b9-b33e-a55a08bb0507)
 
 
 
